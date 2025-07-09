@@ -1,0 +1,132 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+@media screen and (max-width:1052px) {
+    .job-nav {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    /* It to change navbar into column */
+    /* .job-nav-options ul {
+      flex-direction: column;
+      align-items: center;
+    } */
+  
+    .job-nav-options ul li {
+        display: none;
+      /* margin-bottom: 10px; */
+    }
+  
+    .job-nav-btn div{
+        
+      /* flex-direction: row-reverse; */
+      display: none;
+    }
+    .job-navbar-menubar
+    {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    }
+    .m
+    {
+        display: block !important;
+    }
+  }
+
+.job-nav
+{
+    padding: 12px;
+    background-color: black;
+    color: orange;
+    display: flex;
+    justify-content: space-between;
+}
+.job-nav-options ul
+{
+    /* margin-top: 10px; */
+    list-style: none;
+    display: flex;
+    /* display: none; */
+}
+.job-nav-options ul li
+{
+    padding: 10px;
+    text-align: center;
+    margin-right:50px;
+    border-radius: 10px;
+}
+.job-nav-line
+{
+    text-decoration: none;
+    color: orange;
+}
+.job-nav-activepage
+{
+    /* background-color: orange; */
+    color:white;
+    border-radius: 10px;
+    text-decoration: none;
+    border-radius: 0%;
+    /* border-bottom: 2px solid orange; */
+    
+}
+
+.job-nav-options ul li:hover
+{
+    cursor: pointer;
+    /* background-color: orange; */
+    color: white;
+}
+/* Navigation  Login & Reg buttons */
+.job-nav-btn 
+{
+    display: flex;
+    /* padding: 10px; */
+    /* margin-right: 10px; */
+}
+.job-reg-btn button,.job-log-btn button
+{
+    margin-right: 20px;
+    /* border: 1px solid white; */
+    border-radius: 7px;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.job-log-btn button:hover
+{
+    cursor: pointer;
+    background-color: orange;
+    color: black;
+}
+.job-reg-btn button:hover
+{
+    cursor: pointer;
+}
+.job-reg-btn button
+{
+    background-color: orange;
+    
+    color: black;
+}
+.job-reg-btn button:active,.job-log-btn button:active
+{
+    background-color: rgb(194, 135, 27);
+}
+.m
+{
+    cursor: pointer;
+    display: none;
+}
+/* .false
+{
+    display: flex;
+}
+.true
+{
+    display: none;
+} */

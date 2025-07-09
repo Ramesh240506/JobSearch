@@ -1,0 +1,67 @@
+.job-employer-page
+{
+    background-color: rgb(245, 245, 245);
+    min-height: 100vh;
+    padding-left: 20px;
+}
+.job-employer-header
+{
+    padding-top: 20px;
+    line-height: 1.5;
+}
+.job-employer-btn 
+{
+    margin-top: 10px;
+    padding-top: 10px;
+}
+.job-employer-btn button
+{
+    background-color: black;
+    color: white;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.job-employer-content
+{
+    text-align: center;
+    line-height: 1.7;
+}
+.job-employer-content h1
+{
+    font-size: 40px;
+}
+.job-employer-steps
+{
+    display: flex;
+    /* gap:20px; */
+    width: 100%;
+    line-height: 1.5;
+}
+.job-employer-main
+{
+    padding: 20px;
+    background-color: white;
+    width: 30%;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.job-employer-steps-list
+{
+    padding-top: 15px;
+}
+@media screen and (max-width: 768px)
+{
+    .job-employer-steps
+    {
+        flex-direction: column;
+    }
+    .job-employer-main
+    {
+        width: 80%;
+    }
+    
+}

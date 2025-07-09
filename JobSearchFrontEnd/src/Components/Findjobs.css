@@ -1,0 +1,249 @@
+
+.job-finderpage{
+    min-height: 100vh;
+    background-color: #F2F4F8;
+}
+.job-finderpage-header {
+    padding-top: 10px;
+    margin-left: 20px;
+    line-height: 1.5;
+}
+.job-finderpage-header p
+{
+    opacity: 0.7;
+}
+.job-finderpage-searchfield input
+{
+    width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    border:none;
+}
+.job-finderpage-searchfield
+{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+.job-finderpage-searchfield select
+{
+    /* padding-left: 20px; */
+    width: 10%;
+    border-radius: 7px;
+    border: none;
+    padding: 10px;
+}
+.job-finderpage-searchfield button
+{
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 7px;
+    border: none;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.job-finderpage-searchfield button:hover,select:hover
+{
+    cursor: pointer;
+    opacity: 0.8;
+}
+.job-finderpage-job-options
+{
+    display: flex;
+    width: 40%;
+    justify-content:space-evenly;
+    margin-top: 20px;
+}
+.job-finderpage-job-options button
+{
+    padding: 7px;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 7px;
+    border: none;
+    background-color: rgb(214, 237, 247);
+}
+.job-finderpage-job-options button:hover
+{
+    cursor: pointer;
+    background-color: lightgray;
+}
+@media screen and (max-width:860px) {
+    .job-finderpage-searchfield input
+    {
+        width: 50%;
+    }
+    .job-finderpage-searchfield select
+    {
+        width: 20%;
+    }
+    .job-finderpage-job-options
+    {
+        display: flex;
+        flex-direction: column;
+        width: 20%;
+        margin-top: 5px;
+    }
+    .job-finderpage-job-options button
+    {
+        margin-top: 5px;
+        font-size: 8px;
+    }
+}
+@media screen and (max-width:500px) {
+    .job-finderpage-searchfield input
+    {
+        width: 100%;
+    }
+    .job-finderpage-searchfield
+    {
+        display: flex;
+        flex-direction: column;
+        width:40%;
+        padding: 10px;
+    }
+    .job-finderpage-searchfield input,select,button
+    {
+        padding: 10px;
+    }
+    .job-finderpage-job-options
+    {
+        display: flex;
+        flex-direction: column;
+        width: 10%;
+        margin-top: 5px;
+    }
+    .job-finderpage-job-options button
+    {
+        margin-top: 5px;
+        font-size: 6px;
+    }
+}
+.job-finderpage-job-list-header
+{
+    margin-top: 15px;
+    margin-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.job-finderpage-job-list-sort
+{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    right: 20px;
+}
+.job-finderpage-job-list-sort select 
+{
+    padding-left: 10px;
+    padding: 7px;
+    padding-right: 10px;
+    border-radius: 7px;
+    border: none;
+}
+.job-finderpage-job-list
+{
+    margin-top: 10px;
+    margin-left: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+.job-finderpage-job-listvalues
+{
+    line-height: 1.8;
+    width: 30%;
+    padding: 30px;  
+    padding-left: 20px;
+    background-color:white;
+    border-radius: 10px;
+}
+.job-finderpage-job-listvalues p
+{
+    opacity: 0.7;
+}
+.job-finderpage-job-list-last
+{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.job-finderpage-companyname
+{
+    display: flex;
+    gap:25px;
+}
+.job-finderpage-iconset
+{
+    display: flex;
+    align-items: center;
+    gap:4px;
+}
+.job-finderpage-viewdetails
+{
+    color: black;
+    cursor: pointer;
+}
+.job-finderpage-viewdetails:active
+{
+    color: rgb(73, 73, 245);
+}
+img
+{
+    width:60px;
+    height: 60px;
+}
+.job-finderpage-job-skills
+{
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.job-finderpage-job-skills button
+{
+    padding: 7px;
+    border-radius: 70px;
+    border: none;
+    background-color:lightgray;
+    font-size: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+.job-finderpage-job-skills button:hover
+{
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+.job-finderpage-bookmark
+{
+    display: flex;
+    justify-content: space-between;
+}
+@media screen and (max-width:860px) {
+    .job-finderpage-job-listvalues
+    {
+        width: 40%;
+    }
+    .job-finderpage-job-skills
+    {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+
+.job-finderpage-job-listvalues:hover
+{
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: scale(1.02);
+    transition: transform 0.3s ;
+}
+
