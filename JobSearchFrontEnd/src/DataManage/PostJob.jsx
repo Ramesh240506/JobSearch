@@ -7,7 +7,9 @@ import { LuGraduationCap } from "react-icons/lu";
 import BasicAlerts from "@/UIComponents/BasicALerts";
 import { createJob } from "@/Services/JobService";
 import { useNavigate } from "react-router-dom";
+import PositionedSnackbar from "@/UIComponents/PositionedSnackbar";
 const PostJob = () => {
+  const [snackbar, setSnackbar] = useState(false);
   const [jobFormData, setJobFormData] = React.useState({
     // Basic Job Information
     jobTitle: "",
@@ -110,7 +112,7 @@ const PostJob = () => {
         setJobFormData({
           // Reset form data
           jobTitle: "",
-          companyName: "", 
+          companyName: "",
           jobLocation: "",
           jobType: "",
           jobDescription: "",
@@ -124,17 +126,25 @@ const PostJob = () => {
           maxSalary: "",
           benefits: "",
         });
-  
       } catch (error) {
         console.error("Error posting job:", error);
         alert("Failed to post job. Please try again later.");
       }
     } else {
-      alert("Please fill all the required fields.");
+      // <PositionedSnackbar></PositionedSnackbar>
+      setSnackbar(true);
     }
   };
   return (
     <div>
+      {snackbar && (
+        <PositionedSnackbar
+          open={snackbar}
+          message="Please fill all required fields"
+          onClose={() => setSnackbar(false)}
+        />
+      )}
+
       <div className="postjob-header">
         <h1>Post a Job</h1>
         <p>Reach top talent by posting your job on our platform.</p>
@@ -195,7 +205,12 @@ const PostJob = () => {
             )}
 
             <label htmlFor="jobType">Job Type *</label>
-            <select value={jobFormData.jobType} id="jobType" onChange={onInputChange} required>
+            <select
+              value={jobFormData.jobType}
+              id="jobType"
+              onChange={onInputChange}
+              required
+            >
               <option value="">Select job type</option>
               <option value="full-time">Full Time</option>
               <option value="part-time">Part Time</option>
@@ -272,7 +287,12 @@ const PostJob = () => {
               </div>
             </div>
             <label htmlFor="">Experience level</label>
-            <select value={jobFormData.experienceLevel} onChange={onInputChange} id="experienceLevel" required>
+            <select
+              value={jobFormData.experienceLevel}
+              onChange={onInputChange}
+              id="experienceLevel"
+              required
+            >
               <option value="">Select experience level</option>
               <option value="entry-level">Entry Level</option>
               <option value="mid-level">Mid Level</option>
@@ -286,7 +306,12 @@ const PostJob = () => {
             )}
 
             <label htmlFor="education">Education Level *</label>
-            <select value={jobFormData.education} onChange={onInputChange} id="education" required>
+            <select
+              value={jobFormData.education}
+              onChange={onInputChange}
+              id="education"
+              required
+            >
               <option value="">Select education level</option>
               <option value="high-school">High School</option>
               <option value="associate-degree">Associate Degree</option>
@@ -316,7 +341,12 @@ const PostJob = () => {
               </div>
             </div>
             <label htmlFor="salary">Currency</label>
-            <select value={jobFormData.currency} onChange={onInputChange} id="currency" required>
+            <select
+              value={jobFormData.currency}
+              onChange={onInputChange}
+              id="currency"
+              required
+            >
               <option value="">Select currency</option>
               <option value="usd">USD</option>
               <option value="eur">EUR</option>

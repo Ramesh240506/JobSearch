@@ -2,6 +2,9 @@ package com.jobsearch.JobSearch.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -33,4 +36,7 @@ public class JobPostEntity {
     private String minSalary;
     private String maxSalary;
     private String benefits;
+
+    @CreationTimestamp
+    private LocalDateTime postedAt;
 }

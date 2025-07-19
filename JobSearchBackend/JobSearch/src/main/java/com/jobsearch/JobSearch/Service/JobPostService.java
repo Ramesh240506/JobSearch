@@ -19,4 +19,11 @@ public class JobPostService {
     public List<JobPostEntity> getAllJobs() {
         return jobPostRepo.findAll();
     }
+
+    public JobPostEntity getJobById(Long id) {
+
+        return jobPostRepo.findById(id).
+                orElseThrow(()->new RuntimeException("No id Found"));
+
+    }
 }

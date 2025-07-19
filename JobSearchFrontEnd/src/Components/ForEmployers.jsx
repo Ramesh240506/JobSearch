@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ForEmployers.css";
 import { FaRegFileAlt } from "react-icons/fa";
 import { TiTick } from "react-icons/ti";
 import { TbUsers } from "react-icons/tb";
 import { CgInsights } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
+import ApplicantDetails from "@/DataManage/ApplicantDetails";
+import ApplicationDetails from "@/DataManage/ApplicationDetails";
 const ForEmployers = () => {
   const navigate=useNavigate();
+  const [activeTab, setActiveTab] = useState("overview");
+
+  
   return (
     <div>
       <div className="job-employer-page">
@@ -16,10 +21,50 @@ const ForEmployers = () => {
             Post jobs,screen candidates and build your dream team with our
             powerful employer tools
           </p>
+
+
           <div className="job-employer-btn">
             <button onClick={()=>{navigate('/postjob')}}>Post a Job</button>
           </div>
         </div>
+          <div className="job-employer-dashboard">
+            <h1>Hiring Dashboard</h1>
+            <nav>
+              <ul>
+                <li className={activeTab==="overview"? "active":""} onClick={()=>setActiveTab("overview")}>Overview</li>
+                <li className={activeTab==="joblistings"? "active":""} onClick={()=>setActiveTab("joblistings")}>Job Listings</li>
+              </ul>
+            </nav>
+            </div>
+          {
+            activeTab==="joblistings" ? (
+              <ApplicationDetails></ApplicationDetails>
+            )
+            : (
+            <div className="job-employer-overview">
+              <div className="job-employer-overview-item">
+                <div>
+                <h4>Total Jobs</h4>
+                <h2>5</h2>
+                </div>
+
+              </div>
+              <div className="job-employer-overview-item">
+                 <div>
+                <h4>Active Jobs</h4>
+                <h2>3</h2>
+                </div>
+                
+              </div>
+              <div className="job-employer-overview-item">
+                <div>
+                <h4>Total Applicants</h4>
+                <h2>10</h2>
+                </div>
+              </div>
+            </div>
+            )
+          }
         <div className="job-employer-content">
           <h1>Powerful Employer Tools</h1>
           <p>

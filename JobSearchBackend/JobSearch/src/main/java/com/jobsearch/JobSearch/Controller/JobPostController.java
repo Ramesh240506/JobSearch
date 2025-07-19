@@ -26,4 +26,10 @@ public class JobPostController {
     {
         return postService.getAllJobs();
     }
+
+    @GetMapping("/getjob/{id}")
+    public JobPostEntity getJobById(@PathVariable Long id)
+    {
+        return postService.getJobById(id);
+    }
 }

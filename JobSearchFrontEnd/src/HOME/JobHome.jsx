@@ -13,6 +13,8 @@ import { BsSuitcaseLg } from "react-icons/bs";
 import CircularIndeterminate from "./CircularIndeterminate";
 import { getAllJobs } from "@/Services/JobService";
 import { useNavigate } from "react-router-dom";
+
+import {formatDistanceToNow} from "date-fns";
 const JobHome = () => {
   const handleBookmark = (id) => {
     // if (isBookmarked === false) setBookmark(true);
@@ -35,7 +37,7 @@ const JobHome = () => {
       minsalary:"$100k",
       maxsalary: "$150k",
       jobType: "Full-time",
-      posted: "2 days ago",
+      postedAt: "2 days ago",
       bookmark: false,
       tags: ["React", "TypeScript", "Remote OK"],
     },
@@ -47,7 +49,7 @@ const JobHome = () => {
       minSalary:"$80k",
       maxSalary: "$120k",
       jobType: "Part-time",
-      posted: "3 days ago",
+      postedAt: "3 days ago",
       bookmark: false,
     }
   ]);
@@ -59,6 +61,11 @@ const JobHome = () => {
     "JavaScript",
     "CSS",
     "HTML",]);
+
+    const handleApply=(id)=>{
+      console.log("Job Id:",id);
+      navigate(`/jobdetails/${id}`);
+    }
 
  useEffect(() => {
     const timer = setTimeout(() => {
@@ -144,7 +151,12 @@ const JobHome = () => {
               </div>
               <h5>{job.minSalary}-{job.maxSalary}</h5>
               <p>
-                <IoMdTime />1 hour ago
+                <IoMdTime />
+                { job.postedAt &&
+                  formatDistanceToNow(new Date(job.postedAt), {
+                    addSuffix: true,
+                  })
+                }
               </p>
               <div className="job-finderpage-job-skills">
                 {skills.slice(0,3).map((tag) => (
@@ -152,7 +164,8 @@ const JobHome = () => {
                 ))}
               </div>
 
-              <button onClick={()=>navigate('/jobdetails')} className="job-finderpage-apply-button">Apply Now</button>
+              <button onClick={()=>handleApply(job.id)} 
+              className="job-finderpage-apply-button">Apply Now</button>
             </div>
           ))}
           {/* <div className="job-finderpage-job-listvalues"> */}

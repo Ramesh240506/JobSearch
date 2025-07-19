@@ -1,0 +1,174 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+.form {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 20px;
+}
+.title {
+  color: #333;
+  font-size: 28px;
+  margin: 0 0 10px 0;
+  font-weight: 600;
+}
+.subtitle {
+  color: #666;
+  font-size: 14px;
+  font-style: italic;
+}
+.section {
+  margin-bottom: 30px;
+}
+.sectionTitle {
+  color: #333;
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  border-left: 4px solid #007bff;
+  padding-left: 10px;
+}
+.row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+.inputGroup {
+  flex: 1;
+  margin-bottom: 15px;
+}
+.label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+}
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+.inputError {
+  border-color: #dc3545;
+}
+.select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fff;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  resize: vertical;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+.fileInput {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fff;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.helpText {
+  color: #666;
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
+}
+.errorText {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
+}
+.referenceGroup {
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+.referenceTitle {
+  color: #333;
+  font-size: 16px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+.checkboxGroup {
+  margin-bottom: 15px;
+}
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+.checkbox {
+  margin-right: 10px;
+  cursor: pointer;
+}
+.submitSection {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+.submitButton {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: 500;
+}
+.successMessage {
+  text-align: center;
+  padding: 50px 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.successTitle {
+  color: #28a745;
+  font-size: 24px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+.successText {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}

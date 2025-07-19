@@ -46,7 +46,7 @@ const Nav = () => {
               <li>For Employers</li>
             </NavLink>
             <NavLink
-              to={"/jobblog"}
+              to={"/favouritejobs"}
               className={({ isActive }) =>
                 isActive ? "job-nav-activepage" : "job-nav-line"
               }

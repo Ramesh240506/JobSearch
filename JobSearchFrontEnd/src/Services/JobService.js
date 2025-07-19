@@ -25,10 +25,22 @@ export const getAllJobs = async () => {
 
 export const getJobById = async (jobId) => {
     try {
-        const response = await axios.get(`${API_URL}/getjob/${jobId}`);
+        const response = await axios.get(API_URL+'/getjob/'+jobId);
         return response.data;
     } catch (error) {
         console.error("Error fetching job by ID:", error);
         throw error;
     }
+}
+
+export const postJobApplication = async (formData)=>{
+    try{
+        const response = await axios.post(API_URL+'/postapplication', formData);
+        return response.data;
+      }
+    catch (error) {
+        console.error("Error posting job application:", error);
+        throw error;
+    }
+    
 }
