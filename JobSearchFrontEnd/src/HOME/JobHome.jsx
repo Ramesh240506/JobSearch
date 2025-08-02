@@ -34,8 +34,8 @@ const JobHome = () => {
       jobTitle: "Senior Frontend Developer",
       companyName: "TechCorp Inc.",
       jobLocation: "San Francisco, CA",
-      minsalary:"$100k",
-      maxsalary: "$150k",
+      minSalary:"$100k",
+      maxSalary: "$150k",
       jobType: "Full-time",
       postedAt: "2 days ago",
       bookmark: false,
@@ -66,6 +66,13 @@ const JobHome = () => {
       console.log("Job Id:",id);
       navigate(`/jobdetails/${id}`);
     }
+    
+    const getFeaturedJobs = async () => {
+        const response = await getAllJobs();
+        console.log(response);
+        console.log("Featured Jobs:", response);
+        setFeaturedJobs(response);
+    }
 
  useEffect(() => {
     const timer = setTimeout(() => {
@@ -75,14 +82,6 @@ const JobHome = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const getFeaturedJobs = async () => {
-      const response = await getAllJobs();
-      console.log(response);
-      // const TechSkills =response.skills.split(",");
-      // console.log(TechSkills);
-      // setSkills(TechSkills);
-      setFeaturedJobs(response);
-  }
   if(loading) {
     
     return (
@@ -116,7 +115,7 @@ const JobHome = () => {
 
         {/* Featured Jobs */}
         <div className="job-finderpage-job-list">
-          {featuredJobs.slice(0,2).map((job) => (
+          {featuredJobs.slice(0,7).map((job) => (
             <div className="job-finderpage-job-listvalues" key={job.id}>
               <div className="job-finderpage-companyname">
                 <div>
@@ -179,10 +178,10 @@ const JobHome = () => {
             through JobFlow
           </p>
           <div className="cta-section-btn">
-            <button style={{ backgroundColor: "white", color: "blue" }}>
+            <button onClick={()=>navigate('/findjobs')} style={{ backgroundColor: "white", color: "blue" }}>
               Browse Jobs
             </button>
-            <button className="cta-post">Post a Job</button>
+            <button onClick={()=>navigate('/postjob')} className="cta-post">Post a Job</button>
           </div>
         </section>
 

@@ -5,7 +5,6 @@ import { TiTick } from "react-icons/ti";
 import { TbUsers } from "react-icons/tb";
 import { CgInsights } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
-import ApplicantDetails from "@/DataManage/ApplicantDetails";
 import ApplicationDetails from "@/DataManage/ApplicationDetails";
 const ForEmployers = () => {
   const navigate=useNavigate();

@@ -122,11 +122,16 @@
     cursor: pointer;
     display: none;
 }
-/* .false
-{
+.user-profile {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: white;
 }
-.true
-{
-    display: none;
-} */
+.user-profile:hover {
+    cursor: pointer;
+    color:orange;
+}

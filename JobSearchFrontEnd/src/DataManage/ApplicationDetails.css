@@ -71,3 +71,24 @@
 .edit-application:hover {
   background-color: #1e7e34;
 }
+
+.application-details-header {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+.application-details-description {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.application-details{
+  list-style: none;
+  padding: 40px;
+  margin: auto;
+  margin-top: 50px;
+  /* margin-bottom: 100px; */
+  /* margin: 110px; */
+}

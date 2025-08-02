@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import Nav from '../NAV/Nav'
 import Findjobs from '../Components/Findjobs'
 import ForEmployers from '../Components/ForEmployers'
@@ -11,16 +11,24 @@ import JobHome from '@/HOME/JobHome'
 import JobDetails from '@/Components/JobDetails'
 import Favouritejobs from '@/Components/Favouritejobs'
 import JobApplicationForm from '@/DataManage/JobApplicationForm'
-import ApplicantDetails from '@/DataManage/ApplicantDetails'
 import ApplicationDetails from '@/DataManage/ApplicationDetails'
+import JobBoardAuth from '@/Authentication/JobBoardAuth'
+import ViewApplicants from '@/DataManage/ViewApplicants'
+import UserProfile from '@/DataManage/UserProfile'
 const Layout = () => {
+
+  const location=useLocation();
+
+  const isAuthPage = location.pathname !== '/';
   return (
     <div>
-      <BrowserRouter>
-      <Nav></Nav>
+    
+      {isAuthPage && <Nav></Nav>}
       <Routes>
         
-        <Route path='/' element={<JobHome></JobHome>}></Route>
+        <Route path='/' element={<JobBoardAuth></JobBoardAuth>}></Route>
+        <Route path='/userprofile' element={<UserProfile></UserProfile>}></Route>
+        <Route path='/jobhome' element={<JobHome></JobHome>}></Route>
         <Route path='/findjobs' element={<Findjobs></Findjobs>}></Route>
         <Route path='/foremployers' element={<ForEmployers></ForEmployers>}></Route>
         <Route path='/contact' element={<Contact></Contact>}></Route>
@@ -31,8 +39,9 @@ const Layout = () => {
         <Route path='/jobdetails/:id' element={<JobDetails></JobDetails>}></Route>
         <Route path='/jobapplicantiondetails' element={<ApplicationDetails></ApplicationDetails>}></Route>
         <Route path='/jobapplicationform' element={<JobApplicationForm></JobApplicationForm>}></Route>
+        <Route path='/viewapplicants' element={<ViewApplicants></ViewApplicants>}></Route>
       </Routes>
-      </BrowserRouter>
+      
     </div>
   )
 }

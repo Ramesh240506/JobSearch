@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class JobAppService {
@@ -18,5 +19,13 @@ public class JobAppService {
     public void saveApplication(JobApplication jobApplication, MultipartFile resumeFile) throws IOException {
         jobApplication.setResume(resumeFile.getBytes());
         jobApplicationRepo.save(jobApplication);
+    }
+
+    public List<JobApplication> getApplicantDetails() {
+        return jobApplicationRepo.findAll();
+    }
+
+    public JobApplication getApplicantDetailsByEmail(String email) {
+        return jobApplicationRepo.findByEmail(email);
     }
 }

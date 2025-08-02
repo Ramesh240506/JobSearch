@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import "./Nav.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { CiMenuFries } from "react-icons/ci";
 import NavComp from "./NavComp";
+import { CgProfile } from "react-icons/cg";
 const Nav = () => {
   const [menuBar,setmenuBar]=useState(false);
 
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  }
   return (
     <div>
       <div className="job-nav">
@@ -21,7 +27,7 @@ const Nav = () => {
         <div className={"job-nav-options"}>
           <ul>
             <NavLink
-              to={"/"}
+              to={"/jobhome"}
               end
               className={({ isActive }) =>
                 isActive ? "job-nav-activepage" : "job-nav-line"
@@ -64,11 +70,11 @@ const Nav = () => {
           </ul>
         </div>
         <div className="job-nav-btn">
-          <div className="job-reg-btn">
-            <button>Register</button>
+          <div onClick={()=>navigate('/userprofile')} className="user-profile" style={{ display: "flex", alignItems: "center" ,marginRight: "10px"}}>
+          <CgProfile size={35}></CgProfile>
           </div>
           <div className="job-log-btn">
-            <button>Login</button>
+            <button onClick={handleLogout}>Logout</button>
           </div>
         </div>
       </div>

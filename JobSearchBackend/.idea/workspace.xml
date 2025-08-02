@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6a8fea72-f822-4d87-9bda-1b9215a29584" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/JobSearch/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/JobSearch/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobSearch/src/main/java/com/jobsearch/JobSearch/JobSearchApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/JobSearch/src/main/java/com/jobsearch/JobSearch/JobSearchApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobSearch/src/main/java/com/jobsearch/JobSearch/Service/JobPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/JobSearch/src/main/java/com/jobsearch/JobSearch/Service/JobPostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobSearch/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/JobSearch/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JobSearchFrontEnd/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../JobSearchFrontEnd/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JobSearchFrontEnd/src/HOME/JobHome.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../JobSearchFrontEnd/src/HOME/JobHome.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JobSearchFrontEnd/src/Login/Loginpage/Login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JobSearchFrontEnd/src/Login/Loginpage/Login.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JobSearchFrontEnd/src/Login/Reg/Reg.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JobSearchFrontEnd/src/Login/Reg/Reg.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JobSearchFrontEnd/src/NAV/Nav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../JobSearchFrontEnd/src/NAV/Nav.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JobSearchFrontEnd/src/ROUTING/Layout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../JobSearchFrontEnd/src/ROUTING/Layout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JobSearchFrontEnd/src/Services/JobService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JobSearchFrontEnd/src/Services/JobService.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="30abiqAcEYP5vfe47drIpWZE24A" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/VS Code/Projects/JobSearch/JobSearchBackend"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6a8fea72-f822-4d87-9bda-1b9215a29584" name="Changes" comment="" />
+      <created>1753868761078</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1753868761078</updated>
+    </task>
+    <servers />
+  </component>
+</project>

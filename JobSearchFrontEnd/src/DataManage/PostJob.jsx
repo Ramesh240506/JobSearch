@@ -108,7 +108,7 @@ const PostJob = () => {
         await createJob(jobFormData);
         // setJobFormData(response.data);
         alert("Job posted successfully!");
-        navigate("/"); // Redirect to the jobs page after successful post
+        navigate("/jobhome"); // Redirect to the jobs page after successful post
         setJobFormData({
           // Reset form data
           jobTitle: "",

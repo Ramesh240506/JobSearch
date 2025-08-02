@@ -2,6 +2,9 @@ package com.jobsearch.JobSearch.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "job_applications")
@@ -47,4 +50,7 @@ public class JobApplication {
     private String workAuthorization;
     private boolean willingToRelocate;
     private boolean agreeToTerms;
+
+    @CreationTimestamp
+    private LocalDateTime appliedAt;
 }

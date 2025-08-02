@@ -39,4 +39,8 @@ public class JobPostEntity {
 
     @CreationTimestamp
     private LocalDateTime postedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 }

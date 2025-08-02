@@ -4,6 +4,10 @@ import com.jobsearch.JobSearch.Entity.JobApplication;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface JobApplicationRepo extends JpaRepository<JobApplication,Long> {
+    JobApplication findByEmail(String email);
+
 }
