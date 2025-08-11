@@ -5,6 +5,7 @@ import com.jobsearch.JobSearch.Entity.UserEntity;
 import com.jobsearch.JobSearch.Repository.JobPostRepository;
 import com.jobsearch.JobSearch.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +40,17 @@ public class JobPostService {
         return jobPostRepo.findById(id).
                 orElseThrow(()->new RuntimeException("No id Found"));
 
+    }
+
+    public List<JobPostEntity> searchResults(String keyword) {
+        return jobPostRepo.searchJobs(keyword);
+    }
+
+    public List<JobPostEntity> sortResults(String sortby) {
+        if(sortby.equals("postedAt"))
+        {
+            return jobPostRepo.findAll(Sort.by(Sort.Direction.DESC,sortby));
+        }
+        return jobPostRepo.findAll(Sort.by(Sort.Direction.ASC,sortby));
     }
 }

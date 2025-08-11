@@ -15,6 +15,7 @@ import ApplicationDetails from '@/DataManage/ApplicationDetails'
 import JobBoardAuth from '@/Authentication/JobBoardAuth'
 import ViewApplicants from '@/DataManage/ViewApplicants'
 import UserProfile from '@/DataManage/UserProfile'
+import SearchResults from '@/Features/SearchResults'
 const Layout = () => {
 
   const location=useLocation();
@@ -40,6 +41,7 @@ const Layout = () => {
         <Route path='/jobapplicantiondetails' element={<ApplicationDetails></ApplicationDetails>}></Route>
         <Route path='/jobapplicationform' element={<JobApplicationForm></JobApplicationForm>}></Route>
         <Route path='/viewapplicants' element={<ViewApplicants></ViewApplicants>}></Route>
+        <Route path='/searchresults/:keyword' element={<SearchResults></SearchResults>}></Route>
       </Routes>
       
     </div>

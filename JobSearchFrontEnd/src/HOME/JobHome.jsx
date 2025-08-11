@@ -15,6 +15,7 @@ import { getAllJobs } from "@/Services/JobService";
 import { useNavigate } from "react-router-dom";
 
 import {formatDistanceToNow} from "date-fns";
+import { NavigationOff } from "lucide-react";
 const JobHome = () => {
   const handleBookmark = (id) => {
     // if (isBookmarked === false) setBookmark(true);
@@ -28,31 +29,10 @@ const JobHome = () => {
   
   const navigate=useNavigate();
   const [loading, setLoading] = useState(true);
-  const [featuredJobs, setFeaturedJobs] = useState([
-    {
-      id: 1,
-      jobTitle: "Senior Frontend Developer",
-      companyName: "TechCorp Inc.",
-      jobLocation: "San Francisco, CA",
-      minSalary:"$100k",
-      maxSalary: "$150k",
-      jobType: "Full-time",
-      postedAt: "2 days ago",
-      bookmark: false,
-      tags: ["React", "TypeScript", "Remote OK"],
-    },
-    {
-      id: 2,
-      jobTitle: "UX/UI Designer",
-      companyName: "Creative Minds Co.",
-      jobLocation: "Los Angeles, CA",
-      minSalary:"$80k",
-      maxSalary: "$120k",
-      jobType: "Part-time",
-      postedAt: "3 days ago",
-      bookmark: false,
-    }
-  ]);
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const [featuredJobs, setFeaturedJobs] = useState([]);
 
     const [skills, setSkills] = useState([
     "React",
@@ -67,6 +47,10 @@ const JobHome = () => {
       navigate(`/jobdetails/${id}`);
     }
     
+    const handleSearch = () => {
+        const keyword = searchTerm.trim();
+        navigate(`/searchresults/${keyword}`);
+    }
     const getFeaturedJobs = async () => {
         const response = await getAllJobs();
         console.log(response);
@@ -89,6 +73,8 @@ const JobHome = () => {
     )
 
   }
+
+
   return (
     <div>
     
@@ -108,8 +94,10 @@ const JobHome = () => {
             <input
               type="text"
               placeholder="Search for jobs, companies, or keywords..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button className="search-button">Search</button>
+            <button onClick={handleSearch} className="search-button">Search</button>
           </div>
         </section>
 

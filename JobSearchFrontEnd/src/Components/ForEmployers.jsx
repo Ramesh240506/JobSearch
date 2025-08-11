@@ -34,7 +34,6 @@ const ForEmployers = () => {
                 <li className={activeTab==="joblistings"? "active":""} onClick={()=>setActiveTab("joblistings")}>Job Listings</li>
               </ul>
             </nav>
-            </div>
           {
             activeTab==="joblistings" ? (
               <ApplicationDetails></ApplicationDetails>
@@ -64,6 +63,7 @@ const ForEmployers = () => {
             </div>
             )
           }
+            </div>
         <div className="job-employer-content">
           <h1>Powerful Employer Tools</h1>
           <p>

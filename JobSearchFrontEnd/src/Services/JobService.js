@@ -75,3 +75,23 @@ export const getAllApplicants = () =>{
 export const getUserApplication=()=>{
     return axios.get(API_URL+'/getapplicationsdata',authHeaders())
 }
+
+export const getSearchResults = async (keyword) => {
+    try {
+        const response = await axios.get(`${API_URL}/search/${keyword}`, authHeaders());
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching search results:", error);
+        throw error;
+    }
+}
+
+export const getSortedJobs = async (sortBy) => {
+    try {
+        const response = await axios.get(`${API_URL}/sorting/${sortBy}`, authHeaders());
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching sorted jobs:", error);
+        throw error;
+    }
+}

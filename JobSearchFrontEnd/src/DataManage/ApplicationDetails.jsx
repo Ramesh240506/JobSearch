@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import "./ApplicationDetails.css";
-import { getAllJobs, getUserApplication } from "@/Services/JobService";
 import { formatDistanceToNow } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { CiLocationOn } from "react-icons/ci";
 import { FiDollarSign } from "react-icons/fi";
 import { CiCalendarDate } from "react-icons/ci";
+import { getUserApplication } from "@/Services/JobService";
 const ApplicationDetails = () => {
   const [applications, setApplications] = React.useState([
     {

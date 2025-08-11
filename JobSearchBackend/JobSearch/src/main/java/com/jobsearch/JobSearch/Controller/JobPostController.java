@@ -39,4 +39,16 @@ public class JobPostController {
     {
         return postService.getJobById(id);
     }
+
+    @GetMapping("/search/{keyword}")
+    public List<JobPostEntity> searchResults(@PathVariable String keyword)
+    {
+        return postService.searchResults(keyword);
+    }
+
+    @GetMapping("/sorting/{sortby}")
+    public List<JobPostEntity> sortResults(@PathVariable String sortby)
+    {
+        return postService.sortResults(sortby);
+    }
 }
