@@ -29,6 +29,8 @@
                     authz->
                 authz.requestMatchers("/api/jobs/register", "/api/jobs/login")
                         .permitAll()
+                        .requestMatchers("/api/jobs/postapplication").hasRole("SEEKER")
+                        .requestMatchers("/api/jobs/jobpost").hasRole("POSTER")
                             .anyRequest().authenticated()
             );
             http.httpBasic(Customizer.withDefaults());
@@ -58,6 +60,7 @@
         public AuthenticationManager authManger(AuthenticationConfiguration config) throws Exception {
             return config.getAuthenticationManager();
         }
+
         @Bean
         public BCryptPasswordEncoder passwordEncoder()
         {

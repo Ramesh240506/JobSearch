@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./Nav.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { CiMenuFries } from "react-icons/ci";
-import NavComp from "./NavComp";
 import { CgProfile } from "react-icons/cg";
 const Nav = () => {
   const [menuBar,setmenuBar]=useState(false);
@@ -43,14 +42,7 @@ const Nav = () => {
             >
               <li>Find Jobs</li>
             </NavLink>
-            <NavLink
-              to={"/foremployers"}
-              className={({ isActive }) =>
-                isActive ? "job-nav-activepage" : "job-nav-line"
-              }
-            >
-              <li>For Employers</li>
-            </NavLink>
+            
             <NavLink
               to={"/favouritejobs"}
               className={({ isActive }) =>

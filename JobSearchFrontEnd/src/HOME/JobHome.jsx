@@ -32,6 +32,7 @@ const JobHome = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
 
+  const [role, setRole] = useState("User");
   const [featuredJobs, setFeaturedJobs] = useState([]);
 
     const [skills, setSkills] = useState([
@@ -151,7 +152,7 @@ const JobHome = () => {
                 ))}
               </div>
 
-              <button onClick={()=>handleApply(job.id)} 
+              <button disabled={role==="User"} onClick={()=>handleApply(job.id)} 
               className="job-finderpage-apply-button">Apply Now</button>
             </div>
           ))}

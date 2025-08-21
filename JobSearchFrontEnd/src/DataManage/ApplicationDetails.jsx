@@ -7,26 +7,7 @@ import { FiDollarSign } from "react-icons/fi";
 import { CiCalendarDate } from "react-icons/ci";
 import { getUserApplication } from "@/Services/JobService";
 const ApplicationDetails = () => {
-  const [applications, setApplications] = React.useState([
-    {
-      id: 1,
-      jobTitle: "Senior Frontend Developer",
-      companyName: "TechCorp Inc.",
-      jobLocation: "San Francisco, CA",
-      minsalary: "$100k",
-      maxsalary: "$150k",
-      postedAt: "2 days ago",
-    },
-    {
-      id: 2,
-      jobTitle: "Backend Developer",
-      companyName: "Innovate Solutions",
-      jobLocation: "New York, NY",
-      minsalary: "$90k",
-      maxsalary: "$130k",
-      postedAt: "1 week ago",
-    },
-  ]);
+  const [applications, setApplications] = React.useState([]);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -55,10 +36,7 @@ const ApplicationDetails = () => {
 
   return (
     <div>
-      <h2 className="application-details-header">Application Details</h2>
-      <p className="application-details-description">
-        Manage and view details of job applications received through JobFlow.
-      </p>
+      
       {applications.map((application) => (
         <div className="application-details" key={application.id}>
           <div className="application-list">

@@ -36,8 +36,10 @@ public class UserController {
     {
         Map<String,String> response = new HashMap<>();
 
-        response.put("accessToken",userService.verifyUser(user));
+        UserEntity userData=userService.findUserByEmail(user.getEmail());
 
+        response.put("accessToken",userService.verifyUser(user));
+        response.put("role",userData.getRole());
         return response;
     }
 

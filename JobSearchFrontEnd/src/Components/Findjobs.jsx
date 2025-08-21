@@ -21,21 +21,18 @@ const Findjobs = () => {
     else setBookmark(false);
   };
 
-  const handleApply=(id)=>{
-      console.log("Job Id:",id);
-      navigate(`/jobdetails/${id}`);
-    }
+  const handleApply = (id) => {
+    console.log("Job Id:", id);
+    navigate(`/jobdetails/${id}`);
+  };
   useEffect(() => {
-
     const fetchJobs = async () => {
       try {
-        if(sortBy) {
+        if (sortBy) {
           const response = await getSortedJobs(sortBy);
           setJobs(response);
           console.log("Jobs sorted by:", sortBy, response);
-        }
-        else
-        {
+        } else {
           const response = await getAllJobs();
           setJobs(response);
           console.log("Jobs:", response);
@@ -61,12 +58,12 @@ const Findjobs = () => {
             <option>Remote</option>
             <option>Onsite</option>
           </select>
-          
+
           <button style={{ backgroundColor: "black", color: "white" }}>
             Search
           </button>
         </div>
-     
+
         <div className="job-finderpage-job-list-header">
           <div>
             <h3>6 Jobs Available</h3>
@@ -74,8 +71,11 @@ const Findjobs = () => {
           <div className="job-finderpage-job-list-sort">
             <p>Sort:</p>
             <select onChange={(e) => setSortBy(e.target.value)}>
-              <option value={"postedAt"}>Most Recent</option>
-              <option value={"jobLocation"}>Most Relevant</option>
+              <option value="postedAt">Most Recent</option>
+              <option value="maxSalary">Highest Salary</option>
+              <option value="minSalary">Lowest Salary</option>
+              <option value="companyName">Company Name (A–Z)</option>
+              <option value="jobLocation">Location</option>
             </select>
           </div>
         </div>
@@ -136,8 +136,12 @@ const Findjobs = () => {
                       ))}
                     </div> */}
 
-              <button onClick={() => handleApply(job.id)}
-              className="job-finderpage-apply-button">Apply Now</button>
+              <button
+                onClick={() => handleApply(job.id)}
+                className="job-finderpage-apply-button"
+              >
+                Apply Now
+              </button>
             </div>
           ))}
           {/* <div className="job-finderpage-job-listvalues"> */}

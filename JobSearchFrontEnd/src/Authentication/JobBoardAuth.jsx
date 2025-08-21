@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./JobBoardAuth.css";
 import { loginUser, registerUser } from "@/Services/JobService";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,7 @@ const JobBoardAuth = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    role:"SEEKER",
   });
 
   const navigate = useNavigate();
@@ -22,6 +23,9 @@ const JobBoardAuth = () => {
     }));
   };
 
+  useEffect(() => {
+    console.log("Form Data:", formData);
+},[formData]);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -36,6 +40,7 @@ const JobBoardAuth = () => {
         username: formData.username,
         email: formData.email,
         password: formData.password,
+        role: formData.role,
       }).then(() => {
         alert(`Registered successfully for: ${formData.username}`);
         setFormData({
@@ -43,6 +48,7 @@ const JobBoardAuth = () => {
           email: "",
           password: "",
           confirmPassword: "",
+          role: "",
         });
         setIsLoginMode(true);
       });
@@ -54,6 +60,8 @@ const JobBoardAuth = () => {
       }).then((response) => {
         if (response.data && response.data.accessToken) {
           localStorage.setItem("accessToken", response.data.accessToken);
+          localStorage.setItem("role", response.data.role);
+          console.log("role:", response.data.role);
           alert("Login successful!");
           navigate("/jobhome");
         } else {
@@ -70,6 +78,7 @@ const JobBoardAuth = () => {
       email: "",
       password: "",
       confirmPassword: "",
+      role:""
     });
   };
 
@@ -162,6 +171,18 @@ const JobBoardAuth = () => {
                   className="form-input"
                 />
                 <label className="form-label">Confirm Password</label>
+              </div>
+            )}
+
+            {
+              !isLoginMode && (
+              <div className="form-group">
+                <select className="form-input" name="role" value={formData.role} 
+                onChange={handleInputChange} required>
+                  <option value="SEEKER">Job Seeker</option>
+                  <option value="POSTER">Job Poster</option>
+                </select>
+                <label className="form-label">Role</label>
               </div>
             )}
 

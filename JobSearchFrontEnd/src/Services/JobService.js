@@ -95,3 +95,32 @@ export const getSortedJobs = async (sortBy) => {
         throw error;
     }
 }
+
+export const SaveUserProfile =(userData) => {
+    return axios.put(API_URL+'/saveprofile', userData, authHeaders())
+    .then(response => response.data)
+    .catch(error => {
+        console.error("Error saving user profile:", error);
+        throw error;
+    });
+}
+
+export const getUserProfile = async () => {
+    try {
+        const response = await axios.get(API_URL+'/fetchuserdetails', authHeaders());
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching user profile:", error);
+        throw error;
+    }
+}
+
+export const appliedUsers= async (id) => {
+    try {
+        const response = await axios.post(`${API_URL}/appliedusers/${id}`,{}, authHeaders());
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching user applications:", error);
+        throw error;
+    }
+}

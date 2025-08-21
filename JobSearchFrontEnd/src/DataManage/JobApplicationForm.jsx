@@ -2,7 +2,8 @@ import { useState } from 'react';
 
 import './JobApplicationForm.css'; 
 import PositionedSnackbar from '@/UIComponents/PositionedSnackbar';
-import { postJobApplication } from '@/Services/JobService';
+import { appliedUsers, postJobApplication } from '@/Services/JobService';
+import { useParams } from 'react-router-dom';
 export default function JobApplicationForm() {
   const [jobFormData, setjobFormData] = useState({
     firstName: '',
@@ -37,7 +38,7 @@ export default function JobApplicationForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [resumeFile, setResumeFile] = useState(null);
-
+  const {id}=useParams();
   const [snackbar, setSnackbar] = useState(false);
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -85,6 +86,7 @@ export default function JobApplicationForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
+      appliedUsers(id);
       setIsSubmitted(true);
       const formData = new FormData();
       

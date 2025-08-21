@@ -45,7 +45,7 @@ function createData(name, email, appliedDate) {
 
 export default function StickyHeadTable() {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] =useState(10);
+  const [rowsPerPage, setRowsPerPage] =useState(25);
   const [rows,setRows]=useState([]);
 
   const handleChangePage = (event, newPage) => {
