@@ -94,7 +94,7 @@ export default function JobApplicationForm() {
       formData.append('application',new Blob([JSON.stringify({...jobFormData , resume:null})],
        { type: 'application/json' }));
 
-      postJobApplication(formData).then(response => {
+      postJobApplication(formData,id).then(response => {
         console.log('Application submitted successfully:', response)
         }).catch(error =>
         {

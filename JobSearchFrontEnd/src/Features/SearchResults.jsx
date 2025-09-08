@@ -12,12 +12,14 @@ const SearchResults = () => {
   const { keyword } = useParams();
   const [searchresults, setSearchResults] = useState([]);
   const navigate = useNavigate();
-
+  const [role, setRole] = useState("");
   const handleApply=(id)=>{
       console.log("Job Id:",id);
       navigate(`/jobdetails/${id}`);
     }
   useEffect(() => {
+    const storedRole = localStorage.getItem("role");
+    setRole(storedRole);
     const fetchSearchResults = async () => {
       const response = await getSearchResults(keyword);
       setSearchResults(response);
@@ -34,9 +36,6 @@ const SearchResults = () => {
           {searchresults.slice(0, 7).map((job) => (
             <div className="job-finderpage-job-listvalues" key={job.id}>
               <div className="job-finderpage-companyname">
-                <div>
-                  <img src={"/public/vite.svg"} alt="no"></img>
-                </div>
                 <div style={{ width: "100%" }}>
                   <div className="job-finderpage-bookmark">
                     <div>
@@ -80,7 +79,7 @@ const SearchResults = () => {
                       ))}
                     </div> */}
 
-              <button onClick={() => handleApply(job.id)}
+              <button disabled={role==="POSTER"} onClick={() => handleApply(job.id)}
               className="job-finderpage-apply-button">Apply Now</button>
             </div>
           ))}

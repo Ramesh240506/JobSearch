@@ -53,4 +53,12 @@ public class JobApplication {
 
     @CreationTimestamp
     private LocalDateTime appliedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "jobid")
+    private JobPostEntity jobPost;
+
+    @ManyToOne
+    @JoinColumn(name = "userid")
+    private UserEntity user;
 }

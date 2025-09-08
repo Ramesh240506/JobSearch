@@ -43,9 +43,9 @@ export const getJobById = async (jobId) => {
     }
 }
 
-export const postJobApplication = async (formData)=>{
+export const postJobApplication = async (formData,id)=>{
     try{
-        const response = await axios.post(API_URL+'/postapplication', formData, authHeaders());
+        const response = await axios.post(API_URL+'/postapplication/'+id, formData, authHeaders());
         return response.data;
       }
     catch (error) {
@@ -68,8 +68,8 @@ export const loginUser = (userData)=>{
     return axios.post(API_URL+'/login',userData)
 }
 
-export const getAllApplicants = () =>{
-    return axios.get(API_URL+'/getapplicants',authHeaders());
+export const getAllApplicants = (jobid) =>{
+    return axios.get(API_URL+'/getapplicants/'+jobid,authHeaders());
 }
 
 export const getUserApplication=()=>{
@@ -121,6 +121,81 @@ export const appliedUsers= async (id) => {
         return response.data;
     } catch (error) {
         console.error("Error fetching user applications:", error);
+        throw error;
+    }
+}
+
+export const JobSeekerApplications = () => {
+    return axios.get(API_URL+'/getapplieduserjobs', authHeaders());
+}
+
+export const JobSeekerApplicationStatus = () => {
+    return axios.get(API_URL+'/getappliedusersstatus', authHeaders());
+}
+
+export const JobSeekerAppliedJobDetails = async (id) => {
+    try{
+        const response = await axios.get(`${API_URL}/getappliedjobofuserbyid/${id}`, authHeaders());
+        return response.data;
+      }
+    catch (error) {
+        console.error("Error fetching job details:", error);
+        throw error;
+    }
+}
+
+export const JobSeekerApplicationStatusByJobId = async (id) => {
+    try{
+        const response = await axios.get(`${API_URL}/getapplieduserstatusbyjobid/${id}`, authHeaders());
+        return response.data;
+      }
+    catch (error) {
+        console.error("Error fetching job details:", error);
+        throw error;
+    }
+}
+
+export const JobSeekerApplicationStatusByUserId = async (id) => {
+    try{
+        const response = await axios.get(`${API_URL}/getapplieduserstatusbyjobid/${id}`, authHeaders());
+        return response.data;
+      }
+    catch (error) {
+        console.error("Error fetching job details:", error);
+        throw error;
+    }
+}
+
+export const JobSeekerAppliedStatus = async (id) => {
+    try{
+        const response = await axios.get(`${API_URL}/checkappliedstatus/${id}`, authHeaders());
+        return response.data;
+      }
+    catch (error) {
+        console.error("Error fetching job details:", error);
+        throw error;
+    }
+}
+
+export const deleteAppliedJob = async (id) => {
+    try{
+        
+        const response = await axios.delete(`${API_URL}/deleteappliedjob/${id}`, authHeaders());
+        return response.data;
+      }
+    catch (error) {
+        console.error("Error deleting applied job:", error);
+        throw error;
+    }
+}
+
+export const getAppliedUserDetails = async (jobid,id) => {
+    try{
+        const response = await axios.get(`${API_URL}/getapplieduserdetails/${jobid}/${id}`, authHeaders());
+        return response.data;
+      }
+    catch (error) {
+        console.error("Error fetching job details:", error);
         throw error;
     }
 }

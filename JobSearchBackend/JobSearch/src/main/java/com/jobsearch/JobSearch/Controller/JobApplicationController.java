@@ -1,5 +1,6 @@
 package com.jobsearch.JobSearch.Controller;
 
+import com.jobsearch.JobSearch.Entity.JobApplicant;
 import com.jobsearch.JobSearch.Entity.JobApplication;
 import com.jobsearch.JobSearch.Service.JobAppService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +18,17 @@ public class JobApplicationController {
     @Autowired
     JobAppService jobAppService;
 
-    @PostMapping("/postapplication")
+    @PostMapping("/postapplication/{jobid}")
     public void saveApplication(@RequestPart("application") JobApplication jobApplication
-    , @RequestPart("resume")MultipartFile resumeFile) throws IOException {
-        jobAppService.saveApplication(jobApplication,resumeFile);
+    , @RequestPart("resume")MultipartFile resumeFile,@PathVariable Long jobid) throws IOException {
+        jobAppService.saveApplication(jobApplication,resumeFile,jobid);
     }
 
-    @GetMapping("/getapplicants")
-    public List<JobApplication> getApplicantsDetails()
+    @GetMapping("/getapplicants/{jobid}")
+    public List<JobApplication> getApplicantsDetails(@PathVariable Long jobid)
     {
-        return jobAppService.getApplicantDetails();
+        return jobAppService.getApplicantDetails(jobid);
     }
+
+
 }

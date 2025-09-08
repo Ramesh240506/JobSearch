@@ -63,12 +63,12 @@ const ApplicationDetails = () => {
               
               <div className="application-actions">
                 <button
-                  onClick={() => navigate("/viewapplicants")}
+                  onClick={() => navigate(`/viewapplicants/${application.id}`)}
                   className="view-application"
                 >
-                  View Applicants
+                🔍 View Applicants
                 </button>
-                <button className="edit-application">Edit</button>
+                <button className="edit-application">✏️ Edit</button>
               </div>
             </div>
           </div>

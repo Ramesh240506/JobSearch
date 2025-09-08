@@ -4,9 +4,10 @@ import {
   TableHead, TablePagination, TableRow, Typography, Button
 } from '@mui/material';
 import { useState } from 'react';
-import { getAllApplicants, getAllJobs } from '@/Services/JobService';
+import { getAllApplicants } from '@/Services/JobService';
 import { useEffect } from 'react';
 import { format } from 'date-fns';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const columns = [
   { id: 'name', label: 'Name', minWidth: 170 },
@@ -28,8 +29,8 @@ const columns = [
 
 
 // Example row creation function
-function createData(name, email, appliedDate) {
-  return { name, email, appliedDate };
+function createData(id,name, email, appliedDate) {
+  return { id,name, email, appliedDate };
 }
 
 
@@ -44,9 +45,12 @@ function createData(name, email, appliedDate) {
 // ];
 
 export default function StickyHeadTable() {
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] =useState(25);
   const [rows,setRows]=useState([]);
+  
+  const navigate=useNavigate();
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -56,17 +60,18 @@ export default function StickyHeadTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
+  const {jobid}=useParams();
   useEffect(()=>{
+    console.log("Job ID from params:",jobid);
     getApplicants();
-  },[])
+  },[jobid]);
 
   const getApplicants=async()=>{
-      const response=await getAllApplicants();
+      const response=await getAllApplicants(jobid);
       try
       {
           const applicants=response.data.map((applicant)=>(
-              createData(applicant.firstName,applicant.email,format(new Date(applicant.appliedAt), 'dd MMM yyyy'))
+              createData(applicant.user.id,applicant.firstName,applicant.email,format(new Date(applicant.appliedAt), 'dd MMM yyyy'))
           ));
           console.log("Response from backend",response)
           setRows(applicants);
@@ -77,6 +82,10 @@ export default function StickyHeadTable() {
       }
   }
 
+  const handleView = (id) => {
+    alert('View action clicked');
+    navigate(`/applieduserdetails/${jobid}/${id}`);
+  }
 
   return (
     <Paper
@@ -136,7 +145,7 @@ export default function StickyHeadTable() {
                       variant="outlined"
                       size="small"
                       sx={{ mr: 1 }}
-                      onClick={() => alert(`Viewing ${row.name}`)}
+                      onClick={()=>handleView(row.id)}
                     >
                       View
                     </Button>

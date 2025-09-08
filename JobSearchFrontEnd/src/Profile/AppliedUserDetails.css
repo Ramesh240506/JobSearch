@@ -1,0 +1,124 @@
+.applied-user-details-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+/* Page Title */
+.applied-user-details-container h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 30px;
+  border-bottom: 3px solid #3182ce;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+/* Section Styles */
+.applied-user-inforamtion,
+.applied-user-professional,
+.applied-user-coverletter,
+.applied-user-links {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.applied-user-inforamtion:hover,
+.applied-user-professional:hover,
+.applied-user-coverletter:hover,
+.applied-user-links:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+}
+
+.applied-user-inforamtion h3,
+.applied-user-professional h3,
+.applied-user-coverletter h3,
+.applied-user-links h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+  color: #2d3748;
+  border-left: 4px solid #3182ce;
+  padding-left: 10px;
+}
+
+.applied-user-inforamtion p,
+.applied-user-professional p,
+.applied-user-coverletter p,
+.applied-user-links p {
+  font-size: 16px;
+  color: #4a5568;
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+/* Highlight Labels */
+.applied-user-inforamtion p strong,
+.applied-user-professional p strong {
+  font-weight: 600;
+  color: #1a202c;
+}
+
+/* Cover Letter */
+.applied-user-coverletter p {
+  color: #2d3748;
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: justify;
+}
+
+/* External Links */
+.applied-user-links p {
+  margin: 10px 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3182ce;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.applied-user-links p:hover {
+  color: #1a202c;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .applied-user-details-container {
+    padding: 15px;
+  }
+
+  .applied-user-details-container h1 {
+    font-size: 24px;
+  }
+
+  .applied-user-inforamtion,
+  .applied-user-professional,
+  .applied-user-coverletter,
+  .applied-user-links {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .applied-user-details-container h1 {
+    font-size: 20px;
+  }
+
+  .applied-user-inforamtion h3,
+  .applied-user-professional h3,
+  .applied-user-coverletter h3,
+  .applied-user-links h3 {
+    font-size: 18px;
+  }
+}

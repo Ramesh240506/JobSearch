@@ -13,7 +13,7 @@ const Findjobs = () => {
   const [isBookmarked, setBookmark] = useState(false);
   const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
-
+  const [role, setRole] = useState("");
   const [sortBy, setSortBy] = useState("");
 
   const handleBookmark = () => {
@@ -26,6 +26,8 @@ const Findjobs = () => {
     navigate(`/jobdetails/${id}`);
   };
   useEffect(() => {
+    const storedRole = localStorage.getItem("role");
+    setRole(storedRole);
     const fetchJobs = async () => {
       try {
         if (sortBy) {
@@ -66,7 +68,7 @@ const Findjobs = () => {
 
         <div className="job-finderpage-job-list-header">
           <div>
-            <h3>6 Jobs Available</h3>
+            <h3>{jobs.length} Jobs Available</h3>
           </div>
           <div className="job-finderpage-job-list-sort">
             <p>Sort:</p>
@@ -84,9 +86,9 @@ const Findjobs = () => {
           {jobs.slice(0, 7).map((job) => (
             <div className="job-finderpage-job-listvalues" key={job.id}>
               <div className="job-finderpage-companyname">
-                <div>
+                {/* <div>
                   <img src={"/public/vite.svg"} alt="no"></img>
-                </div>
+                </div> */}
                 <div style={{ width: "100%" }}>
                   <div className="job-finderpage-bookmark">
                     <div>
@@ -138,6 +140,7 @@ const Findjobs = () => {
 
               <button
                 onClick={() => handleApply(job.id)}
+                disabled={role === "POSTER"}
                 className="job-finderpage-apply-button"
               >
                 Apply Now

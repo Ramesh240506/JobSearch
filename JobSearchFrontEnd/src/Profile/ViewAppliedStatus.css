@@ -1,0 +1,154 @@
+.applied-job-details {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 32px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+.applied-job-details h2 {
+  color: #1a202c;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-align: center;
+  border-bottom: 3px solid #3182ce;
+  padding-bottom: 12px;
+}
+
+.applied-job-details h3 {
+  color: #2d3748;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  margin-top: 24px;
+}
+
+.applied-job-details > h3:first-of-type {
+  text-align: center;
+  color: #3182ce;
+  font-size: 22px;
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+.applied-job-details hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, #3182ce, #63b3ed);
+  border-radius: 2px;
+}
+
+.applied-job-information,
+.applied-job-description,
+.applied-job-requirements,
+.applied-job-skills,
+.applied-job-status {
+  background-color: #f8fafc;
+  padding: 24px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border-left: 4px solid #3182ce;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.applied-job-information:hover,
+.applied-job-description:hover,
+.applied-job-requirements:hover,
+.applied-job-skills:hover,
+.applied-job-status:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+}
+
+.applied-job-information p,
+.applied-job-description p,
+.applied-job-requirements p,
+.applied-job-skills p,
+.applied-job-status p {
+  color: #4a5568;
+  font-size: 16px;
+  margin: 8px 0;
+  line-height: 1.7;
+}
+
+.applied-job-information p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.applied-job-information p:last-child {
+  border-bottom: none;
+}
+
+.applied-job-information p strong,
+.applied-job-information p::before {
+  font-weight: 600;
+  color: #2d3748;
+  min-width: 120px;
+}
+
+.applied-job-status p {
+  color: #4a5568;
+  font-weight: 600;
+  margin: 8px 0;
+  line-height: 1.7;
+}
+
+.applied-job-status p strong {
+  color: #3182ce;
+}
+
+.applied-job-status p span {
+  color: #2d3748;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .applied-job-details {
+    margin: 16px;
+    padding: 20px;
+  }
+  
+  .applied-job-details h2 {
+    font-size: 24px;
+  }
+  
+  .applied-job-details h3 {
+    font-size: 18px;
+  }
+  
+  .applied-job-information,
+  .applied-job-description,
+  .applied-job-requirements,
+  .applied-job-skills,
+  .applied-job-status {
+    padding: 16px;
+  }
+  
+  .applied-job-information p {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .applied-job-details {
+    margin: 8px;
+    padding: 16px;
+  }
+  
+  .applied-job-details h2 {
+    font-size: 20px;
+  }
+  
+  .applied-job-details h3 {
+    font-size: 16px;
+  }
+}

@@ -14,6 +14,9 @@ import ViewApplicants from '@/DataManage/ViewApplicants'
 import UserProfile from '@/Profile/UserProfile'
 import SearchResults from '@/Features/SearchResults'
 import ProfileDetails from '@/DataManage/ProfileDetails'
+import ProtectedRoute from './ProtectedRoute'
+import ViewAppliedStatus from '@/Profile/ViewAppliedStatus'
+import AppliedUserDetails from '@/Profile/AppliedUserDetails'
 const Layout = () => {
 
   const location=useLocation();
@@ -26,20 +29,27 @@ const Layout = () => {
       <Routes>
         
         <Route path='/' element={<JobBoardAuth></JobBoardAuth>}></Route>
-        <Route path='/userprofile' element={<UserProfile></UserProfile>}></Route>
-        <Route path='/jobhome' element={<JobHome></JobHome>}></Route>
-        <Route path='/findjobs' element={<Findjobs></Findjobs>}></Route>
-        <Route path='/contact' element={<Contact></Contact>}></Route>
-        <Route path='/postjob' element={<PostJob></PostJob>}></Route>
-        <Route path='/step2back' element={<PostJob></PostJob>}></Route>
-        <Route path='/favouritejobs' element={<Favouritejobs></Favouritejobs>}></Route>
-        <Route path='/jobdetails/:id' element={<JobDetails></JobDetails>}></Route>
-        <Route path='/jobapplicantiondetails' element={<ApplicationDetails></ApplicationDetails>}></Route>
-        <Route path='/jobapplicationform/:id' element={<JobApplicationForm></JobApplicationForm>}></Route>
-        <Route path='/viewapplicants' element={<ViewApplicants></ViewApplicants>}></Route>
-        <Route path='/searchresults/:keyword' element={<SearchResults></SearchResults>}></Route>
-        <Route path='/userdetails' element={<ProfileDetails></ProfileDetails>}></Route>
-      </Routes>
+        <Route path='/userprofile' element={<ProtectedRoute><UserProfile></UserProfile></ProtectedRoute>}></Route>
+        <Route path='/jobhome' element={<ProtectedRoute><JobHome></JobHome></ProtectedRoute>}></Route>
+       
+        <Route path='/findjobs' element={<ProtectedRoute><Findjobs></Findjobs></ProtectedRoute>}></Route>
+        <Route path='/contact' element={<ProtectedRoute><Contact></Contact></ProtectedRoute>}></Route>
+        <Route path='/postjob' element={<ProtectedRoute><PostJob></PostJob></ProtectedRoute>}></Route>
+     
+        <Route path='/favouritejobs' element={<ProtectedRoute><Favouritejobs></Favouritejobs></ProtectedRoute>}></Route>
+        <Route path='/jobdetails/:id' element={<ProtectedRoute><JobDetails></JobDetails></ProtectedRoute>}></Route>
+        <Route path='/jobapplicantiondetails' element=
+        {<ProtectedRoute><ApplicationDetails></ApplicationDetails></ProtectedRoute>}></Route>
+
+        <Route path='/jobapplicationform/:id' element={<ProtectedRoute><JobApplicationForm></JobApplicationForm></ProtectedRoute>}></Route>
+        <Route path='/viewapplicants/:jobid' element={<ProtectedRoute><ViewApplicants></ViewApplicants></ProtectedRoute>}></Route>
+        
+        <Route path='/searchresults/:keyword' element={<ProtectedRoute><SearchResults></SearchResults></ProtectedRoute>}></Route>
+        <Route path='/userdetails' element={<ProtectedRoute><ProfileDetails></ProfileDetails></ProtectedRoute>}></Route>
+        <Route path='/viewappliedstatus/:id' element={<ProtectedRoute><ViewAppliedStatus></ViewAppliedStatus></ProtectedRoute>}></Route>
+        <Route path='/applieduserdetails/:jobid/:id' element={<ProtectedRoute><AppliedUserDetails></AppliedUserDetails></ProtectedRoute>}></Route> 
+          
+          </Routes>
       
     </div>
   )

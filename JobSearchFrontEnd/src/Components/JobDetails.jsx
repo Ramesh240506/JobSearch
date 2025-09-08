@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./JobDetails.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { appliedUsers, getJobById, getUserApplication } from "@/Services/JobService";
+import {  getJobById, JobSeekerAppliedStatus } from "@/Services/JobService";
 import { formatDistanceToNow } from "date-fns";
 const JobDetails = () => {
   const [jobDetails, setJobDetails] = useState({
@@ -15,14 +15,21 @@ const JobDetails = () => {
     postedAt: "",
     jobDescription:
       "",
-    requirements: "l",
+    requirements: "",
     skills: "",
   });
 
   const navigate = useNavigate();
+  const [appliedStatus, setAppliedStatus] = useState(false);
   const { id } = useParams();
   useEffect(() => {
     console.log(id);
+    const getStatus = async () => {
+      const response = await JobSeekerAppliedStatus(id);
+      setAppliedStatus(response);
+      console.log(response);
+    }; 
+    getStatus();
     fetchJobDetails(id);
   }, []);
 
@@ -91,7 +98,11 @@ const JobDetails = () => {
       </div>
 
       <div className="job-details-apply">
+        {
+        appliedStatus ? <button className="job-details-apply-button">Applied</button>
+        :
         <button onClick={handleApply} className="job-details-apply-button">Apply Now</button>
+        }
       </div>
     </div>
   );
