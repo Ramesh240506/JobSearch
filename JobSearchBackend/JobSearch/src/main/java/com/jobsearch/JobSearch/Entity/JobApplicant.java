@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,5 +28,5 @@ public class JobApplicant {
 
     private String applicationStatus;
 
-
+    private LocalDate interviewDate;
 }

@@ -10,12 +10,17 @@ import com.jobsearch.JobSearch.Repository.JobPostRepository;
 import com.jobsearch.JobSearch.Repository.UserRepository;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,22 +57,27 @@ public class JobApplicantService {
         jobApplicantRepo.save(jobApplicant);
     }
 
-    public List<JobPostEntity> getAppliedUserJobs() {
+    public Page<JobPostEntity> getAppliedUserJobs(int page,int size,String status,String keyword) {
 
         String currentlyLoggedInUser=SecurityContextHolder.getContext().getAuthentication().getName();
 
         UserEntity user=userRepository.findByEmail(currentlyLoggedInUser);
 
-        List<JobApplicant> appliedJobs=jobApplicantRepo.findByUser(user);
-
-        List<JobPostEntity> jobPost=new ArrayList<>();
-
-        for (JobApplicant appliedJob:appliedJobs)
+        Pageable pageable= PageRequest.of(page,size);
+        Page<JobApplicant> appliedJobs;
+        if((status!=null&&!status.isEmpty())||(keyword!=null&&!keyword.isEmpty()))
         {
-            jobPost.add(appliedJob.getJobPostEntity());
+            appliedJobs=jobApplicantRepo.findByUserAndApplicationStatus(
+                    user,
+                    (status!=null&&!status.isEmpty()) ? status : null,
+                    (keyword!=null&&!keyword.isEmpty() ? keyword : "")
+                    ,pageable);
         }
-
-        return jobPost;
+        else
+        {
+        appliedJobs=jobApplicantRepo.findByUser(user,pageable);
+        }
+        return appliedJobs.map(JobApplicant::getJobPostEntity);
     }
 
     public List<JobApplicant> getAppliedUsers() {
@@ -149,5 +159,48 @@ public class JobApplicantService {
         );
 
         return jobApplicationRepo.findByUserAndJobPost(user,appliedJob);
+    }
+
+    public void setAppliedStatus(Long jobid,Long id, JobApplicant updateStatus) {
+        JobPostEntity appliedJob=jobPostRepository.findById(jobid)
+                .orElseThrow(()->new RuntimeException("Job Not Found"));
+
+        UserEntity user=userRepository.findById(id).orElseThrow(
+                ()->new RuntimeException("User not Found")
+        );
+
+        JobApplicant jobstatus=jobApplicantRepo.findByUserAndJobPostEntity(user,appliedJob);
+
+        jobstatus.setApplicationStatus(updateStatus.getApplicationStatus());
+
+        if(updateStatus.getInterviewDate()!=null)
+        {
+            jobstatus.setInterviewDate(updateStatus.getInterviewDate());
+        }
+
+        jobApplicantRepo.save(jobstatus);
+    }
+
+    public JobApplicant getAppliedUserDetailsOfAJob(Long jobid, Long id) {
+        UserEntity user=userRepository.findById(id).orElseThrow(
+                ()->new RuntimeException("User Not Found")
+        );
+
+        JobPostEntity appliedJob=jobPostRepository.findById(jobid)
+                .orElseThrow(()->new RuntimeException("Job not found"));
+
+        return jobApplicantRepo.findByUserAndJobPostEntity(user,appliedJob);
+    }
+
+    public List<JobPostEntity> getAppliedUserDetailsByStatus(String status) {
+
+        String currentlyLoggedInUser=SecurityContextHolder.getContext().getAuthentication().getName();
+
+        UserEntity user=userRepository.findByEmail(currentlyLoggedInUser);
+        System.out.println(user);
+        System.out.println(status);
+        List<JobPostEntity> jobByStatus=jobPostRepository.findByUserAndStatus(user,status);
+        System.out.println(jobByStatus);
+        return jobByStatus;
     }
 }

@@ -24,7 +24,7 @@ const JobBoardAuth = () => {
   };
 
   useEffect(() => {
-    console.log("Form Data:", formData);
+   
 },[formData]);
   const handleSubmit = (e) => {
     e.preventDefault();

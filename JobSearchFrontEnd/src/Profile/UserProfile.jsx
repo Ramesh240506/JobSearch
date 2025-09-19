@@ -52,11 +52,9 @@ const UserProfile = () => {
         </div>
       </div>
 
-      {role === "SEEKER" ? (
-        <JobSeeker />
-      ) : (
-        <JobPoster />
-      )}
+      <div className="main-content">
+        {role === "SEEKER" ? <JobSeeker /> : <JobPoster />}
+      </div>
     </div>
   );
 };

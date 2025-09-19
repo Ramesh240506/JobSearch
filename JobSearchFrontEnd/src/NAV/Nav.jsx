@@ -68,9 +68,27 @@ const Nav = () => {
           <div className="job-log-btn">
             <button onClick={handleLogout}>Logout</button>
           </div>
-        </div>
       </div>
-        {menuBar ? <NavComp></NavComp> : null}
+          {menuBar && (
+  <div className="mobile-nav-menu">
+    <ul>
+      <NavLink to={"/jobhome"} className={({ isActive }) => isActive ? "job-nav-activepage" : "job-nav-line"} onClick={() => setmenuBar(false)}>
+        <li>Home</li>
+      </NavLink>
+      <NavLink to={"/findjobs"} className={({ isActive }) => isActive ? "job-nav-activepage" : "job-nav-line"} onClick={() => setmenuBar(false)}>
+        <li>Find Jobs</li>
+      </NavLink>
+      <NavLink to={"/favouritejobs"} className={({ isActive }) => isActive ? "job-nav-activepage" : "job-nav-line"} onClick={() => setmenuBar(false)}>
+        <li>Favourites</li>
+      </NavLink>
+      <NavLink to={"/contact"} className={({ isActive }) => isActive ? "job-nav-activepage" : "job-nav-line"} onClick={() => setmenuBar(false)}>
+        <li>Contact</li>
+      </NavLink>
+    </ul>
+  </div>
+)}
+        </div>
+
     </div>
   );
 };

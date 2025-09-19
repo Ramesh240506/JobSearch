@@ -5,6 +5,9 @@ import com.jobsearch.JobSearch.Entity.UserEntity;
 import com.jobsearch.JobSearch.Repository.JobPostRepository;
 import com.jobsearch.JobSearch.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -46,11 +49,26 @@ public class JobPostService {
         return jobPostRepo.searchJobs(keyword);
     }
 
-    public List<JobPostEntity> sortResults(String sortby) {
-        if(sortby.equals("postedAt"))
+
+    public Page<JobPostEntity> getJobsByPaginate(int page, int size,String sortBy,String mode) {
+        Pageable pageable=null;
+        if(sortBy!=null&&!sortBy.isEmpty())
         {
-            return jobPostRepo.findAll(Sort.by(Sort.Direction.DESC,sortby));
+            if(sortBy.equals("postedAt"))
+            {
+            pageable= PageRequest.of(page,size,Sort.by(sortBy).descending());
+            }
+            else
+            pageable= PageRequest.of(page,size,Sort.by(sortBy).ascending());
         }
-        return jobPostRepo.findAll(Sort.by(Sort.Direction.ASC,sortby));
+        else
+        {
+            pageable= PageRequest.of(page,size);
+        }
+        if(mode!=null&&!mode.isEmpty())
+        {
+            return jobPostRepo.findByWorkMode(mode,pageable);
+        }
+        return jobPostRepo.findAll(pageable);
     }
 }

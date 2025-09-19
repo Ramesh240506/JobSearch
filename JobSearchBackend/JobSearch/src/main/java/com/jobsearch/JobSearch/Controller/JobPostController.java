@@ -5,6 +5,7 @@ import com.jobsearch.JobSearch.Entity.UserEntity;
 import com.jobsearch.JobSearch.Service.JobPostService;
 import com.jobsearch.JobSearch.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/jobs")
-@CrossOrigin("*")
 public class JobPostController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class JobPostController {
     @PostMapping("/jobpost")
     public void PostJobs(@RequestBody JobPostEntity jobData)
     {
-
+        jobData.setStatus("active");
         postService.postJobData(jobData);
     }
 
@@ -46,9 +46,11 @@ public class JobPostController {
         return postService.searchResults(keyword);
     }
 
-    @GetMapping("/sorting/{sortby}")
-    public List<JobPostEntity> sortResults(@PathVariable String sortby)
+    @GetMapping("/pagination")
+    public Page<JobPostEntity> paginateResults(
+            @RequestParam int page,@RequestParam int size,@RequestParam String sortBy
+            ,@RequestParam String mode)
     {
-        return postService.sortResults(sortby);
+        return postService.getJobsByPaginate(page,size,sortBy,mode);
     }
 }

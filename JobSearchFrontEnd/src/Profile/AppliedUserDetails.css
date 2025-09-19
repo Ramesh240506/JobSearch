@@ -122,3 +122,159 @@
     font-size: 18px;
   }
 }
+
+/* Application Actions Section */
+
+.application-actions h3 {
+  color: #343a40;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.application-actions hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, #007bff, #6c757d);
+  margin-bottom: 20px;
+}
+
+/* Action Buttons Container */
+.application-actions > button {
+  margin-right: 15px;
+  margin-bottom: 10px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Hire Button */
+.application-actions > button:first-of-type {
+  background-color: #28a745;
+  color: white;
+}
+
+.application-actions > button:first-of-type:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+/* Reject Button */
+.application-actions > button:nth-of-type(2) {
+  background-color: #dc3545;
+  color: white;
+}
+
+.application-actions > button:nth-of-type(2):hover {
+  background-color: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+/* Schedule Interview Button */
+.application-actions > button:nth-of-type(3) {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.application-actions > button:nth-of-type(3):hover {
+  background-color: #e0a800;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
+}
+
+/* Schedule Interview Form */
+.schedule-interview {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  margin-top: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-interview label {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: #495057;
+  margin-bottom: 15px;
+}
+
+.schedule-interview input[type="date"] {
+  margin-left: 10px;
+  padding: 10px 15px;
+  border: 2px solid #ced4da;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+  min-width: 150px;
+}
+
+.schedule-interview input[type="date"]:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.schedule-interview button {
+  margin-top: 15px;
+  padding: 12px 30px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-interview button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .application-actions {
+    padding: 20px 15px;
+  }
+  
+  .application-actions > button {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+  
+  .schedule-interview label {
+    text-align: center;
+  }
+  
+  .schedule-interview input[type="date"] {
+    display: block;
+    margin: 10px auto 0;
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .schedule-interview button {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+  }
+}

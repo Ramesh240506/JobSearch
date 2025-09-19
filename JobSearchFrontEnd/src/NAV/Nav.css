@@ -5,8 +5,9 @@
 
 @media screen and (max-width:1052px) {
     .job-nav {
-      flex-direction: column;
-      align-items: center;
+     flex-direction: column;
+align-items: center;
+position: relative;
     }
   
     /* It to change navbar into column */
@@ -135,3 +136,41 @@
     cursor: pointer;
     color:orange;
 }
+
+.mobile-nav-menu {
+    display: block !important;
+    position: relative;
+    width: 100%;
+    background-color: black;
+    padding: 10px 0;
+    border-top: 1px solid #333;
+}
+
+
+.mobile-nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex !important;
+    flex-direction: column;
+}
+
+.mobile-nav-menu ul li {
+    display: block !important;
+    padding: 15px 20px;
+    border-bottom: 1px solid #333;
+    margin-right: 0 !important;
+    text-align: left;
+}
+
+.mobile-nav-menu a {
+    color: orange;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+}
+
+.mobile-nav-menu a:hover {
+    color: white;
+}
+

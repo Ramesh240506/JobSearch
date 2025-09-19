@@ -9,26 +9,30 @@ import './ViewAppliedStatus.css'
 const ViewAppliedStatus = () => {
   const [applicationDetails, setApplicationDetails] = useState();
   const { id } = useParams();
+
   const [applicationStatus, setApplicationStatus] = useState("");
+  const [interviewDate, setInterviewDate] = useState("");
+
+  const fetchApplications = async () => {
+    try {
+      const response = await JobSeekerAppliedJobDetails(id);
+      // console.log(response);
+      setApplicationDetails(response);
+    } catch (error) {
+      console.error("Error fetching applications:", error);
+    }
+
+    try {
+      const response = await JobSeekerApplicationStatusByJobId(id);
+      console.log(response);
+      setApplicationStatus(response);
+      setInterviewDate(response.interviewDate);
+    } catch (error) {
+      console.error("Error fetching applications:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchApplications = async () => {
-      try {
-        const response = await JobSeekerAppliedJobDetails(id);
-        console.log(response);
-        setApplicationDetails(response);
-      } catch (error) {
-        console.error("Error fetching applications:", error);
-      }
-
-      try {
-        const response = await JobSeekerApplicationStatusByJobId(id);
-        console.log(response);
-        setApplicationStatus(response);
-      } catch (error) {
-        console.error("Error fetching applications:", error);
-      }
-    };
     fetchApplications();
   }, []);
 
@@ -61,7 +65,7 @@ const ViewAppliedStatus = () => {
         </div>
         <div className="applied-job-status">
             <h3>Application Status</h3>
-            <p><span>{applicationStatus.applicationStatus}</span></p>
+            <p><span>{applicationStatus.applicationStatus} {interviewDate && `at ${interviewDate}` }</span></p>
         </div>
       </div>
     </div>

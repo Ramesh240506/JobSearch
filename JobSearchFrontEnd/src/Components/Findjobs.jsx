@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Findjobs.css";
-import { CiFilter, CiLocationOn, CiBookmark } from "react-icons/ci";
+import { CiLocationOn, CiBookmark } from "react-icons/ci";
 import { PiSuitcase } from "react-icons/pi";
 import { IoMdTime } from "react-icons/io";
-import { MdArrowOutward } from "react-icons/md";
 import { FaBookmark } from "react-icons/fa6";
 import { formatDistanceToNow } from "date-fns";
-import { getAllJobs, getSortedJobs } from "@/Services/JobService";
+import { paginate } from "@/Services/JobService";
 import { useNavigate } from "react-router-dom";
+import { Pagination, Stack } from "@mui/material";
 
 const Findjobs = () => {
   const [isBookmarked, setBookmark] = useState(false);
@@ -15,6 +15,13 @@ const Findjobs = () => {
   const [jobs, setJobs] = useState([]);
   const [role, setRole] = useState("");
   const [sortBy, setSortBy] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filter, setFilter] = useState("");
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
+  const size = 2;
+
+  const [totalJobs, setTotalJobs] = useState(0);
 
   const handleBookmark = () => {
     if (isBookmarked === false) setBookmark(true);
@@ -25,26 +32,33 @@ const Findjobs = () => {
     console.log("Job Id:", id);
     navigate(`/jobdetails/${id}`);
   };
+
+  const handleSearch = () => {
+    const keyword = searchTerm.trim();
+    if (!keyword) {
+      alert("Please enter a keyword to search.");
+      return;
+    }
+    navigate(`/searchresults/${keyword}`);
+  };
+
+  const fetchJobs = async () => {
+    try {
+      const response = await paginate(page, size, sortBy, filter);
+      setTotalPages(response.totalPages);
+      setTotalJobs(response.totalElements);
+      setJobs(response.content);
+      console.log("Jobs:", response.content);
+    } catch (error) {
+      console.error("Error fetching jobs:", error);
+    }
+  };
+
   useEffect(() => {
     const storedRole = localStorage.getItem("role");
     setRole(storedRole);
-    const fetchJobs = async () => {
-      try {
-        if (sortBy) {
-          const response = await getSortedJobs(sortBy);
-          setJobs(response);
-          console.log("Jobs sorted by:", sortBy, response);
-        } else {
-          const response = await getAllJobs();
-          setJobs(response);
-          console.log("Jobs:", response);
-        }
-      } catch (error) {
-        console.error("Error fetching jobs:", error);
-      }
-    };
     fetchJobs();
-  }, [sortBy]);
+  }, [sortBy, page, filter]);
 
   return (
     <div>
@@ -54,25 +68,36 @@ const Findjobs = () => {
           <p>Discover opportunities that match your skills and carrer goals</p>
         </div>
         <div className="job-finderpage-searchfield">
-          <input placeholder="Job title, company, or keywords"></input>
-          <select>
-            <option>Hybrid</option>
-            <option>Remote</option>
-            <option>Onsite</option>
+          <input
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Job title, company, or keywords"
+          ></input>
+          <select onChange={(e) => setFilter(e.target.value)}>
+            <option value={"Hybrid"}>Hybrid</option>
+            <option value={"Remote"}>Remote</option>
+            <option value={"Onsite"}>Onsite</option>
           </select>
 
-          <button style={{ backgroundColor: "black", color: "white" }}>
+          <button
+            onClick={handleSearch}
+            style={{ backgroundColor: "black", color: "white" }}
+          >
             Search
           </button>
         </div>
 
         <div className="job-finderpage-job-list-header">
           <div>
-            <h3>{jobs.length} Jobs Available</h3>
+            <h3>{totalJobs} Jobs Available</h3>
           </div>
           <div className="job-finderpage-job-list-sort">
             <p>Sort:</p>
-            <select onChange={(e) => setSortBy(e.target.value)}>
+            <select
+              onChange={(e) => {
+                setSortBy(e.target.value);
+                setPage(0);
+              }}
+            >
               <option value="postedAt">Most Recent</option>
               <option value="maxSalary">Highest Salary</option>
               <option value="minSalary">Lowest Salary</option>
@@ -83,12 +108,9 @@ const Findjobs = () => {
         </div>
 
         <div className="job-finderpage-job-list">
-          {jobs.slice(0, 7).map((job) => (
+          {jobs.map((job) => (
             <div className="job-finderpage-job-listvalues" key={job.id}>
               <div className="job-finderpage-companyname">
-                {/* <div>
-                  <img src={"/public/vite.svg"} alt="no"></img>
-                </div> */}
                 <div style={{ width: "100%" }}>
                   <div className="job-finderpage-bookmark">
                     <div>
@@ -132,11 +154,14 @@ const Findjobs = () => {
                     addSuffix: true,
                   })}
               </p>
-              {/* <div className="job-finderpage-job-skills">
-                      {skills.slice(0,3).map((tag) => (
-                        <button key={tag}>{tag}</button>
-                      ))}
-                    </div> */}
+              <div className="job-finderpage-job-skills">
+                {job.skills
+                  .split(",")
+                  .slice(0, 3)
+                  .map((tag) => (
+                    <button key={tag}>{tag}</button>
+                  ))}
+              </div>
 
               <button
                 onClick={() => handleApply(job.id)}
@@ -150,6 +175,28 @@ const Findjobs = () => {
           {/* <div className="job-finderpage-job-listvalues"> */}
         </div>
       </div>
+
+      <Stack
+        style={{
+          backgroundColor: "#F2F4F8",
+          marginTop: "-100px",
+          paddingBottom: "20px",
+        }}
+      >
+        <Pagination
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "20px",
+            marginBottom: "20px",
+          }}
+          count={totalPages}
+          page={page + 1} // Convert zero-based to one-based for UI
+          onChange={(e, value) => setPage(value - 1)} // Convert one-based UI input to zero-based page state
+          variant="outlined"
+          shape="rounded"
+        />
+      </Stack>
     </div>
   );
 };

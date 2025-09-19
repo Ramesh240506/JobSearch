@@ -49,7 +49,7 @@ const ProfileDetails = () => {
   return (
     
     <div>
-      <div className="profile-details">
+      <div className="personal-details">
         <h1>Personal Information</h1>
         <label>
           First Name
@@ -80,21 +80,21 @@ const ProfileDetails = () => {
           <input name="experience" onChange={handleChange} value={userdetails.experience} type="text" placeholder="Experience" />
         </label>
 
-        <label className="profile-bio">
+        <label className="personal-bio">
           Bio
             <textarea name="bio" onChange={handleChange} value={userdetails.bio} placeholder="Tell us about yourself" rows="4"></textarea>
 
         </label>
       </div>
-      <div className="profile-actions">
-        <button onClick={handleSave} className="save-profile-button">Save Changes</button>
+      <div className="personal-actions">
+        <button onClick={handleSave} className="save-personal-button">Save Changes</button>
         <button onClick={()=>navigate('/userprofile')} className="cancel-button">Cancel</button>
       </div>
 
       <style>
         {
             `
-            .profile-details {
+            .personal-details {
   max-width: 500px;
   margin: 20px auto;
   padding: 20px;
@@ -103,14 +103,14 @@ const ProfileDetails = () => {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-.profile-details h1 {
+.personal-details h1 {
   font-size: 1.5rem;
   margin-bottom: 20px;
   color: #333;
   text-align: center;
 }
 
-.profile-details label {
+.personal-details label {
   display: flex;
   flex-direction: column;
   font-weight: 500;
@@ -118,7 +118,7 @@ const ProfileDetails = () => {
   margin-bottom: 15px;
 }
 
-.profile-details input {
+.personal-details input {
   margin-top: 6px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -128,19 +128,19 @@ const ProfileDetails = () => {
   transition: border 0.3s;
 }
 
-.profile-details input:focus {
+.personal-details input:focus {
   border-color: #007bff;
   box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
 }
 
-.profile-actions {
+.personal-actions {
   display: flex;
   justify-content: center;
   gap: 15px;
   margin: 20px;
 }
 
-.save-profile-button,
+.save-personal-button,
 .cancel-button {
   padding: 10px 20px;
   border: none;
@@ -151,12 +151,12 @@ const ProfileDetails = () => {
   transition: background 0.3s ease;
 }
 
-.save-profile-button {
+.save-personal-button {
   background-color: #007bff;
   color: #fff;
 }
 
-.save-profile-button:hover {
+.save-personal-button:hover {
   background-color: #0056b3;
 }
 
@@ -169,7 +169,7 @@ const ProfileDetails = () => {
   background-color: #d6d6d6;
 }
 
-.profile-bio textarea{
+.personal-bio textarea{
     margin-top: 6px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -181,7 +181,7 @@ const ProfileDetails = () => {
     font-family: inherit; /* Matches rest of form */
   }
 
-  .profile-bio textarea:focus {
+  .personal-bio textarea:focus {
     border-color: #007bff;
     box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
   }

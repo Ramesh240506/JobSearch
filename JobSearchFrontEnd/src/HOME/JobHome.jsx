@@ -108,7 +108,7 @@ const JobHome = () => {
 
         {/* Featured Jobs */}
         <div className="job-finderpage-job-list">
-          {featuredJobs.slice(0, 7).map((job) => (
+          {featuredJobs.slice(0, 3).map((job) => (
             <div className="job-finderpage-job-listvalues" key={job.id}>
               <div className="job-finderpage-companyname">
                 {/* <div>

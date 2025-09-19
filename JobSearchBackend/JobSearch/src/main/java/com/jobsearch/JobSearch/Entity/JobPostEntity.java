@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -37,6 +38,9 @@ public class JobPostEntity {
     private String maxSalary;
     private String benefits;
 
+    private String workMode;
+    private LocalDate deadline;
+    private String status;
     @CreationTimestamp
     private LocalDateTime postedAt;
 

@@ -32,6 +32,9 @@ const PostJob = () => {
     minSalary: "",
     maxSalary: "",
     benefits: "",
+
+    workMode: "",
+    deadline: "",
   });
   const [errors, setErrors] = useState({
     jobTitle: "",
@@ -48,6 +51,9 @@ const PostJob = () => {
     minSalary: "",
     maxSalary: "",
     benefits: "",
+
+    workMode: "",
+    deadline: "",
   });
 
   const navigate = useNavigate();
@@ -69,7 +75,8 @@ const PostJob = () => {
       "currency",
       "minSalary",
       "maxSalary",
-      "benefits",
+      "workMode",
+      "deadline",
     ];
 
     requiredFields.forEach((field) => {
@@ -214,10 +221,13 @@ const PostJob = () => {
               <option value="">Select job type</option>
               <option value="Full Time">Full Time</option>
               <option value="Part Time">Part Time</option>
-              <option value="contract">Contract</option>
-              <option value="internship">Internship</option>
-              <option value="temporary">Temporary</option>
+              <option value="Contract">Contract</option>
+              <option value="Internship">Internship</option>
+              <option value="Temporary">Temporary</option>
             </select>
+            {errors.jobType && (
+              <BasicAlerts severity="error" message="Job Type is required" />
+            )}
           </div>
 
           <div className="postjob-form-group">
@@ -319,6 +329,12 @@ const PostJob = () => {
               <option value="master-degree">Master's Degree</option>
               <option value="phd">PhD</option>
             </select>
+            {errors.education && (
+              <BasicAlerts
+                severity="error"
+                message="Education Level is required"
+              />
+            )}
 
             <label htmlFor="skills">Skills *</label>
             <input
@@ -329,6 +345,9 @@ const PostJob = () => {
               placeholder="Enter required skills (comma separated)"
               required
             ></input>
+            {errors.skills && (
+              <BasicAlerts severity="error" message="Skills is required" />
+            )}
           </div>
 
           <div className="postjob-form-group">
@@ -340,7 +359,7 @@ const PostJob = () => {
                 <h1> Compensation</h1>
               </div>
             </div>
-            <label htmlFor="salary">Currency</label>
+            <label htmlFor="salary">Currency *</label>
             <select
               value={jobFormData.currency}
               onChange={onInputChange}
@@ -353,7 +372,10 @@ const PostJob = () => {
               <option value="gbp">GBP</option>
               <option value="inr">INR</option>
             </select>
-            <label htmlFor="salary">Minimum Salary</label>
+            {errors.currency && (
+              <BasicAlerts severity="error" message="Currency is required" />
+            )}
+            <label htmlFor="salary">Minimum Salary *</label>
             <input
               type="number"
               value={jobFormData.minSalary}
@@ -362,7 +384,13 @@ const PostJob = () => {
               placeholder="Enter minimum salary"
               required
             ></input>
-            <label htmlFor="maxSalary">Maximum Salary</label>
+            {errors.minSalary && (
+              <BasicAlerts
+                severity="error"
+                message="Minimum Salary is required"
+              />
+            )}
+            <label htmlFor="maxSalary">Maximum Salary *</label>
             <input
               type="number"
               value={jobFormData.maxSalary}
@@ -371,6 +399,12 @@ const PostJob = () => {
               placeholder="Enter maximum salary"
               required
             ></input>
+            {errors.maxSalary && (
+              <BasicAlerts
+                severity="error"
+                message="Maximum Salary is required"
+              />
+            )}
             <label htmlFor="benefits">Benefits</label>
             <textarea
               value={jobFormData.benefits}
@@ -378,6 +412,44 @@ const PostJob = () => {
               id="benefits"
               placeholder="Enter benefits (e.g., health insurance, retirement plans)"
             ></textarea>
+          </div>
+          <div className="postjob-form-group">
+            <div className="postjob-form-header">
+              <div>
+                <FaFileAlt size={25} />
+              </div>
+              <div>
+                <h1>Additional Information</h1>
+              </div>
+            </div>
+
+            <label htmlFor="workMode">Work Mode *</label>
+            <select
+              value={jobFormData.workMode}
+              onChange={onInputChange}
+              id="workMode"
+              required
+            >
+              <option value="">Select work mode</option>
+              <option value="Remote">Remote</option>
+              <option value="Hybrid">Hybrid</option>
+              <option value="On-site">On-site</option>
+            </select>
+            {errors.workMode && (
+              <BasicAlerts severity="error" message="Work mode is required" />
+            )}
+
+            <label htmlFor="deadline">Application Deadline *</label>
+            <input
+              type="date"
+              id="deadline"
+              value={jobFormData.deadline}
+              onChange={onInputChange}
+              required
+            />
+            {errors.deadline && (
+              <BasicAlerts severity="error" message="Deadline is required" />
+            )}
           </div>
         </div>
         <div className="postjob-form-actions">

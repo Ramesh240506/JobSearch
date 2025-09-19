@@ -6,7 +6,9 @@ import com.jobsearch.JobSearch.Entity.JobPostEntity;
 import com.jobsearch.JobSearch.Service.JobApplicantService;
 import com.jobsearch.JobSearch.Service.JobPostService;
 import jdk.dynalink.linker.LinkerServices;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authorization.method.AuthorizeReturnObject;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/api/jobs")
 public class JobApplicantController {
 
@@ -29,10 +30,14 @@ public class JobApplicantController {
         jobApplicantService.appliedUsers(jobid);
     }
 
+
     @GetMapping("/getapplieduserjobs")
-    public List<JobPostEntity> getAppliedUserJobList()
+    public Page<JobPostEntity> getAppliedUserJobList(
+            @RequestParam int page,@RequestParam int size,
+            @RequestParam String status,@RequestParam String keyword
+    )
     {
-        return jobApplicantService.getAppliedUserJobs();
+        return jobApplicantService.getAppliedUserJobs(page,size,status,keyword);
     }
 
     @GetMapping("/getappliedusersstatus")
@@ -69,5 +74,24 @@ public class JobApplicantController {
     public JobApplication getAppliedUserDetails(@PathVariable Long jobid,@PathVariable Long id)
     {
         return jobApplicantService.getAppliedUserDetails(jobid,id);
+    }
+
+    @PutMapping("/setappliedstatus/{jobid}/{id}")
+    public void setAppliedStatus(@PathVariable Long jobid,@PathVariable Long id,
+                                 @RequestBody JobApplicant updateStatus)
+    {
+        jobApplicantService.setAppliedStatus(jobid,id,updateStatus);
+    }
+
+    @GetMapping("/applieduserdetails/{jobid}/{id}")
+    public JobApplicant AppliedUserDetailsOfAJob(@PathVariable Long jobid,@PathVariable Long id)
+    {
+        return jobApplicantService.getAppliedUserDetailsOfAJob(jobid,id);
+    }
+
+    @GetMapping("/getapplicationsbystatus/{status}")
+    public List<JobPostEntity> getAppliedUserDetailsByStatus(@PathVariable String status)
+    {
+        return jobApplicantService.getAppliedUserDetailsByStatus(status);
     }
 }

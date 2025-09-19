@@ -361,10 +361,10 @@ export default function JobApplicationForm() {
               className="select"
             >
               <option value="">Select Availability</option>
-              <option value="full-time">Full-time</option>
-              <option value="part-time">Part-time</option>
-              <option value="contract">Contract</option>
-              <option value="internship">Internship</option>
+              <option value="Full time">Full-time</option>
+              <option value="Part time">Part-time</option>
+              <option value="Contract">Contract</option>
+              <option value="Internship">Internship</option>
             </select>
           </div>
         </div>

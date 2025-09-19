@@ -125,8 +125,16 @@ export const appliedUsers= async (id) => {
     }
 }
 
-export const JobSeekerApplications = () => {
-    return axios.get(API_URL+'/getapplieduserjobs', authHeaders());
+export const JobSeekerApplications = async (page,size,filter,keyword) => {
+  
+    try{
+        const response = await axios.get(`${API_URL}/getapplieduserjobs?page=${page}&size=${size}&status=${filter}&keyword=${keyword}`, authHeaders());
+        return response.data;
+      }
+    catch (error) {
+        console.error("Error fetching job details:", error);
+        throw error;
+    }
 }
 
 export const JobSeekerApplicationStatus = () => {
@@ -192,6 +200,52 @@ export const deleteAppliedJob = async (id) => {
 export const getAppliedUserDetails = async (jobid,id) => {
     try{
         const response = await axios.get(`${API_URL}/getapplieduserdetails/${jobid}/${id}`, authHeaders());
+        return response.data;
+      }
+    catch (error) {
+        console.error("Error fetching job details:", error);
+        throw error;
+    }
+}
+
+export const updateApplicantStatus = async (jobid,id,status,interview) => {
+    try{
+       const data = { applicationStatus: status, interviewDate: interview };
+
+        const response = await axios.put(`${API_URL}/setappliedstatus/${jobid}/${id}`,data, authHeaders());
+        return response.data;
+      }
+    catch (error) {
+        console.error("Error fetching job details:", error);
+        throw error;
+    }
+}
+
+export const appliedUserDetailsOfAJob = async (jobid,id) => {
+    try{
+        const response = await axios.get(`${API_URL}/applieduserdetails/${jobid}/${id}`, authHeaders());
+        return response.data;
+      }
+    catch (error) {
+        console.error("Error fetching job details:", error);
+        throw error;
+    }
+}
+
+export const getApplicationsByStatus = async (status) => {
+    try{
+        const response = await axios.get(`${API_URL}/getapplicationsbystatus/${status}`, authHeaders());
+        return response.data;
+      }
+    catch (error) {
+        console.error("Error fetching job details:", error);
+        throw error;
+    }
+}
+
+export const paginate = async (page,size,sortBy,filter) => {
+    try{
+        const response = await axios.get(`${API_URL}/pagination?page=${page}&size=${size}&sortBy=${sortBy}&mode=${filter}`, authHeaders())
         return response.data;
       }
     catch (error) {

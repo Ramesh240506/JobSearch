@@ -5,11 +5,45 @@ import { useNavigate } from "react-router-dom";
 import { CiLocationOn } from "react-icons/ci";
 import { FiDollarSign } from "react-icons/fi";
 import { CiCalendarDate } from "react-icons/ci";
-import { getUserApplication } from "@/Services/JobService";
+import { getApplicationsByStatus, getUserApplication } from "@/Services/JobService";
+import { useState } from "react";
 const ApplicationDetails = () => {
-  const [applications, setApplications] = React.useState([]);
-
+  const [applications, setApplications] = useState([]);
+  const [filterStatus, setFilterStatus] = useState("");
   const navigate = useNavigate();
+
+  const getApplicationsByFilter = async (status) => {
+    try {
+      console.log(status);
+      const response = await getApplicationsByStatus(status);
+      const applications = response.map((job) => ({
+        id: job.id,
+        jobTitle: job.jobTitle,
+        companyName: job.companyName,
+        jobLocation: job.jobLocation,
+        minsalary: job.minSalary,
+        maxsalary: job.maxSalary,
+        postedAt: formatDistanceToNow(new Date(job.postedAt), {
+          addSuffix: true,
+        }),
+      }));
+      console.log(applications);
+      setApplications(applications);
+    } catch (error) {
+      console.error("Failed to fetch job applications", error);
+    }
+  }
+
+  const handleFilterChange = (e) => {
+    setFilterStatus(e.target.value);
+    if(e.target.value === "all") {
+      getApplications();
+    }
+    else
+    {
+      getApplicationsByFilter(e.target.value);
+    }
+  }
   useEffect(() => {
     getApplications();
   }, []);
@@ -37,6 +71,19 @@ const ApplicationDetails = () => {
   return (
     <div>
       
+      <div className="filter-select">
+        <label htmlFor="statusFilter">Filter by: </label>
+        <select
+          id="statusFilter"
+          value={filterStatus}
+          onChange={(e) => handleFilterChange(e)}
+        >
+          <option value="all">All</option>
+          <option value="active">Active</option>
+          <option value="expired">Expired</option>
+        </select>
+      </div>
+
       {applications.map((application) => (
         <div className="application-details" key={application.id}>
           <div className="application-list">
@@ -68,7 +115,7 @@ const ApplicationDetails = () => {
                 >
                 🔍 View Applicants
                 </button>
-                <button className="edit-application">✏️ Edit</button>
+                {/* <button className="edit-application">✏️ Edit</button> */}
               </div>
             </div>
           </div>
