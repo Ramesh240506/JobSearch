@@ -10,8 +10,13 @@ const JobBoardAuth = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    role:"SEEKER",
+    role: "SEEKER",
   });
+
+  const [loading, setLoading] = useState(false);
+
+  // State for errors
+  const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
 
@@ -21,53 +26,72 @@ const JobBoardAuth = () => {
       ...prev,
       [name]: value,
     }));
+
+    // Clear field-specific error when user types
+    setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  useEffect(() => {
-   
-},[formData]);
   const handleSubmit = (e) => {
     e.preventDefault();
+    setErrors({}); // Reset errors before submit
 
     if (!isLoginMode) {
+      // Registration validation
       if (formData.password !== formData.confirmPassword) {
-        alert("Passwords do not match!");
+        setErrors({ confirmPassword: "Passwords do not match!" });
         return;
       }
 
-      // Registration
+      if (formData.password.length < 8) {
+        setErrors({ password: "Password should be at least 8 characters" });
+        return;
+      }
+      
+      if(formData.email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)===null)
+      {
+        setErrors({ email: "Invalid email format" });
+        return;
+      }
+
       registerUser({
         username: formData.username,
         email: formData.email,
         password: formData.password,
         role: formData.role,
-      }).then(() => {
-        alert(`Registered successfully for: ${formData.username}`);
-        setFormData({
-          username: "",
-          email: "",
-          password: "",
-          confirmPassword: "",
-          role: "",
+      })
+        .then(() => {
+          setFormData({
+            username: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+            role: "SEEKER",
+          });
+          setIsLoginMode(true);
+        })
+        .catch(() => {
+          setErrors({ form: "Email already exists ! Please login" });
         });
-        setIsLoginMode(true);
-      });
     } else {
       // Login
       loginUser({
         email: formData.email,
         password: formData.password,
-      }).then((response) => {
-        if (response.data && response.data.accessToken) {
-          localStorage.setItem("accessToken", response.data.accessToken);
-          localStorage.setItem("role", response.data.role);
-          console.log("role:", response.data.role);
-          alert("Login successful!");
-          navigate("/jobhome");
-        } else {
-          alert("Login failed: " + response.message);
-        }
-      });
+      })
+        .then((response) => {
+          if (response.data && response.data.accessToken) {
+            localStorage.setItem("accessToken", response.data.accessToken);
+            localStorage.setItem("role", response.data.role);
+            navigate("/jobhome");
+          }
+        })
+        .catch((err) => {
+          if (err.response && err.response.data && err.response.data.message) {
+            setErrors({ form: err.response.data.message });
+          } else {
+            setErrors({ form: "Invalid email or password" });
+          }
+        });
     }
   };
 
@@ -78,15 +102,49 @@ const JobBoardAuth = () => {
       email: "",
       password: "",
       confirmPassword: "",
-      role:""
+      role: loginMode ? "" : "SEEKER",
     });
+    setErrors({});
   };
 
   const showForgotPassword = () => {
     alert("Password reset functionality would be implemented here.");
   };
 
+  useEffect(() => {
+    setLoading(true);
+    const token=localStorage.getItem("accessToken");
+    
+    if(token)
+    {
+      try
+      {
+      const payload=JSON.parse(atob(token.split('.')[1]));
+      const isExpired=Date.now()/1000>=payload.exp;
+      if(!isExpired)
+      {
+        navigate("/jobhome");
+      }
+      else
+      {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("role");
+      }
+    } catch (e) {
+      console.log(e);
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("role");
+    }
+  }
+    setLoading(false);
+  },[]);
+
+  if(loading)
+  {
+    return <div>Loading...</div>;
+  }
   return (
+
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
@@ -96,7 +154,9 @@ const JobBoardAuth = () => {
 
         <div className="auth-form-container">
           <div className="toggle-buttons">
-            <div className={`toggle-slider ${!isLoginMode ? "register" : ""}`} />
+            <div
+              className={`toggle-slider ${!isLoginMode ? "register" : ""}`}
+            />
             <button
               type="button"
               onClick={() => switchMode(true)}
@@ -113,7 +173,7 @@ const JobBoardAuth = () => {
             </button>
           </div>
 
-          <div>
+          <form>
             {/* Username - Register only */}
             {!isLoginMode && (
               <div className="form-group">
@@ -127,6 +187,9 @@ const JobBoardAuth = () => {
                   className="form-input"
                 />
                 <label className="form-label">Username</label>
+                {errors.username && (
+                  <div className="field-error">{errors.username}</div>
+                )}
               </div>
             )}
 
@@ -142,6 +205,9 @@ const JobBoardAuth = () => {
                 className="form-input"
               />
               <label className="form-label">Email</label>
+              {errors.email && (
+                <div className="field-error">{errors.email}</div>
+              )}
             </div>
 
             {/* Password */}
@@ -156,6 +222,9 @@ const JobBoardAuth = () => {
                 className="form-input"
               />
               <label className="form-label">Password</label>
+              {errors.password && (
+                <div className="field-error">{errors.password}</div>
+              )}
             </div>
 
             {/* Confirm Password - Register only */}
@@ -171,14 +240,22 @@ const JobBoardAuth = () => {
                   className="form-input"
                 />
                 <label className="form-label">Confirm Password</label>
+                {errors.confirmPassword && (
+                  <div className="field-error">{errors.confirmPassword}</div>
+                )}
               </div>
             )}
 
-            {
-              !isLoginMode && (
+            {/* Role - Register only */}
+            {!isLoginMode && (
               <div className="form-group">
-                <select className="form-input" name="role" value={formData.role} 
-                onChange={handleInputChange} required>
+                <select
+                  className="form-input"
+                  name="role"
+                  value={formData.role}
+                  onChange={handleInputChange}
+                  required
+                >
                   <option value="SEEKER">Job Seeker</option>
                   <option value="POSTER">Job Poster</option>
                 </select>
@@ -186,11 +263,10 @@ const JobBoardAuth = () => {
               </div>
             )}
 
-            <button
-              type="button"
-              onClick={handleSubmit}
-              className="submit-btn"
-            >
+            {/* Form-level error (e.g., login failure) */}
+            {errors.form && <div className="form-error">{errors.form}</div>}
+
+            <button type="submit" onClick={handleSubmit} className="submit-btn">
               {isLoginMode ? "Sign In" : "Create Account"}
             </button>
 
@@ -201,7 +277,7 @@ const JobBoardAuth = () => {
                 </button>
               </div>
             )}
-          </div>
+          </form>
         </div>
       </div>
     </div>

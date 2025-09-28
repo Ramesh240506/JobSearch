@@ -2,13 +2,11 @@ package com.jobsearch.JobSearch;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 
 @SpringBootApplication
+@EnableScheduling
 public class JobSearchApplication {
 
 	public static void main(String[] args) {

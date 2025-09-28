@@ -154,6 +154,16 @@ const Findjobs = () => {
                     addSuffix: true,
                   })}
               </p>
+              
+                <div>
+                  ⏳ 
+                  {job.deadline && 
+                    formatDistanceToNow(new Date(job.deadline), {
+                      addSuffix: true,
+                    })
+                  }
+                </div>
+
               <div className="job-finderpage-job-skills">
                 {job.skills
                   .split(",")
@@ -194,6 +204,7 @@ const Findjobs = () => {
           page={page + 1} // Convert zero-based to one-based for UI
           onChange={(e, value) => setPage(value - 1)} // Convert one-based UI input to zero-based page state
           variant="outlined"
+          color="primary"
           shape="rounded"
         />
       </Stack>

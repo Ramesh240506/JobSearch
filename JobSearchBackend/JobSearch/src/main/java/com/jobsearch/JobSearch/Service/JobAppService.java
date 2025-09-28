@@ -39,6 +39,7 @@ public class JobAppService {
         String currentlyLoggedInUser=SecurityContextHolder.getContext().getAuthentication().getName();
         UserEntity user=userRepository.findByEmail(currentlyLoggedInUser);
         jobApplication.setUser(user);
+        jobApplication.setApplicationStatus("Applied");
         jobApplicationRepo.save(jobApplication);
     }
 

@@ -26,8 +26,7 @@ public class UserProfileService {
         {
             UserProfile existingProfile=userProfileRepo.findByUserId(user.getId());
 
-            existingProfile.setFirstName(userProfile.getFirstName());
-            existingProfile.setLastName(userProfile.getLastName());
+            existingProfile.setUsername(userProfile.getUsername());
             existingProfile.setPhoneNumber(userProfile.getPhoneNumber());
             existingProfile.setBio(userProfile.getBio());
             existingProfile.setTitle(userProfile.getTitle());
@@ -35,6 +34,8 @@ public class UserProfileService {
             existingProfile.setEmail(userProfile.getEmail());
             existingProfile.setExperience(userProfile.getExperience());
 
+            user.setUsername(userProfile.getUsername());
+            userRepository.save(user);
             return userProfileRepo.save(existingProfile);
         }
 

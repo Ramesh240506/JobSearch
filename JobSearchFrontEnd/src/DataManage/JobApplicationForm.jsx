@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import './JobApplicationForm.css'; 
 import PositionedSnackbar from '@/UIComponents/PositionedSnackbar';
@@ -64,7 +64,7 @@ export default function JobApplicationForm() {
     let valid = true;
     const requiredFields = [
       'firstName', 'lastName', 'email', 'phone', 'position',
-      'experience', 'education', 'coverLetter', 'workAuthorization', 'agreeToTerms'
+      'experience', 'education', 'coverLetter','resume', 'workAuthorization', 'agreeToTerms'
     ];
 
     requiredFields.forEach(field => {
@@ -141,7 +141,11 @@ export default function JobApplicationForm() {
     });
     setErrors({});
   };
+  
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
   if (isSubmitted) {
     return (
       <div className="container">
@@ -160,6 +164,7 @@ export default function JobApplicationForm() {
       </div>
     );
   }
+
 
   return (
     <div className="container">
@@ -432,8 +437,10 @@ export default function JobApplicationForm() {
               onChange={handleFileChange}
               className="fileInput"
               accept=".pdf,.doc,.docx"
+              required
             />
             <small className="helpText">Accepted formats: PDF, DOC, DOCX</small>
+            {errors.resume && <span className="errorText">{errors.resume}</span>}
           </div>
         </div>
 

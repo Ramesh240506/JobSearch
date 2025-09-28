@@ -1,43 +1,29 @@
 import React, { useEffect, useState } from "react";
 import "./JobDetails.css";
 import { useNavigate, useParams } from "react-router-dom";
-import {  getJobById, JobSeekerAppliedStatus } from "@/Services/JobService";
+import { getJobById, JobSeekerAppliedStatus } from "@/Services/JobService";
 import { formatDistanceToNow } from "date-fns";
 const JobDetails = () => {
-  const [jobDetails, setJobDetails] = useState({
-    id: 1,
-    jobTitle: "",
-    companyName: "",
-    jobLocation: "",
-    minSalary: "",
-    maxSalary: "",
-    jobType: "",
-    postedAt: "",
-    jobDescription:
-      "",
-    requirements: "",
-    skills: "",
-  });
+  const [jobDetails, setJobDetails] = useState({});
 
   const navigate = useNavigate();
   const [appliedStatus, setAppliedStatus] = useState(false);
   const { id } = useParams();
+  const getStatus = async () => {
+    const response = await JobSeekerAppliedStatus(id);
+    setAppliedStatus(response);
+    console.log(response);
+  };
   useEffect(() => {
-    console.log(id);
-    const getStatus = async () => {
-      const response = await JobSeekerAppliedStatus(id);
-      setAppliedStatus(response);
-      console.log(response);
-    }; 
+    window.scrollTo(0, 0);
     getStatus();
     fetchJobDetails(id);
   }, []);
 
-  const handleApply=()=>{
-    // appliedUsers(id);
-    // console.log("Applying for job with ID:", id);
+  const handleApply = () => {
+    
     navigate(`/jobapplicationform/${id}`);
-  }
+  };
   const fetchJobDetails = async (jobId) => {
     const response = await getJobById(jobId);
     setJobDetails(response);
@@ -69,40 +55,58 @@ const JobDetails = () => {
 
       <div className="job-details-description">
         <h3 className="job-details-description-title">Job Description</h3>
-        <p className="job-details-description-text">{jobDetails.jobDescription}</p>
+        <p className="job-details-description-text">
+          {jobDetails.jobDescription}
+        </p>
       </div>
 
       <div className="job-details-qualifications">
         <h3 className="job-details-qualifications-title">Qualifications</h3>
         <ul className="job-details-qualifications-list">
-          <li>{jobDetails.requirements}</li>
+          {jobDetails?.qualifications
+            ?.split(".")
+            .filter((qualification) => qualification.trim().length > 1)
+            .map((qualification, i) => (
+              <li key={i} className="job-details-qualification-item">
+                {qualification.trim()}
+              </li>
+            ))}
         </ul>
       </div>
 
       <div className="job-details-tags">
         <h3 className="job-details-tags-title">Technologies We Use</h3>
         <div className="job-details-tags-list">
-          {/* {jobDetails.skills.map((tag, index) => (
-                        <span key={index} className="job-details-tag">{tag} </span>
-                    ))} */}
+          {jobDetails?.skills?.split(",").map((tag, index) => (
+            <span key={index} className="job-details-tag">
+              {tag}{" "}
+            </span>
+          ))}
         </div>
       </div>
-      <div className="job-details-benefits">
-        <h3 className="job-details-benefits-title">Benefits</h3>
-        <ul className="job-details-benefits-list">
-          <li className="job-details-benefit-item">Health Insurance</li>
-          <li className="job-details-benefit-item">401(k) Plan</li>
-          <li className="job-details-benefit-item">Flexible Work Hours</li>
-          <li className="job-details-benefit-item">Remote Work Options</li>
-        </ul>
-      </div>
+      {jobDetails?.benefits && jobDetails.benefits.length > 0 && (
+        <div className="job-details-benefits">
+          <h3 className="job-details-benefits-title">Benefits</h3>
+          <ul className="job-details-benefits-list">
+            {jobDetails?.benefits?.split(".").filter((benefit) => benefit.trim().length > 1).map((benefit, i) => (
+              <li key={i} className="job-details-benefit-item">
+                {benefit.trim()}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <div className="job-details-apply">
-        {
-        appliedStatus ? <button className="job-details-apply-button">Applied</button>
-        :
-        <button onClick={handleApply} className="job-details-apply-button">Apply Now</button>
-        }
+        {appliedStatus ? (
+          <button disabled className="job-details-apply-button">
+            Applied
+          </button>
+        ) : (
+          <button onClick={handleApply} className="job-details-apply-button">
+            Apply Now
+          </button>
+        )}
       </div>
     </div>
   );

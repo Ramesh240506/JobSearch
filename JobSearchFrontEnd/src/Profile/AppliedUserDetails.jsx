@@ -138,7 +138,7 @@ const AppliedUserDetails = () => {
       {/* ✅ Action Buttons with Date Picker */}
 <div className="application-actions">
 
-  {status && status!=="APPLIED" ? (
+  {status && status!=="Applied" ? (
     <p>
       <strong>Current Status:</strong> {status} {interviewDate}
     </p>

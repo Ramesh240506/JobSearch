@@ -16,26 +16,27 @@ public class JobPostEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    Basic Job Info
+
     private String jobTitle;
     private String companyName;
     private String jobLocation;
     private String jobType;
 
-//       Job Description
+    @Column(columnDefinition = "TEXT")
     private String jobDescription;
+    @Column(columnDefinition = "TEXT")
     private String qualifications;
+    @Column(columnDefinition = "TEXT")
     private String requirements;
 
-//    Exp & Ed
     private String experienceLevel;
     private String education;
     private String skills;
 
-//  Compensation
     private String currency;
-    private String minSalary;
-    private String maxSalary;
+    private Integer minSalary;
+    private Integer maxSalary;
+    @Column(columnDefinition = "TEXT")
     private String benefits;
 
     private String workMode;

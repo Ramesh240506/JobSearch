@@ -35,14 +35,7 @@ const JobHome = () => {
   const [role, setRole] = useState("");
   const [featuredJobs, setFeaturedJobs] = useState([]);
 
-  const [skills, setSkills] = useState([
-    "React",
-    "Node.js",
-    "Python",
-    "JavaScript",
-    "CSS",
-    "HTML",
-  ]);
+
 
   const handleApply = (id) => {
     console.log("Job Id:", id);
@@ -148,7 +141,7 @@ const JobHome = () => {
                 <p> {job.jobType}</p>
               </div>
               <h5>
-                {job.minSalary}-{job.maxSalary}
+                $  {job.minSalary}-{job.maxSalary}
               </h5>
               <p>
                 <IoMdTime />
@@ -157,8 +150,14 @@ const JobHome = () => {
                     addSuffix: true,
                   })}
               </p>
+              <p>
+                {/* <h1>Expire At</h1> */}
+                
+                <p>⏳ {job.deadline &&
+                  formatDistanceToNow(new Date(job.deadline), { addSuffix: true })}</p>
+              </p>
               <div className="job-finderpage-job-skills">
-                {skills.slice(0, 3).map((tag) => (
+                {job.skills.split(",").slice(0, 3).map((tag) => (
                   <button key={tag}>{tag}</button>
                 ))}
               </div>

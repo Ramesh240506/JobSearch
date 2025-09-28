@@ -89,9 +89,5 @@ public class JobApplicantController {
         return jobApplicantService.getAppliedUserDetailsOfAJob(jobid,id);
     }
 
-    @GetMapping("/getapplicationsbystatus/{status}")
-    public List<JobPostEntity> getAppliedUserDetailsByStatus(@PathVariable String status)
-    {
-        return jobApplicantService.getAppliedUserDetailsByStatus(status);
-    }
+
 }

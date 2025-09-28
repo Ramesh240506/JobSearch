@@ -3,7 +3,7 @@ import {
   JobSeekerApplications,
   JobSeekerApplicationStatus,
 } from "@/Services/JobService";
-import { format } from "date-fns";
+import { format, formatDistanceToNow } from "date-fns";
 import React, { useEffect, useState } from "react";
 import "./Jobseeker.css";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ const JobSeeker = () => {
   const [filter, setFilter] = useState("");
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
-  const size = 2;
+  const size = 1;
   const [totalJobs, setTotalJobs] = useState(0);
 
   const [keyword, setKeyword] = useState("");
@@ -105,6 +105,18 @@ const JobSeeker = () => {
                         Applied at: 📅{" "}
                         {detail.appliedAt &&
                           format(new Date(detail.appliedAt), "dd MMM yyyy")}
+                      </p>
+                    }
+                    {
+                      <p>
+                        ⏳ 
+                        Expiring {
+                          application.deadline &&
+                          formatDistanceToNow(new Date(application.deadline),
+                        {addSuffix: true})
+                        }
+                          
+                        
                       </p>
                     }
                     <p>Status: {detail.applicationStatus}</p>

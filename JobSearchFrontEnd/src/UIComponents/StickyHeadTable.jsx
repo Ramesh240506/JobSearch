@@ -13,6 +13,12 @@ const columns = [
   { id: 'name', label: 'Name', minWidth: 170 },
   { id: 'email', label: 'Email', minWidth: 170 },
   {
+    id: 'appliedStatus',
+    label: 'Applied Status',
+    minWidth: 170,
+    align: 'right',
+  },
+  {
     id: 'appliedDate',
     label: 'Applied Date',
     minWidth: 170,
@@ -25,24 +31,11 @@ const columns = [
     align: 'right',
   },
 ];
-
-
-
 // Example row creation function
-function createData(id,name, email, appliedDate) {
-  return { id,name, email, appliedDate };
+function createData(id,name,appliedStatus,email, appliedDate) {
+  return { id,name,appliedStatus,email,appliedDate };
 }
 
-
-// Sample rows
-// const rows = [
-
-//   createData('Ramesh Kumar', 'ramesh@example.com', '2025-07-30'),
-//   createData('Priya Singh', 'priya@example.com', '2025-07-29'),
-//   createData('Anil Gupta', 'anil@example.com', '2025-07-28'),
-//   createData('John Doe', 'john@example.com', '2025-07-25'),
-//   createData('Sara Khan', 'sara@example.com', '2025-07-24'),
-// ];
 
 export default function StickyHeadTable() {
 
@@ -71,7 +64,9 @@ export default function StickyHeadTable() {
       try
       {
           const applicants=response.data.map((applicant)=>(
-              createData(applicant.user.id,applicant.firstName,applicant.email,format(new Date(applicant.appliedAt), 'dd MMM yyyy'))
+              createData(applicant.user.id,applicant.firstName,
+                applicant.applicationStatus
+                ,applicant.email,format(new Date(applicant.appliedAt), 'dd MMM yyyy'))
           ));
           console.log("Response from backend",response)
           setRows(applicants);
@@ -139,6 +134,7 @@ export default function StickyHeadTable() {
                 >
                   <TableCell>{row.name}</TableCell>
                   <TableCell>{row.email}</TableCell>
+                  <TableCell align="right">{row.appliedStatus}</TableCell>
                   <TableCell align="right">{row.appliedDate}</TableCell>
                   <TableCell align="right">
                     <Button
@@ -149,14 +145,7 @@ export default function StickyHeadTable() {
                     >
                       View
                     </Button>
-                    <Button
-                      variant="outlined"
-                      color="error"
-                      size="small"
-                      onClick={() => alert(`Deleting ${row.name}`)}
-                    >
-                      Delete
-                    </Button>
+                   
                   </TableCell>
                 </TableRow>
               ))}

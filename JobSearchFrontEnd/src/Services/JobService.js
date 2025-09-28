@@ -56,12 +56,7 @@ export const postJobApplication = async (formData,id)=>{
 }
 
 export const registerUser = (userData)=>{
-    return axios.post(API_URL+'/register',userData)
-    .then(response => response.data)
-    .catch(error => {
-        console.error("Error registering user:", error);
-        throw error;
-    });
+    return axios.post(API_URL+'/register',userData);
 }
 
 export const loginUser = (userData)=>{
@@ -72,13 +67,20 @@ export const getAllApplicants = (jobid) =>{
     return axios.get(API_URL+'/getapplicants/'+jobid,authHeaders());
 }
 
-export const getUserApplication=()=>{
-    return axios.get(API_URL+'/getapplicationsdata',authHeaders())
+export const getUserApplication= async (page,size,status,keyword)=>{
+    try{
+        const response = await axios.get(`${API_URL}/getapplicationsdata?page=${page}&size=${size}&status=${status}&keyword=${keyword}`, authHeaders());
+        return response.data;
+      }
+    catch (error) {
+        console.error("Error fetching job details:", error);
+        throw error;
+    }
 }
 
-export const getSearchResults = async (keyword) => {
+export const getSearchResults = async (page,size,keyword) => {
     try {
-        const response = await axios.get(`${API_URL}/search/${keyword}`, authHeaders());
+        const response = await axios.get(`${API_URL}/search?page=${page}&size=${size}&keyword=${keyword}`, authHeaders());
         return response.data;
     } catch (error) {
         console.error("Error fetching search results:", error);

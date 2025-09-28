@@ -53,7 +53,7 @@ public class JobApplication {
 
     @CreationTimestamp
     private LocalDateTime appliedAt;
-
+    private String applicationStatus;
     @ManyToOne
     @JoinColumn(name = "jobid")
     private JobPostEntity jobPost;

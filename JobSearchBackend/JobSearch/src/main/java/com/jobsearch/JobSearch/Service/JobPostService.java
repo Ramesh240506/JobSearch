@@ -35,7 +35,7 @@ public class JobPostService {
 
     public List<JobPostEntity> getAllJobs() {
         System.out.println(jobPostRepo.findAll());
-        return jobPostRepo.findAll();
+        return jobPostRepo.findByStatus("active");
     }
 
     public JobPostEntity getJobById(Long id) {
@@ -45,9 +45,9 @@ public class JobPostService {
 
     }
 
-    public List<JobPostEntity> searchResults(String keyword) {
-        return jobPostRepo.searchJobs(keyword);
-    }
+//    public Page<JobPostEntity> searchResults(String keyword) {
+//        return jobPostRepo.searchJobs(keyword);
+//    }
 
 
     public Page<JobPostEntity> getJobsByPaginate(int page, int size,String sortBy,String mode) {
@@ -58,8 +58,10 @@ public class JobPostService {
             {
             pageable= PageRequest.of(page,size,Sort.by(sortBy).descending());
             }
-            else
+            else if(sortBy.equals("minSalary"))
             pageable= PageRequest.of(page,size,Sort.by(sortBy).ascending());
+            else if(sortBy.equals("maxSalary"))
+            pageable= PageRequest.of(page,size,Sort.by(sortBy).descending());
         }
         else
         {
@@ -67,8 +69,20 @@ public class JobPostService {
         }
         if(mode!=null&&!mode.isEmpty())
         {
-            return jobPostRepo.findByWorkMode(mode,pageable);
+            return jobPostRepo.findByStatusAndWorkMode("active",mode,pageable);
         }
-        return jobPostRepo.findAll(pageable);
+        return jobPostRepo.findByStatus("active",pageable);
+    }
+
+    public Page<JobPostEntity> searchResults(int page,int size,String keyword) {
+
+        Pageable pageable=PageRequest.of(page,size);
+
+        if(keyword!=null&&!keyword.isEmpty())
+        {
+            return jobPostRepo.searchJobsGlobal(keyword,pageable);
+        }
+        else
+            return jobPostRepo.findAll(pageable);
     }
 }

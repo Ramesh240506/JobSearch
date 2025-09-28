@@ -34,14 +34,14 @@ const Layout = () => {
        
         <Route path='/findjobs' element={<ProtectedRoute><Findjobs></Findjobs></ProtectedRoute>}></Route>
         <Route path='/contact' element={<ProtectedRoute><Contact></Contact></ProtectedRoute>}></Route>
-        <Route path='/postjob' element={<ProtectedRoute><PostJob></PostJob></ProtectedRoute>}></Route>
+        <Route path='/postjob' element={<ProtectedRoute allowedRoles={['POSTER']}><PostJob></PostJob></ProtectedRoute>}></Route>
      
         <Route path='/favouritejobs' element={<ProtectedRoute><Favouritejobs></Favouritejobs></ProtectedRoute>}></Route>
-        <Route path='/jobdetails/:id' element={<ProtectedRoute><JobDetails></JobDetails></ProtectedRoute>}></Route>
+        <Route path='/jobdetails/:id' element={<ProtectedRoute allowedRoles={['SEEKER']}><JobDetails></JobDetails></ProtectedRoute>}></Route>
         <Route path='/jobapplicantiondetails' element=
         {<ProtectedRoute><ApplicationDetails></ApplicationDetails></ProtectedRoute>}></Route>
 
-        <Route path='/jobapplicationform/:id' element={<ProtectedRoute><JobApplicationForm></JobApplicationForm></ProtectedRoute>}></Route>
+        <Route path='/jobapplicationform/:id' element={<ProtectedRoute allowedRoles={['SEEKER']}><JobApplicationForm></JobApplicationForm></ProtectedRoute>}></Route>
         <Route path='/viewapplicants/:jobid' element={<ProtectedRoute><ViewApplicants></ViewApplicants></ProtectedRoute>}></Route>
         
         <Route path='/searchresults/:keyword' element={<ProtectedRoute><SearchResults></SearchResults></ProtectedRoute>}></Route>

@@ -53,7 +53,7 @@ public class JobApplicantService {
         JobApplicant jobApplicant=new JobApplicant();
         jobApplicant.setUser(user);
         jobApplicant.setJobPostEntity(job);
-        jobApplicant.setApplicationStatus("APPLIED");
+        jobApplicant.setApplicationStatus("Applied");
         jobApplicantRepo.save(jobApplicant);
     }
 
@@ -169,6 +169,8 @@ public class JobApplicantService {
                 ()->new RuntimeException("User not Found")
         );
 
+        JobApplication jobApplication=jobApplicationRepo.findByUserAndJobPost(user,appliedJob);
+        jobApplication.setApplicationStatus(updateStatus.getApplicationStatus());
         JobApplicant jobstatus=jobApplicantRepo.findByUserAndJobPostEntity(user,appliedJob);
 
         jobstatus.setApplicationStatus(updateStatus.getApplicationStatus());
@@ -192,15 +194,4 @@ public class JobApplicantService {
         return jobApplicantRepo.findByUserAndJobPostEntity(user,appliedJob);
     }
 
-    public List<JobPostEntity> getAppliedUserDetailsByStatus(String status) {
-
-        String currentlyLoggedInUser=SecurityContextHolder.getContext().getAuthentication().getName();
-
-        UserEntity user=userRepository.findByEmail(currentlyLoggedInUser);
-        System.out.println(user);
-        System.out.println(status);
-        List<JobPostEntity> jobByStatus=jobPostRepository.findByUserAndStatus(user,status);
-        System.out.println(jobByStatus);
-        return jobByStatus;
-    }
 }

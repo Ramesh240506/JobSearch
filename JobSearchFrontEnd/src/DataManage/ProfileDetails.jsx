@@ -7,8 +7,7 @@ import { useNavigate } from "react-router-dom";
 const ProfileDetails = () => {
     const [userdetails, setUserDetails] =useState(
         {
-            firstName: "",
-            lastName: "",
+            username: "",
             email: "",
             phoneNumber: "",
             address: "",
@@ -16,20 +15,22 @@ const ProfileDetails = () => {
             experience: "",
             bio: ""
         }
-    );
+      );
+
+      const fetchUserDetails = async () => {
+          try {
+              const response = await getUserProfile();
+              setUserDetails(response);
+              console.log("User details fetched:", response);
+          } catch (error) {
+              console.error("Error fetching user details:", error);
+          }
+      };
+    
     useEffect(() => {
-        // Fetch user details from an API or local storage
-        const fetchUserDetails = async () => {
-            try {
-                const response = await getUserProfile();
-                setUserDetails(response);
-                console.log("User details fetched:", response);
-            } catch (error) {
-                console.error("Error fetching user details:", error);
-            }
-        };
         fetchUserDetails();
     },[]);
+
     const navigate = useNavigate();
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -52,16 +53,13 @@ const ProfileDetails = () => {
       <div className="personal-details">
         <h1>Personal Information</h1>
         <label>
-          First Name
-          <input name="firstName" onChange={handleChange} value={userdetails.firstName} type="text" placeholder="First Name" />
+           Username
+          <input name="username" onChange={handleChange} value={userdetails.username} type="text" placeholder="Username" />
         </label>
-        <label>
-          Last Name
-          <input name="lastName" onChange={handleChange} value={userdetails.lastName} type="text" placeholder="Last Name" />
-        </label>
+       
         <label>
           Email
-          <input name="email" onChange={handleChange} value={userdetails.email} type="email" placeholder="Email" />
+          <input style={{cursor:"not-allowed"}} disabled name="email" onChange={handleChange} value={userdetails.email} type="email" placeholder="Email" />
         </label>
         <label>
           Phone Number

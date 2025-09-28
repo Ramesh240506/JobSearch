@@ -5,6 +5,7 @@ import com.jobsearch.JobSearch.Entity.JobPostEntity;
 import com.jobsearch.JobSearch.Entity.UserEntity;
 import com.jobsearch.JobSearch.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class UserController {
     @PostMapping("/register")
     public UserEntity registerUser(@RequestBody UserEntity user)
     {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
 
         return userService.registerUser(user);
     }
@@ -43,9 +44,11 @@ public class UserController {
     }
 
     @GetMapping("/getapplicationsdata")
-    public List<JobPostEntity> getApplicantsData()
+    public Page<JobPostEntity> getApplicantsData
+            (@RequestParam int page, @RequestParam int size,
+             @RequestParam String status,@RequestParam String keyword)
     {
-        return userService.getApplicantsData();
+        return userService.getApplicantsData(page, size, status, keyword);
     }
 
 }

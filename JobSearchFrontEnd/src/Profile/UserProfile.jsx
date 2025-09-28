@@ -9,8 +9,7 @@ import JobPoster from "./JobPoster";
 const UserProfile = () => {
   const navigate = useNavigate();
   const [userdetails, setUserDetails] = useState({
-    firstName: "",
-    lastName: "",
+    username: "",
     email: "",
     phoneNumber: "",
     address: "",
@@ -37,8 +36,7 @@ const UserProfile = () => {
     <div className="user-profile-container">
       <div className="profile-details">
         <div className="profile-image">
-          {/* <img src="img" alt="Profile" /> */}
-          <h2>{userdetails.firstName}</h2>
+          <h2>{userdetails.username}</h2>
           <p>{userdetails.title}</p>
           <p>{userdetails.email}</p>
         </div>

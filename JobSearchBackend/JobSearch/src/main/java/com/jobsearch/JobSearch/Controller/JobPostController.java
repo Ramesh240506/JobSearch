@@ -18,8 +18,7 @@ public class JobPostController {
     @Autowired
     JobPostService postService;
 
-    @Autowired
-    UserService userService;
+
 
     @PostMapping("/jobpost")
     public void PostJobs(@RequestBody JobPostEntity jobData)
@@ -40,10 +39,10 @@ public class JobPostController {
         return postService.getJobById(id);
     }
 
-    @GetMapping("/search/{keyword}")
-    public List<JobPostEntity> searchResults(@PathVariable String keyword)
+    @GetMapping("/search")
+    public Page<JobPostEntity> searchResults(@RequestParam int page,@RequestParam int size,@RequestParam String keyword)
     {
-        return postService.searchResults(keyword);
+        return postService.searchResults(page,size,keyword);
     }
 
     @GetMapping("/pagination")
