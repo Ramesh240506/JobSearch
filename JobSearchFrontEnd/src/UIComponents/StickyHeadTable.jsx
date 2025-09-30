@@ -78,7 +78,6 @@ export default function StickyHeadTable() {
   }
 
   const handleView = (id) => {
-    alert('View action clicked');
     navigate(`/applieduserdetails/${jobid}/${id}`);
   }
 

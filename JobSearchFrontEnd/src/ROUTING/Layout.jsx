@@ -6,7 +6,6 @@ import Contact from '../Components/Contact'
 import PostJob from '../DataManage/PostJob'
 import JobHome from '@/HOME/JobHome'
 import JobDetails from '@/Components/JobDetails'
-import Favouritejobs from '@/Components/Favouritejobs'
 import JobApplicationForm from '@/DataManage/JobApplicationForm'
 import ApplicationDetails from '@/DataManage/ApplicationDetails'
 import JobBoardAuth from '@/Authentication/JobBoardAuth'
@@ -17,11 +16,12 @@ import ProfileDetails from '@/DataManage/ProfileDetails'
 import ProtectedRoute from './ProtectedRoute'
 import ViewAppliedStatus from '@/Profile/ViewAppliedStatus'
 import AppliedUserDetails from '@/Profile/AppliedUserDetails'
+import ForgotPasswordOTP from '@/Authentication/ForgotPasswordOTP'
 const Layout = () => {
 
   const location=useLocation();
 
-  const isAuthPage = location.pathname !== '/';
+  const isAuthPage = location.pathname !== '/' && location.pathname !== '/forgotpassword';
   return (
     <div>
     
@@ -36,7 +36,6 @@ const Layout = () => {
         <Route path='/contact' element={<ProtectedRoute><Contact></Contact></ProtectedRoute>}></Route>
         <Route path='/postjob' element={<ProtectedRoute allowedRoles={['POSTER']}><PostJob></PostJob></ProtectedRoute>}></Route>
      
-        <Route path='/favouritejobs' element={<ProtectedRoute><Favouritejobs></Favouritejobs></ProtectedRoute>}></Route>
         <Route path='/jobdetails/:id' element={<ProtectedRoute allowedRoles={['SEEKER']}><JobDetails></JobDetails></ProtectedRoute>}></Route>
         <Route path='/jobapplicantiondetails' element=
         {<ProtectedRoute><ApplicationDetails></ApplicationDetails></ProtectedRoute>}></Route>
@@ -48,7 +47,7 @@ const Layout = () => {
         <Route path='/userdetails' element={<ProtectedRoute><ProfileDetails></ProfileDetails></ProtectedRoute>}></Route>
         <Route path='/viewappliedstatus/:id' element={<ProtectedRoute><ViewAppliedStatus></ViewAppliedStatus></ProtectedRoute>}></Route>
         <Route path='/applieduserdetails/:jobid/:id' element={<ProtectedRoute><AppliedUserDetails></AppliedUserDetails></ProtectedRoute>}></Route> 
-          
+        <Route path='/forgotpassword' element={<ForgotPasswordOTP></ForgotPasswordOTP>} ></Route>
           </Routes>
       
     </div>

@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { Pagination, Stack } from "@mui/material";
 
 const Findjobs = () => {
-  const [isBookmarked, setBookmark] = useState(false);
+  
   const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
   const [role, setRole] = useState("");
@@ -23,10 +23,7 @@ const Findjobs = () => {
 
   const [totalJobs, setTotalJobs] = useState(0);
 
-  const handleBookmark = () => {
-    if (isBookmarked === false) setBookmark(true);
-    else setBookmark(false);
-  };
+  
 
   const handleApply = (id) => {
     console.log("Job Id:", id);
@@ -117,22 +114,7 @@ const Findjobs = () => {
                       <h4>{job.jobTitle}</h4>
                       <p>{job.companyName}</p>
                     </div>
-                    <div
-                      className="bookmark-icon"
-                      style={{ cursor: "pointer" }}
-                    >
-                      {job.bookmark ? (
-                        <FaBookmark
-                          size={20}
-                          onClick={() => handleBookmark(job.id)}
-                        />
-                      ) : (
-                        <CiBookmark
-                          size={20}
-                          onClick={() => handleBookmark(job.id)}
-                        />
-                      )}
-                    </div>
+                  
                   </div>
                 </div>
               </div>

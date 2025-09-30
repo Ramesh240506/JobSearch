@@ -1,280 +1,437 @@
+/* Main Container */
 .applied-user-details-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8fafc;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  background-color: #f7fafc;
   min-height: 100vh;
 }
 
 /* Page Title */
 .applied-user-details-container h1 {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
   color: #1a202c;
-  margin-bottom: 30px;
-  border-bottom: 3px solid #3182ce;
+  margin-bottom: 40px;
+  padding-bottom: 12px;
+  border-bottom: 4px solid #3182ce;
   display: inline-block;
-  padding-bottom: 8px;
 }
 
 /* Section Styles */
 .applied-user-inforamtion,
 .applied-user-professional,
 .applied-user-coverletter,
-.applied-user-links {
-  background: white;
-  border-radius: 12px;
-  padding: 25px;
-  margin-bottom: 25px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+.applied-user-links,
+.application-actions {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
   border: 1px solid #e2e8f0;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .applied-user-inforamtion:hover,
 .applied-user-professional:hover,
 .applied-user-coverletter:hover,
 .applied-user-links:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
+/* Section Headers */
 .applied-user-inforamtion h3,
 .applied-user-professional h3,
 .applied-user-coverletter h3,
-.applied-user-links h3 {
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0 0 15px 0;
-  color: #2d3748;
-  border-left: 4px solid #3182ce;
-  padding-left: 10px;
+.applied-user-links h3,
+.application-actions h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  color: #1a202c;
+  display: flex;
+  align-items: center;
 }
 
+.applied-user-inforamtion h3::before,
+.applied-user-professional h3::before,
+.applied-user-coverletter h3::before,
+.applied-user-links h3::before,
+.application-actions h3::before {
+  content: '';
+  width: 4px;
+  height: 24px;
+  background: linear-gradient(180deg, #3182ce 0%, #2c5aa0 100%);
+  margin-right: 12px;
+  border-radius: 2px;
+}
+
+/* Horizontal Dividers */
+hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, #cbd5e0 0%, transparent 100%);
+  margin: 0 0 24px 0;
+}
+
+/* Section Paragraphs */
 .applied-user-inforamtion p,
 .applied-user-professional p,
-.applied-user-coverletter p,
-.applied-user-links p {
+.applied-user-coverletter p {
   font-size: 16px;
   color: #4a5568;
-  margin: 8px 0;
-  line-height: 1.6;
+  margin: 14px 0;
+  line-height: 1.7;
 }
 
-/* Highlight Labels */
-.applied-user-inforamtion p strong,
-.applied-user-professional p strong {
+/* Application Information Styling */
+.applied-user-inforamtion p {
+  font-weight: 500;
+  display: flex;
+  align-items: baseline;
+  padding: 8px 0;
+}
+
+.applied-user-inforamtion p::before {
+  content: '•';
+  color: #3182ce;
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: 12px;
+}
+
+/* Professional Section */
+.applied-user-professional h4 {
+  font-size: 18px;
   font-weight: 600;
-  color: #1a202c;
+  color: #2d3748;
+  margin: 24px 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.applied-user-professional p {
+  background: #f7fafc;
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 3px solid #3182ce;
+  margin-bottom: 20px;
 }
 
 /* Cover Letter */
 .applied-user-coverletter p {
   color: #2d3748;
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 16px;
+  line-height: 1.8;
   text-align: justify;
+  background: #f7fafc;
+  padding: 20px;
+  border-radius: 8px;
+  white-space: pre-wrap;
 }
 
 /* External Links */
+.applied-user-links a {
+  display: inline-block;
+  margin: 12px 16px 12px 0;
+  text-decoration: none;
+}
+
 .applied-user-links p {
-  margin: 10px 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 8px;
   font-size: 15px;
-  font-weight: 500;
-  color: #3182ce;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  font-weight: 600;
+  margin: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 }
 
 .applied-user-links p:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.applied-user-links p::before {
+  content: '→';
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+/* Application Actions Section */
+.application-actions {
+  background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
+  border: 2px solid #e2e8f0;
+}
+
+.application-actions > p {
+  font-size: 18px;
+  color: #2d3748;
+  padding: 16px;
+  background: #edf2f7;
+  border-radius: 8px;
+  border-left: 4px solid #3182ce;
+  margin: 0;
+}
+
+.application-actions > p strong {
   color: #1a202c;
-  text-decoration: underline;
+  font-weight: 700;
+}
+
+/* Action Buttons */
+.application-actions > button {
+  margin: 12px 12px 12px 0;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.application-actions > button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: left 0.5s ease;
+}
+
+.application-actions > button:hover::before {
+  left: 100%;
+}
+
+/* Hire Button */
+.application-actions > button:first-of-type {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  color: white;
+}
+
+.application-actions > button:first-of-type:hover {
+  background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(72, 187, 120, 0.4);
+}
+
+.application-actions > button:first-of-type:active {
+  transform: translateY(-1px);
+}
+
+/* Reject Button */
+.application-actions > button:nth-of-type(2) {
+  background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+  color: white;
+}
+
+.application-actions > button:nth-of-type(2):hover {
+  background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(245, 101, 101, 0.4);
+}
+
+.application-actions > button:nth-of-type(2):active {
+  transform: translateY(-1px);
+}
+
+/* Schedule Interview Button */
+.application-actions > button:nth-of-type(3) {
+  background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+  color: white;
+}
+
+.application-actions > button:nth-of-type(3):hover {
+  background: linear-gradient(135deg, #dd6b20 0%, #c05621 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(237, 137, 54, 0.4);
+}
+
+.application-actions > button:nth-of-type(3):active {
+  transform: translateY(-1px);
+}
+
+/* Schedule Interview Form */
+.schedule-interview {
+  background: #f7fafc;
+  padding: 28px;
+  border-radius: 12px;
+  border: 2px dashed #cbd5e0;
+  margin-top: 20px;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.schedule-interview label {
+  display: block;
+  font-size: 17px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 16px;
+}
+
+.schedule-interview input[type="date"] {
+  margin-left: 12px;
+  padding: 12px 18px;
+  border: 2px solid #cbd5e0;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  min-width: 180px;
+  cursor: pointer;
+}
+
+.schedule-interview input[type="date"]:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 4px rgba(49, 130, 206, 0.1);
+  background-color: #fff;
+}
+
+.schedule-interview input[type="date"]:hover {
+  border-color: #4299e1;
+}
+
+.schedule-interview button {
+  margin-top: 20px;
+  padding: 14px 36px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-interview button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.schedule-interview button:active {
+  transform: translateY(-1px);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .applied-user-details-container {
-    padding: 15px;
+    padding: 20px 15px;
   }
 
   .applied-user-details-container h1 {
-    font-size: 24px;
+    font-size: 26px;
+  }
+
+  .applied-user-inforamtion,
+  .applied-user-professional,
+  .applied-user-coverletter,
+  .applied-user-links,
+  .application-actions {
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+
+  .application-actions > button {
+    display: block;
+    width: 100%;
+    margin: 12px 0;
+  }
+
+  .schedule-interview label {
+    text-align: left;
+  }
+
+  .schedule-interview input[type="date"] {
+    display: block;
+    margin: 12px 0;
+    width: 100%;
+  }
+
+  .schedule-interview button {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .applied-user-details-container {
+    padding: 15px 10px;
+  }
+
+  .applied-user-details-container h1 {
+    font-size: 22px;
+  }
+
+  .applied-user-inforamtion h3,
+  .applied-user-professional h3,
+  .applied-user-coverletter h3,
+  .applied-user-links h3,
+  .application-actions h3 {
+    font-size: 18px;
+  }
+
+  .applied-user-inforamtion,
+  .applied-user-professional,
+  .applied-user-coverletter,
+  .applied-user-links,
+  .application-actions {
+    padding: 20px;
+  }
+
+  .applied-user-links p {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .application-actions {
+    display: none;
+  }
+
+  .applied-user-details-container {
+    background: white;
   }
 
   .applied-user-inforamtion,
   .applied-user-professional,
   .applied-user-coverletter,
   .applied-user-links {
-    padding: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .applied-user-details-container h1 {
-    font-size: 20px;
-  }
-
-  .applied-user-inforamtion h3,
-  .applied-user-professional h3,
-  .applied-user-coverletter h3,
-  .applied-user-links h3 {
-    font-size: 18px;
-  }
-}
-
-/* Application Actions Section */
-
-.application-actions h3 {
-  color: #343a40;
-  margin-bottom: 10px;
-  font-size: 1.4rem;
-  font-weight: 600;
-}
-
-.application-actions hr {
-  border: none;
-  height: 2px;
-  background: linear-gradient(to right, #007bff, #6c757d);
-  margin-bottom: 20px;
-}
-
-/* Action Buttons Container */
-.application-actions > button {
-  margin-right: 15px;
-  margin-bottom: 10px;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Hire Button */
-.application-actions > button:first-of-type {
-  background-color: #28a745;
-  color: white;
-}
-
-.application-actions > button:first-of-type:hover {
-  background-color: #218838;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
-}
-
-/* Reject Button */
-.application-actions > button:nth-of-type(2) {
-  background-color: #dc3545;
-  color: white;
-}
-
-.application-actions > button:nth-of-type(2):hover {
-  background-color: #c82333;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
-}
-
-/* Schedule Interview Button */
-.application-actions > button:nth-of-type(3) {
-  background-color: #ffc107;
-  color: #212529;
-}
-
-.application-actions > button:nth-of-type(3):hover {
-  background-color: #e0a800;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
-}
-
-/* Schedule Interview Form */
-.schedule-interview {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid #dee2e6;
-  margin-top: 15px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.schedule-interview label {
-  display: block;
-  font-size: 16px;
-  font-weight: 500;
-  color: #495057;
-  margin-bottom: 15px;
-}
-
-.schedule-interview input[type="date"] {
-  margin-left: 10px;
-  padding: 10px 15px;
-  border: 2px solid #ced4da;
-  border-radius: 5px;
-  font-size: 14px;
-  background-color: #fff;
-  transition: border-color 0.3s ease;
-  min-width: 150px;
-}
-
-.schedule-interview input[type="date"]:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
-}
-
-.schedule-interview button {
-  margin-top: 15px;
-  padding: 12px 30px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.schedule-interview button:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .application-actions {
-    padding: 20px 15px;
-  }
-  
-  .application-actions > button {
-    display: block;
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 15px;
-  }
-  
-  .schedule-interview label {
-    text-align: center;
-  }
-  
-  .schedule-interview input[type="date"] {
-    display: block;
-    margin: 10px auto 0;
-    width: 100%;
-    max-width: 200px;
-  }
-  
-  .schedule-interview button {
-    display: block;
-    width: 100%;
-    margin-top: 20px;
+    box-shadow: none;
+    border: 1px solid #e2e8f0;
+    page-break-inside: avoid;
   }
 }

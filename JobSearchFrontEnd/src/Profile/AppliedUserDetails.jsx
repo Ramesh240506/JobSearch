@@ -60,9 +60,14 @@ const AppliedUserDetails = () => {
             ? new Date(appliedUserDetails?.appliedAt).toLocaleDateString()
             : "N/A"}
         </p>
-        <p>CURRENT STATUS:</p>
+        <p>CURRENT STATUS: {appliedUserDetails?.applicationStatus}</p>
         <p>EXPECTED SALARY: {appliedUserDetails?.salary}</p>
-        <p>AVAILABLE FROM: {appliedUserDetails?.startDate}</p>
+        {
+          appliedUserDetails?.startDate && (
+            <p>AVAILABLE FROM: {appliedUserDetails?.startDate}</p>
+          )
+        }
+       
       </div>
       <div className="applied-user-professional">
         <h3>Professional Background</h3>

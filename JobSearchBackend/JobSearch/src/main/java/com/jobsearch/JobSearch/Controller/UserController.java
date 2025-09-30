@@ -3,7 +3,10 @@ package com.jobsearch.JobSearch.Controller;
 import com.jobsearch.JobSearch.Entity.JobApplication;
 import com.jobsearch.JobSearch.Entity.JobPostEntity;
 import com.jobsearch.JobSearch.Entity.UserEntity;
+import com.jobsearch.JobSearch.Service.EmailService;
 import com.jobsearch.JobSearch.Service.UserService;
+import com.jobsearch.JobSearch.dto.FeedBack;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,9 +26,11 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    EmailService emailService;
+
     @PostMapping("/register")
-    public UserEntity registerUser(@RequestBody UserEntity user)
-    {
+    public UserEntity registerUser(@RequestBody UserEntity user) throws MessagingException {
 
 
         return userService.registerUser(user);
@@ -49,6 +54,12 @@ public class UserController {
              @RequestParam String status,@RequestParam String keyword)
     {
         return userService.getApplicantsData(page, size, status, keyword);
+    }
+
+    @PostMapping("/contact")
+    public void sendFeedBack(@RequestBody FeedBack feedBack)
+    {
+        emailService.sendFeedBack(feedBack);
     }
 
 }

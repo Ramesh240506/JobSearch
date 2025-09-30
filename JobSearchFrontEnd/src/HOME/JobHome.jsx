@@ -17,15 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
 import { NavigationOff } from "lucide-react";
 const JobHome = () => {
-  const handleBookmark = (id) => {
-    // if (isBookmarked === false) setBookmark(true);
-    // else setBookmark(false);
-    setFeaturedJobs((prevJobs) =>
-      prevJobs.map((job) =>
-        job.id === id ? { ...job, bookmark: !job.bookmark } : job
-      )
-    );
-  };
+ 
 
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -113,22 +105,7 @@ const JobHome = () => {
                       <h4>{job.jobTitle}</h4>
                       <p>{job.companyName}</p>
                     </div>
-                    <div
-                      className="bookmark-icon"
-                      style={{ cursor: "pointer" }}
-                    >
-                      {job.bookmark ? (
-                        <FaBookmark
-                          size={20}
-                          onClick={() => handleBookmark(job.id)}
-                        />
-                      ) : (
-                        <CiBookmark
-                          size={20}
-                          onClick={() => handleBookmark(job.id)}
-                        />
-                      )}
-                    </div>
+                 
                   </div>
                 </div>
               </div>
@@ -153,8 +130,8 @@ const JobHome = () => {
               <p>
                 {/* <h1>Expire At</h1> */}
                 
-                <p>⏳ {job.deadline &&
-                  formatDistanceToNow(new Date(job.deadline), { addSuffix: true })}</p>
+                <span>⏳ {job.deadline &&
+                  formatDistanceToNow(new Date(job.deadline), { addSuffix: true })}</span>
               </p>
               <div className="job-finderpage-job-skills">
                 {job.skills.split(",").slice(0, 3).map((tag) => (

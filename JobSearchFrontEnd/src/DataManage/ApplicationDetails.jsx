@@ -163,7 +163,7 @@ const ApplicationDetails = () => {
                 <p style={{ margin: 0 }}>{application.postedAt}</p>
               </div>
 
-              <div className="application-actions">
+              <div className="application-action">
                 <button
                   onClick={() => navigate(`/viewapplicants/${application.id}`)}
                   className="view-application"
@@ -173,21 +173,23 @@ const ApplicationDetails = () => {
               </div>
             </div>
           </div>
-          {
-            application.length > 0 &&
-          <Pagination
-            style={{ display: "flex", justifyContent: "center" }}
-            count={totalPages}
-            page={page + 1}
-            onChange={(e, value) => setPage(value - 1)}
-            variant="outlined"
-            shape="rounded"
-          />
-          }
         </div>
         
       ))
     )}
+   {
+    applications.length>0 &&
+
+    <Pagination
+      style={{ display: "flex", justifyContent: "center" }}
+      count={totalPages}
+      page={page + 1}
+      onChange={(e, value) => setPage(value - 1)}
+      variant="outlined"
+      shape="rounded"
+    />
+   }
+   
       <div>
 
       </div>

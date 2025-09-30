@@ -1,61 +1,61 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import './JobApplicationForm.css'; 
-import PositionedSnackbar from '@/UIComponents/PositionedSnackbar';
-import { appliedUsers, postJobApplication } from '@/Services/JobService';
-import { useParams } from 'react-router-dom';
+import "./JobApplicationForm.css";
+import PositionedSnackbar from "@/UIComponents/PositionedSnackbar";
+import { appliedUsers, postJobApplication } from "@/Services/JobService";
+import { useParams } from "react-router-dom";
 export default function JobApplicationForm() {
   const [jobFormData, setjobFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    address: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    position: '',
-    department: '',
-    salary: '',
-    startDate: '',
-    experience: '',
-    education: '',
-    skills: '',
-    coverLetter: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    position: "",
+    department: "",
+    salary: "",
+    startDate: "",
+    experience: "",
+    education: "",
+    skills: "",
+    coverLetter: "",
     resume: null,
-    availability: '',
-    referenceName: '',
-    referenceEmail: '',
-    referencePhone: '',
-    linkedin: '',
-    portfolio: '',
-    workAuthorization: '',
+    availability: "",
+    referenceName: "",
+    referenceEmail: "",
+    referencePhone: "",
+    linkedin: "",
+    portfolio: "",
+    workAuthorization: "",
     willingToRelocate: false,
-    agreeToTerms: false
+    agreeToTerms: false,
   });
 
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [resumeFile, setResumeFile] = useState(null);
-  const {id}=useParams();
+  const { id } = useParams();
   const [snackbar, setSnackbar] = useState(false);
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setjobFormData(prev => ({
+    setjobFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
-    
+
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setjobFormData(prev => ({ ...prev, resume: file }));
+    setjobFormData((prev) => ({ ...prev, resume: file }));
     setResumeFile(file);
   };
 
@@ -63,25 +63,38 @@ export default function JobApplicationForm() {
     const newErrors = {};
     let valid = true;
     const requiredFields = [
-      'firstName', 'lastName', 'email', 'phone', 'position',
-      'experience', 'education', 'coverLetter','resume', 'workAuthorization', 'agreeToTerms'
+      "firstName",
+      "lastName",
+      "email",
+      "phone",
+      "position",
+      "experience",
+      "education",
+      "coverLetter",
+      "resume",
+      "workAuthorization",
+      "agreeToTerms",
     ];
 
-    requiredFields.forEach(field => {
+    requiredFields.forEach((field) => {
       const value = jobFormData[field];
-      if (value &&((typeof value === 'string' && value.trim()))
-        ||((typeof value === 'boolean' ))) {
+
+      if (
+        (typeof value === "string" && value.trim()) ||
+        typeof value === "boolean" ||
+        (field === "resume" && value instanceof File) // check file
+      ) {
         newErrors[field] = "";
-      }
-      else
-      {
-        newErrors[field] = field.charAt(0).toUpperCase() + field.slice(1)+ ' is required';
+      } else {
+        newErrors[field] =
+          field.charAt(0).toUpperCase() + field.slice(1) + " is required";
         valid = false;
       }
-    })
+    });
+
     setErrors(newErrors);
     return valid;
-    };
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -89,22 +102,25 @@ export default function JobApplicationForm() {
       appliedUsers(id);
       setIsSubmitted(true);
       const formData = new FormData();
-      
-      formData.append('resume',resumeFile);
-      formData.append('application',new Blob([JSON.stringify({...jobFormData , resume:null})],
-       { type: 'application/json' }));
 
-      postJobApplication(formData,id).then(response => {
-        console.log('Application submitted successfully:', response)
-        }).catch(error =>
-        {
-          console.error('Error submitting application:', error)
-        }
+      formData.append("resume", resumeFile);
+      formData.append(
+        "application",
+        new Blob([JSON.stringify({ ...jobFormData, resume: null })], {
+          type: "application/json",
+        })
       );
-    
-      console.log('Form submitted:', jobFormData);
-    }
-    else {
+
+      postJobApplication(formData, id)
+        .then((response) => {
+          console.log("Application submitted successfully:", response);
+        })
+        .catch((error) => {
+          console.error("Error submitting application:", error);
+        });
+
+      console.log("Form submitted:", jobFormData);
+    } else {
       setSnackbar(true);
     }
   };
@@ -112,80 +128,76 @@ export default function JobApplicationForm() {
   const handleReset = () => {
     setIsSubmitted(false);
     setjobFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      address: '',
-      city: '',
-      state: '',
-      zipCode: '',
-      position: '',
-      department: '',
-      salary: '',
-      startDate: '',
-      experience: '',
-      education: '',
-      skills: '',
-      coverLetter: '',
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      address: "",
+      city: "",
+      state: "",
+      zipCode: "",
+      position: "",
+      department: "",
+      salary: "",
+      startDate: "",
+      experience: "",
+      education: "",
+      skills: "",
+      coverLetter: "",
       resume: null,
-      availability: '',
-      referenceName: '',
-      referenceEmail: '',
-      referencePhone: '',
-      linkedin: '',
-      portfolio: '',
-      workAuthorization: '',
+      availability: "",
+      referenceName: "",
+      referenceEmail: "",
+      referencePhone: "",
+      linkedin: "",
+      portfolio: "",
+      workAuthorization: "",
       willingToRelocate: false,
-      agreeToTerms: false
+      agreeToTerms: false,
     });
     setErrors({});
   };
-  
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  },[]);
+  }, []);
   if (isSubmitted) {
     return (
       <div className="container">
         <div className="successMessage">
           <h2 className="successTitle">Application Submitted Successfully!</h2>
           <p className="successText">
-            Thank you for your application. We will review your information and contact you soon.
+            Thank you for your application. We will review your information and
+            contact you soon.
           </p>
-          <button 
-            className="submitButton" 
-            onClick={handleReset}
-          >
-            Submit Another Application
-          </button>
+          
         </div>
       </div>
     );
   }
 
-
   return (
     <div className="container">
-        {snackbar && (
-              <PositionedSnackbar
-                open={snackbar}
-                message="Please fill all required fields"
-                onClose={() => setSnackbar(false)}
-              />
-            )}
+      {snackbar && (
+        <PositionedSnackbar
+          open={snackbar}
+          message="Please fill all required fields"
+          onClose={() => setSnackbar(false)}
+        />
+      )}
 
       <div className="form">
         <div className="header">
           <h1 className="title">Job Application Form</h1>
-          <p className="subtitle">Please fill out all required fields marked with *</p>
+          <p className="subtitle">
+            Please fill out all required fields marked with *
+          </p>
         </div>
 
         {/* Personal Info */}
         <div className="section">
           <h2 className="sectionTitle">Personal Information</h2>
-          
+
           <div className="row">
             <div className="inputGroup">
               <label className="label">First Name *</label>
@@ -197,9 +209,11 @@ export default function JobApplicationForm() {
                 className={errors.firstName ? "input inputError" : "input"}
                 placeholder="Enter your first name"
               />
-              {errors.firstName && <span className="errorText">{errors.firstName}</span>}
+              {errors.firstName && (
+                <span className="errorText">{errors.firstName}</span>
+              )}
             </div>
-            
+
             <div className="inputGroup">
               <label className="label">Last Name *</label>
               <input
@@ -210,7 +224,9 @@ export default function JobApplicationForm() {
                 className={errors.lastName ? "input inputError" : "input"}
                 placeholder="Enter your last name"
               />
-              {errors.lastName && <span className="errorText">{errors.lastName}</span>}
+              {errors.lastName && (
+                <span className="errorText">{errors.lastName}</span>
+              )}
             </div>
           </div>
 
@@ -225,9 +241,11 @@ export default function JobApplicationForm() {
                 className={errors.email ? "input inputError" : "input"}
                 placeholder="Enter your email address"
               />
-              {errors.email && <span className="errorText">{errors.email}</span>}
+              {errors.email && (
+                <span className="errorText">{errors.email}</span>
+              )}
             </div>
-            
+
             <div className="inputGroup">
               <label className="label">Phone Number *</label>
               <input
@@ -238,7 +256,9 @@ export default function JobApplicationForm() {
                 className={errors.phone ? "input inputError" : "input"}
                 placeholder="Enter your phone number"
               />
-              {errors.phone && <span className="errorText">{errors.phone}</span>}
+              {errors.phone && (
+                <span className="errorText">{errors.phone}</span>
+              )}
             </div>
           </div>
 
@@ -266,7 +286,7 @@ export default function JobApplicationForm() {
                 placeholder="Enter your city"
               />
             </div>
-            
+
             <div className="inputGroup">
               <label className="label">State</label>
               <input
@@ -278,7 +298,7 @@ export default function JobApplicationForm() {
                 placeholder="Enter your state"
               />
             </div>
-            
+
             <div className="inputGroup">
               <label className="label">ZIP Code</label>
               <input
@@ -296,7 +316,7 @@ export default function JobApplicationForm() {
         {/* Job Information */}
         <div className="section">
           <h2 className="sectionTitle">Job Information</h2>
-          
+
           <div className="row">
             <div className="inputGroup">
               <label className="label">Position Applied For *</label>
@@ -308,9 +328,11 @@ export default function JobApplicationForm() {
                 className={errors.position ? "input inputError" : "input"}
                 placeholder="Enter the position you're applying for"
               />
-              {errors.position && <span className="errorText">{errors.position}</span>}
+              {errors.position && (
+                <span className="errorText">{errors.position}</span>
+              )}
             </div>
-            
+
             <div className="inputGroup">
               <label className="label">Department</label>
               <select
@@ -344,7 +366,7 @@ export default function JobApplicationForm() {
                 placeholder="Enter expected salary"
               />
             </div>
-            
+
             <div className="inputGroup">
               <label className="label">Available Start Date</label>
               <input
@@ -377,7 +399,7 @@ export default function JobApplicationForm() {
         {/* Professional Information */}
         <div className="section">
           <h2 className="sectionTitle">Professional Information</h2>
-          
+
           <div className="inputGroup">
             <label className="label">Work Experience *</label>
             <textarea
@@ -388,7 +410,9 @@ export default function JobApplicationForm() {
               placeholder="Describe your relevant work experience..."
               rows="4"
             />
-            {errors.experience && <span className="errorText">{errors.experience}</span>}
+            {errors.experience && (
+              <span className="errorText">{errors.experience}</span>
+            )}
           </div>
 
           <div className="inputGroup">
@@ -401,7 +425,9 @@ export default function JobApplicationForm() {
               placeholder="Describe your educational background..."
               rows="3"
             />
-            {errors.education && <span className="errorText">{errors.education}</span>}
+            {errors.education && (
+              <span className="errorText">{errors.education}</span>
+            )}
           </div>
 
           <div className="inputGroup">
@@ -422,11 +448,15 @@ export default function JobApplicationForm() {
               name="coverLetter"
               value={jobFormData.coverLetter}
               onChange={handleInputChange}
-              className={errors.coverLetter ? "textarea inputError" : "textarea"}
+              className={
+                errors.coverLetter ? "textarea inputError" : "textarea"
+              }
               placeholder="Write your cover letter..."
               rows="6"
             />
-            {errors.coverLetter && <span className="errorText">{errors.coverLetter}</span>}
+            {errors.coverLetter && (
+              <span className="errorText">{errors.coverLetter}</span>
+            )}
           </div>
 
           <div className="inputGroup">
@@ -440,14 +470,16 @@ export default function JobApplicationForm() {
               required
             />
             <small className="helpText">Accepted formats: PDF, DOC, DOCX</small>
-            {errors.resume && <span className="errorText">{errors.resume}</span>}
+            {errors.resume && (
+              <span className="errorText">{errors.resume}</span>
+            )}
           </div>
         </div>
 
         {/* References */}
         <div className="section">
           <h2 className="sectionTitle">References</h2>
-          
+
           <div className="referenceGroup">
             <h3 className="referenceTitle">Reference </h3>
             <div className="row">
@@ -462,7 +494,7 @@ export default function JobApplicationForm() {
                   placeholder="Reference name"
                 />
               </div>
-              
+
               <div className="inputGroup">
                 <label className="label">Email</label>
                 <input
@@ -474,7 +506,7 @@ export default function JobApplicationForm() {
                   placeholder="Reference email"
                 />
               </div>
-              
+
               <div className="inputGroup">
                 <label className="label">Phone</label>
                 <input
@@ -490,10 +522,9 @@ export default function JobApplicationForm() {
           </div>
         </div>
 
-        
         <div className="section">
           <h2 className="sectionTitle">Additional Information</h2>
-          
+
           <div className="row">
             <div className="inputGroup">
               <label className="label">LinkedIn Profile</label>
@@ -506,7 +537,7 @@ export default function JobApplicationForm() {
                 placeholder="https://linkedin.com/in/yourprofile"
               />
             </div>
-            
+
             <div className="inputGroup">
               <label className="label">Portfolio/Website</label>
               <input
@@ -526,7 +557,10 @@ export default function JobApplicationForm() {
               name="workAuthorization"
               value={jobFormData.workAuthorization}
               onChange={handleInputChange}
-              className={errors.workAuthorization ? "select inputError" : "select"}            >
+              className={
+                errors.workAuthorization ? "select inputError" : "select"
+              }
+            >
               <option value="">Select work authorization status</option>
               <option value="citizen">U.S. Citizen</option>
               <option value="permanent-resident">Permanent Resident</option>
@@ -534,7 +568,9 @@ export default function JobApplicationForm() {
               <option value="student-visa">Student Visa</option>
               <option value="other">Other</option>
             </select>
-            {errors.workAuthorization && <span className="errorText">{errors.workAuthorization}</span>}
+            {errors.workAuthorization && (
+              <span className="errorText">{errors.workAuthorization}</span>
+            )}
           </div>
 
           <div className="checkboxGroup">
@@ -561,7 +597,9 @@ export default function JobApplicationForm() {
               />
               I agree to the terms and conditions and privacy policy *
             </label>
-            {errors.agreeToTerms && <span className="errorText">{errors.agreeToTerms}</span>}
+            {errors.agreeToTerms && (
+              <span className="errorText">{errors.agreeToTerms}</span>
+            )}
           </div>
         </div>
 
@@ -575,4 +613,3 @@ export default function JobApplicationForm() {
     </div>
   );
 }
-

@@ -44,14 +44,6 @@ const Nav = () => {
             </NavLink>
             
             <NavLink
-              to={"/favouritejobs"}
-              className={({ isActive }) =>
-                isActive ? "job-nav-activepage" : "job-nav-line"
-              }
-            >
-              <li>Favourites</li>
-            </NavLink>
-            <NavLink
               to={"/contact"}
               className={({ isActive }) =>
                 isActive ? "job-nav-activepage" : "job-nav-line"

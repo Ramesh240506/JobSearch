@@ -12,6 +12,4 @@ public class JobSearchApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(JobSearchApplication.class, args);
 	}
-
-
 }

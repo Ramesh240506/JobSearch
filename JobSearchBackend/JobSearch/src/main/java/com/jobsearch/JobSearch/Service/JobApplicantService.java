@@ -8,6 +8,7 @@ import com.jobsearch.JobSearch.Repository.JobApplicantRepo;
 import com.jobsearch.JobSearch.Repository.JobApplicationRepo;
 import com.jobsearch.JobSearch.Repository.JobPostRepository;
 import com.jobsearch.JobSearch.Repository.UserRepository;
+import jakarta.mail.MessagingException;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,6 +39,9 @@ public class JobApplicantService {
 
     @Autowired
     JobApplicationRepo jobApplicationRepo;
+
+    @Autowired
+    EmailService emailService;
 
     public void appliedUsers(Long id) {
 
@@ -161,7 +165,7 @@ public class JobApplicantService {
         return jobApplicationRepo.findByUserAndJobPost(user,appliedJob);
     }
 
-    public void setAppliedStatus(Long jobid,Long id, JobApplicant updateStatus) {
+    public void setAppliedStatus(Long jobid,Long id, JobApplicant updateStatus) throws MessagingException {
         JobPostEntity appliedJob=jobPostRepository.findById(jobid)
                 .orElseThrow(()->new RuntimeException("Job Not Found"));
 
@@ -179,7 +183,9 @@ public class JobApplicantService {
         {
             jobstatus.setInterviewDate(updateStatus.getInterviewDate());
         }
-
+        emailService.sendApplicationStatusEmail(jobApplication.getEmail(),
+                jobApplication.getFirstName(),appliedJob.getJobTitle(),
+                updateStatus.getApplicationStatus());
         jobApplicantRepo.save(jobstatus);
     }
 

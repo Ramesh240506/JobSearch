@@ -108,7 +108,7 @@ const JobBoardAuth = () => {
   };
 
   const showForgotPassword = () => {
-    alert("Password reset functionality would be implemented here.");
+    navigate("/forgotpassword");
   };
 
   useEffect(() => {

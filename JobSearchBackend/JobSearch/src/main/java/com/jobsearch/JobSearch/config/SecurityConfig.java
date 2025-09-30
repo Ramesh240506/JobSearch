@@ -27,7 +27,9 @@
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
             http.authorizeHttpRequests(
                     authz->
-                authz.requestMatchers("/api/jobs/register", "/api/jobs/login")
+                authz.requestMatchers("/api/jobs/register",
+                                "/api/jobs/login","/api/jobs/forgot-password",
+                                "/api/jobs/verify-otp","/api/jobs/reset-password")
                         .permitAll()
                         .requestMatchers("/api/jobs/postapplication").hasRole("SEEKER")
                         .requestMatchers("/api/jobs/jobpost").hasRole("POSTER")

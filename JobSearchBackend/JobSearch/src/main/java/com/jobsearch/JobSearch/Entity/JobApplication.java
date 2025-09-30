@@ -9,8 +9,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "job_applications")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class JobApplication {
 
     @Id
@@ -29,7 +27,9 @@ public class JobApplication {
     private String department;
     private String salary;
     private String startDate;
+    @Column(columnDefinition = "TEXT")
     private String experience;
+    @Column(columnDefinition = "TEXT")
     private String education;
 
     @Column(length = 1000)

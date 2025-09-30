@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const API_URL = "http://localhost:8080/api/jobs";
+// const API_URL ="https://7jktcm8r-8080.inc1.devtunnels.ms/api/jobs";
 
 const authHeaders = () => ({
   headers: {
@@ -248,6 +249,54 @@ export const getApplicationsByStatus = async (status) => {
 export const paginate = async (page,size,sortBy,filter) => {
     try{
         const response = await axios.get(`${API_URL}/pagination?page=${page}&size=${size}&sortBy=${sortBy}&mode=${filter}`, authHeaders())
+        return response.data;
+      }
+    catch (error) {
+        console.error("Error fetching job details:", error);
+        throw error;
+    }
+}
+
+export const forgotPassword = async (email) => {
+    try{
+        const response = await axios.post(`${API_URL}/forgot-password?email=${email}`);
+        return response.data;
+      }
+    catch (error) {
+        console.error("Error fetching job details:", error);
+        throw error;
+    }
+}
+
+export const validateOtp = async (email,otp) => {
+    try{
+        const response = await axios.post(`${API_URL}/verify-otp?email=${email}&otp=${otp}`);
+        return response.data;
+      }
+    catch (error) {
+        console.error("Error fetching job details:", error);
+        throw error;
+    }
+}
+
+export const ResetPassword = async (email,password) => {
+    try{
+        const data={
+            email:email,
+            newPassword:password
+        }
+        const response = await axios.post(`${API_URL}/reset-password`,data);
+        return response.data;
+      }
+    catch (error) {
+        console.error("Error fetching job details:", error);
+        throw error;
+    }
+}
+
+export const sendFeedBack = async (data) => {
+    try{
+        const response = await axios.post(`${API_URL}/contact`,data,authHeaders());
         return response.data;
       }
     catch (error) {

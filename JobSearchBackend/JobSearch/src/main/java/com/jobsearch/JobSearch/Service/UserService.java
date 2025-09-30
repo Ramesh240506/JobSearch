@@ -7,6 +7,7 @@ import com.jobsearch.JobSearch.Entity.UserProfile;
 import com.jobsearch.JobSearch.Repository.JobPostRepository;
 import com.jobsearch.JobSearch.Repository.UserProfileRepo;
 import com.jobsearch.JobSearch.Repository.UserRepository;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -42,9 +43,12 @@ public class UserService {
     UserProfileRepo userProfileRepo;
 
     @Autowired
+    EmailService emailService;
+
+    @Autowired
     BCryptPasswordEncoder passwordEncoder;
 
-    public UserEntity registerUser(UserEntity user) {
+    public UserEntity registerUser(UserEntity user) throws MessagingException {
         if(userRepository.existsByEmail(user.getEmail()))
         {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Email already exists. Please login.");
@@ -58,6 +62,7 @@ public class UserService {
         userProfile.setUser(user);
 
         userProfileRepo.save(userProfile);
+        emailService.sendRegistrationEmail(user.getEmail(), user.getUsername());
         return savedUser;
     }
 

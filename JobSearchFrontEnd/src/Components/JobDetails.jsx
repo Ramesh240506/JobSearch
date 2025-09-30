@@ -73,7 +73,19 @@ const JobDetails = () => {
             ))}
         </ul>
       </div>
-
+      <div className="job-details-qualifications">
+        <h3 className="job-details-qualifications-title">Requirements</h3>
+        <ul className="job-details-qualifications-list">
+          {jobDetails?.requirements
+            ?.split(".")
+            .filter((requirement) => requirement.trim().length > 1)
+            .map((requirement, i) => (
+              <li key={i} className="job-details-qualification-item">
+                {requirement.trim()}
+              </li>
+            ))}
+        </ul>
+      </div>
       <div className="job-details-tags">
         <h3 className="job-details-tags-title">Technologies We Use</h3>
         <div className="job-details-tags-list">

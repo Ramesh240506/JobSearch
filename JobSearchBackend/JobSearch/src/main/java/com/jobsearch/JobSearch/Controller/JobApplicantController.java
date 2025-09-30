@@ -5,6 +5,7 @@ import com.jobsearch.JobSearch.Entity.JobApplication;
 import com.jobsearch.JobSearch.Entity.JobPostEntity;
 import com.jobsearch.JobSearch.Service.JobApplicantService;
 import com.jobsearch.JobSearch.Service.JobPostService;
+import jakarta.mail.MessagingException;
 import jdk.dynalink.linker.LinkerServices;
 import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,8 +79,7 @@ public class JobApplicantController {
 
     @PutMapping("/setappliedstatus/{jobid}/{id}")
     public void setAppliedStatus(@PathVariable Long jobid,@PathVariable Long id,
-                                 @RequestBody JobApplicant updateStatus)
-    {
+                                 @RequestBody JobApplicant updateStatus) throws MessagingException {
         jobApplicantService.setAppliedStatus(jobid,id,updateStatus);
     }
 

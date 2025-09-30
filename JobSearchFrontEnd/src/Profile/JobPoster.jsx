@@ -14,13 +14,13 @@ const JobPoster = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const size = 3;
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div>
       <div className="job-employer-dashboard">
         <h1>Hiring Dashboard</h1>
-        <nav style={{display:'flex',justifyContent:'space-between'}}>
+        <nav style={{ display: "flex", justifyContent: "space-between" }}>
           <ul className="dashboard-nav-tabs">
             <li
               className={activeTab === "overview" ? "active" : ""}
@@ -35,12 +35,22 @@ const JobPoster = () => {
               Job Listings
             </li>
           </ul>
-          <button onClick={()=>navigate('/postjob')} style={{background:"black",cursor:'pointer',color:"white",padding:"15px 30px",borderRadius:"7px"}}>Post Job</button>
+          <button
+            onClick={() => navigate("/postjob")}
+            style={{
+              background: "black",
+              cursor: "pointer",
+              color: "white",
+              padding: "15px 35px",
+              borderRadius: "7px",
+            }}
+          >
+            Post Job
+          </button>
         </nav>
         {activeTab === "joblistings" ? (
           <>
             <ApplicationDetails></ApplicationDetails>
-
           </>
         ) : (
           <div className="job-employer-overview">
@@ -56,10 +66,8 @@ const JobPoster = () => {
                 <h2>3</h2>
               </div>
             </div>
-          
           </div>
         )}
-        
       </div>
     </div>
   );
