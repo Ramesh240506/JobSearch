@@ -41,7 +41,7 @@ const Layout = () => {
         {<ProtectedRoute><ApplicationDetails></ApplicationDetails></ProtectedRoute>}></Route>
 
         <Route path='/jobapplicationform/:id' element={<ProtectedRoute allowedRoles={['SEEKER']}><JobApplicationForm></JobApplicationForm></ProtectedRoute>}></Route>
-        <Route path='/viewapplicants/:jobid' element={<ProtectedRoute><ViewApplicants></ViewApplicants></ProtectedRoute>}></Route>
+        <Route path='/viewapplicants/:jobid' element={<ProtectedRoute allowedRoles={['POSTER']}><ViewApplicants></ViewApplicants></ProtectedRoute>}></Route>
         
         <Route path='/searchresults/:keyword' element={<ProtectedRoute><SearchResults></SearchResults></ProtectedRoute>}></Route>
         <Route path='/userdetails' element={<ProtectedRoute><ProfileDetails></ProfileDetails></ProtectedRoute>}></Route>

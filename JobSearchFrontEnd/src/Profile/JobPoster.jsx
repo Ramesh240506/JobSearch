@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { FaRegFileAlt } from "react-icons/fa";
 import { TiTick } from "react-icons/ti";
@@ -9,13 +9,22 @@ import { useState } from "react";
 import "./JobPoster.css";
 import { Stack, Pagination } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { jobsCount } from "@/Services/JobService";
 const JobPoster = () => {
   const [activeTab, setActiveTab] = useState("overview");
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const size = 3;
+  const [jobs,setJobs] = useState([]);
+  const totalJobs = jobs.length;
+  const activeJobs = jobs.filter((job) => job.status === "active").length;
   const navigate = useNavigate();
 
+  const getJobs = async () => {
+    
+    const response = await jobsCount();
+    setJobs(response);
+  }
+  useEffect(() => {
+    getJobs();
+  }, []);
   return (
     <div>
       <div className="job-employer-dashboard">
@@ -57,13 +66,13 @@ const JobPoster = () => {
             <div className="job-employer-overview-item">
               <div>
                 <h4>Total Jobs</h4>
-                <h2>5</h2>
+                <h2>{totalJobs}</h2>
               </div>
             </div>
             <div className="job-employer-overview-item">
               <div>
                 <h4>Active Jobs</h4>
-                <h2>3</h2>
+                <h2>{activeJobs}</h2>
               </div>
             </div>
           </div>

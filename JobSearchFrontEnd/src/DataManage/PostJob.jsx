@@ -57,6 +57,45 @@ const PostJob = () => {
   });
 
   const navigate = useNavigate();
+
+  const handleReset = () => {
+    setJobFormData({
+      jobTitle: "",
+      companyName: "",
+      jobLocation: "",
+      jobType: "",
+      jobDescription: "",
+      qualifications: "",
+      requirements: "",
+      experienceLevel: "",
+      education: "",
+      skills: "",
+      currency: "",
+      minSalary: "",
+      maxSalary: "",
+      benefits: "",
+      workMode: "",
+      deadline: "",
+    });
+    setErrors({
+      jobTitle: "",
+      companyName: "",
+      jobLocation: "",
+      jobType: "",
+      jobDescription: "",
+      qualifications: "",
+      requirements: "",
+      experienceLevel: "",
+      education: "",
+      skills: "",
+      currency: "",
+      minSalary: "",
+      maxSalary: "",
+      benefits: "",
+      workMode: "",
+      deadline: "",
+    });
+  }
   const validateForm = () => {
     const errorsCopy = { ...errors };
     let isValid = true;
@@ -93,10 +132,6 @@ const PostJob = () => {
   };
 
   const onInputChange = (e) => {
-    // e.target refers to the input element
-    // id is the name of the input field, value is the input value
-    // setJobFormData updates the state with the new value for the input field
-
     const { id, value } = e.target;
     setJobFormData((prevData) => ({
       ...prevData,
@@ -113,9 +148,7 @@ const PostJob = () => {
     if (validateForm()) {
       try {
         await createJob(jobFormData);
-        // setJobFormData(response.data);
-        alert("Job posted successfully!");
-        navigate("/jobhome"); // Redirect to the jobs page after successful post
+        navigate("/jobhome"); 
         setJobFormData({
           // Reset form data
           jobTitle: "",
@@ -138,7 +171,6 @@ const PostJob = () => {
         alert("Failed to post job. Please try again later.");
       }
     } else {
-      // <PositionedSnackbar></PositionedSnackbar>
       setSnackbar(true);
     }
   };
@@ -458,7 +490,7 @@ const PostJob = () => {
           >
             Post Job
           </button>
-          <button type="reset" className="postjob-reset-button">
+          <button onClick={()=>handleReset()} type="reset" className="postjob-reset-button">
             Reset Form
           </button>
         </div>

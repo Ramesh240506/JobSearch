@@ -198,13 +198,7 @@ export default function ForgotPasswordOTP() {
             >
               {loading ? "Verifying..." : "Verify OTP"}
             </button>
-            <button
-              onClick={handleResendOtp}
-              className="linkButton"
-              disabled={resendDisabled}
-            >
-              {resendDisabled ? `Resend OTP in ${resendTimer}s` : "Resend OTP"}
-            </button>
+          
 
             {/* <button onClick={() => setStep(1)} className="backButton">
               ← Back

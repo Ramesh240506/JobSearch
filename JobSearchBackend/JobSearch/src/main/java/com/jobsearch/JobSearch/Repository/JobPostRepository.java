@@ -45,10 +45,12 @@ public interface JobPostRepository extends JpaRepository<JobPostEntity,Long> {
     Page<JobPostEntity> findByStatusAndWorkMode(String active, String mode, Pageable pageable);
 
     Page<JobPostEntity> findByUser(UserEntity user, Pageable pageable);
+    List<JobPostEntity> findByUser(UserEntity user);
 
     @Query("select e from JobPostEntity e where " +
             "lower(e.jobTitle) like lower(concat('%',:keyword,'%')) or " +
             "lower(e.companyName) like lower(concat('%',:keyword,'%'))")
     Page<JobPostEntity> searchJobsGlobal(String keyword, Pageable pageable);
 
+    JobPostEntity findByIdAndUser(Long jobid, UserEntity user);
 }

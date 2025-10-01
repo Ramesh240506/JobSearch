@@ -103,6 +103,7 @@
 
 .form-group.visible {
   opacity: 1;
+  
   max-height: 100px;
   transition: all 0.3s ease;
 }
@@ -130,7 +131,9 @@
   position: absolute;
   top: 15px;
   left: 20px;
-  color: #999;
+  /* color: #999; */
+  color:white;
+  
   font-size: 16px;
   pointer-events: none;
   transition: all 0.3s ease;
@@ -146,7 +149,7 @@
   padding: 0 8px;
 }
 
-.submit-btn {
+.login-submit-btn {
   width: 100%;
   padding: 15px;
   background: linear-gradient(135deg, #ff8c00 0%, #ff6600 100%);
@@ -160,12 +163,12 @@
   margin-top: 10px;
 }
 
-.submit-btn:hover {
+.login-submit-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(255, 140, 0, 0.3);
 }
 
-.submit-btn:active {
+.login-submit-btn:active {
   transform: translateY(0);
 }
 
@@ -212,3 +215,4 @@
   font-size: 14px;
   margin-top: 5px;
 }
+

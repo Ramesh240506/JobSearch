@@ -16,9 +16,9 @@ import { useNavigate } from "react-router-dom";
 
 import { formatDistanceToNow } from "date-fns";
 import { NavigationOff } from "lucide-react";
+import { CgSandClock } from "react-icons/cg";
+import Footer from "./Footer";
 const JobHome = () => {
- 
-
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
@@ -27,21 +27,18 @@ const JobHome = () => {
   const [role, setRole] = useState("");
   const [featuredJobs, setFeaturedJobs] = useState([]);
 
-
-
   const handleApply = (id) => {
     console.log("Job Id:", id);
     navigate(`/jobdetails/${id}`);
   };
 
   const handleSearch = () => {
-  const keyword = searchTerm.trim();
-  if (!keyword) {
-    alert("Please enter a keyword to search.");
-    return;
-  }
-  navigate(`/searchresults/${keyword}`);
-};
+    const keyword = searchTerm.trim();
+    if (!keyword) {
+      return;
+    }
+    navigate(`/searchresults/${keyword}`);
+  };
 
   const getFeaturedJobs = async () => {
     const response = await getAllJobs();
@@ -96,16 +93,12 @@ const JobHome = () => {
           {featuredJobs.slice(0, 3).map((job) => (
             <div className="job-finderpage-job-listvalues" key={job.id}>
               <div className="job-finderpage-companyname">
-                {/* <div>
-                  <img src={"/public/vite.svg"} alt="no"></img>
-                </div> */}
                 <div style={{ width: "100%" }}>
                   <div className="job-finderpage-bookmark">
                     <div>
                       <h4>{job.jobTitle}</h4>
                       <p>{job.companyName}</p>
                     </div>
-                 
                   </div>
                 </div>
               </div>
@@ -117,10 +110,14 @@ const JobHome = () => {
                 <PiSuitcase />
                 <p> {job.jobType}</p>
               </div>
-              <h5>
-                $  {job.minSalary}-{job.maxSalary}
-              </h5>
-              <p>
+              <p style={{ display: "flex", alignItems: "center" }}>
+                {job.currency === "usd" ? "$" : "R"}
+                <span style={{ marginLeft: "10px" }}>
+                  {job.minSalary}-{job.maxSalary}
+                </span>
+              </p>
+
+              <p style={{ display: "flex", alignItems: "center", gap: "5px" }}>
                 <IoMdTime />
                 {job.postedAt &&
                   formatDistanceToNow(new Date(job.postedAt), {
@@ -128,15 +125,21 @@ const JobHome = () => {
                   })}
               </p>
               <p>
-                {/* <h1>Expire At</h1> */}
-                
-                <span>⏳ {job.deadline &&
-                  formatDistanceToNow(new Date(job.deadline), { addSuffix: true })}</span>
+                <span style={{ marginRight: "5px" }}>
+                  <CgSandClock />
+                </span>
+                {job.deadline &&
+                  formatDistanceToNow(new Date(job.deadline), {
+                    addSuffix: true,
+                  })}
               </p>
               <div className="job-finderpage-job-skills">
-                {job.skills.split(",").slice(0, 3).map((tag) => (
-                  <button key={tag}>{tag}</button>
-                ))}
+                {job.skills
+                  .split(",")
+                  .slice(0, 3)
+                  .map((tag) => (
+                    <button key={tag}>{tag}</button>
+                  ))}
               </div>
 
               <button
@@ -165,64 +168,18 @@ const JobHome = () => {
             >
               Browse Jobs
             </button>
-            <button disabled={role === "SEEKER"} onClick={() => navigate("/postjob")} className="cta-post">
+            <button
+              disabled={role === "SEEKER"}
+              onClick={() => navigate("/postjob")}
+              className="cta-post"
+            >
               Post a Job
             </button>
           </div>
         </section>
 
         {/* Footer Section */}
-        <footer className="footer-section">
-          <div className="footer-content">
-            <div className="footer-logo">
-              <BsSuitcaseLg />
-              <h2>JobFlow</h2>
-            </div>
-            <div className="footer-links">
-              <h3>Quick Links</h3>
-              <ul>
-                <li>About Us</li>
-                <li>Contact Us</li>
-                <li>Privacy Policy</li>
-                <li>Terms of Service</li>
-              </ul>
-            </div>
-            <div className="footer-links">
-              <h3>Resources</h3>
-              <ul>
-                <li>Blog</li>
-                <li>Help Center</li>
-                <li>FAQs</li>
-                <li>Career Advice</li>
-              </ul>
-            </div>
-            <div className="footer-links">
-              <h3>For Employers</h3>
-              <ul>
-                <li>Post a Job</li>
-                <li>Employer Dashboard</li>
-                <li>Pricing Plans</li>
-                <li>Success Stories</li>
-              </ul>
-            </div>
-            <div className="footer-social">
-              <h3>Follow Us</h3>
-              <div className="social-icons">
-                <ul>
-                  <li>
-                    <FaInstagram />
-                  </li>
-                  <li>
-                    <FaFacebook />
-                  </li>
-                  <li>
-                    <FaTwitter />
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </div>
   );

@@ -45,9 +45,7 @@ public class JobPostService {
 
     }
 
-//    public Page<JobPostEntity> searchResults(String keyword) {
-//        return jobPostRepo.searchJobs(keyword);
-//    }
+
 
 
     public Page<JobPostEntity> getJobsByPaginate(int page, int size,String sortBy,String mode) {
@@ -84,5 +82,12 @@ public class JobPostService {
         }
         else
             return jobPostRepo.findAll(pageable);
+    }
+
+    public List<JobPostEntity> jobsCount() {
+        String email=SecurityContextHolder.getContext().getAuthentication().getName();
+        UserEntity user=userRepository.findByEmail(email);
+
+        return jobPostRepo.findByUser(user);
     }
 }

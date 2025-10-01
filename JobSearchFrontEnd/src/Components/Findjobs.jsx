@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Findjobs.css";
-import { CiLocationOn, CiBookmark } from "react-icons/ci";
+import { CiLocationOn} from "react-icons/ci";
 import { PiSuitcase } from "react-icons/pi";
 import { IoMdTime } from "react-icons/io";
-import { FaBookmark } from "react-icons/fa6";
 import { formatDistanceToNow } from "date-fns";
 import { paginate } from "@/Services/JobService";
 import { useNavigate } from "react-router-dom";
 import { Pagination, Stack } from "@mui/material";
-
+import { CgSandClock } from "react-icons/cg";
 const Findjobs = () => {
   
   const navigate = useNavigate();
@@ -19,7 +18,7 @@ const Findjobs = () => {
   const [filter, setFilter] = useState("");
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
-  const size = 2;
+  const size = 6;
 
   const [totalJobs, setTotalJobs] = useState(0);
 
@@ -33,7 +32,7 @@ const Findjobs = () => {
   const handleSearch = () => {
     const keyword = searchTerm.trim();
     if (!keyword) {
-      alert("Please enter a keyword to search.");
+      // alert("Please enter a keyword to search.");
       return;
     }
     navigate(`/searchresults/${keyword}`);
@@ -126,10 +125,14 @@ const Findjobs = () => {
                 <PiSuitcase />
                 <p> Full Time</p>
               </div>
-              <h5>
-                {job.minSalary}-{job.maxSalary}
-              </h5>
-              <p>
+              <p style={{ display: "flex", alignItems: "center"}}>
+                 {job.currency === "usd" ? "$" : "R"} 
+                <span style={{marginLeft: "10px"}}>
+                  {job.minSalary}-
+                {job.maxSalary}
+                  </span>
+              </p>
+              <p style={{ display: "flex", alignItems: "center", gap: "5px"}}>
                 <IoMdTime />
                 {job.postedAt &&
                   formatDistanceToNow(new Date(job.postedAt), {
@@ -138,7 +141,9 @@ const Findjobs = () => {
               </p>
               
                 <div>
-                  ⏳ 
+                  <span style={{marginRight: "5px"}}>
+                    <CgSandClock />
+                    </span>
                   {job.deadline && 
                     formatDistanceToNow(new Date(job.deadline), {
                       addSuffix: true,
@@ -166,8 +171,6 @@ const Findjobs = () => {
           ))}
           {/* <div className="job-finderpage-job-listvalues"> */}
         </div>
-      </div>
-
       <Stack
         style={{
           backgroundColor: "#F2F4F8",
@@ -190,6 +193,8 @@ const Findjobs = () => {
           shape="rounded"
         />
       </Stack>
+      </div>
+
     </div>
   );
 };

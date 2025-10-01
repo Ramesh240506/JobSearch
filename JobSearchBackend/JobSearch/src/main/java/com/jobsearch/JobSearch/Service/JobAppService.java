@@ -4,6 +4,7 @@ import com.jobsearch.JobSearch.Entity.JobApplicant;
 import com.jobsearch.JobSearch.Entity.JobApplication;
 import com.jobsearch.JobSearch.Entity.JobPostEntity;
 import com.jobsearch.JobSearch.Entity.UserEntity;
+import com.jobsearch.JobSearch.Repository.JobApplicantRepo;
 import com.jobsearch.JobSearch.Repository.JobApplicationRepo;
 import com.jobsearch.JobSearch.Repository.JobPostRepository;
 import com.jobsearch.JobSearch.Repository.UserRepository;
@@ -22,10 +23,14 @@ public class JobAppService {
     @Autowired
     JobApplicationRepo jobApplicationRepo;
 
-
+    @Autowired
+    JobApplicantRepo jobApplicantRepo;
 
     @Autowired
     JobPostService jobPostService;
+
+    @Autowired
+    JobPostRepository jobPostRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -44,7 +49,10 @@ public class JobAppService {
     }
 
     public List<JobApplication> getApplicantDetails(Long jobid) {
-        JobPostEntity jobPostEntity=jobPostService.getJobById(jobid);
+        String email=SecurityContextHolder.getContext().getAuthentication().getName();
+        UserEntity user=userRepository.findByEmail(email);
+
+        JobPostEntity jobPostEntity=jobPostRepository.findByIdAndUser(jobid,user);
 
         return jobApplicationRepo.findByJobPost(jobPostEntity);
     }

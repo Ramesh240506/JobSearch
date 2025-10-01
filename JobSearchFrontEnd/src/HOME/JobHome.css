@@ -1,6 +1,10 @@
 *{
     box-sizing: border-box;
 }
+.container1 p
+{
+  font-weight: 500;
+}
 .container1
 {
     /* height: 100vh; */
@@ -15,9 +19,8 @@
 .hero1
 {
     text-align: center;
-    padding: 80px;
-    font-size: 34px;
-    /* font-weight: 600; */
+    padding: 40px;
+    font-size: 32px;
     font-family: 'Poppins', sans-serif;
 }
 .hero1 p

@@ -304,3 +304,14 @@ export const sendFeedBack = async (data) => {
         throw error;
     }
 }
+
+export const jobsCount = async () => {
+    try{
+        const response = await axios.get(`${API_URL}/getjobscount`,authHeaders());
+        return response.data;
+      }
+    catch (error) {
+        console.error("Error fetching job details:", error);
+        throw error;
+    }
+}

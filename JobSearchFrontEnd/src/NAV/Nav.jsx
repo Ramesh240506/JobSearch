@@ -70,9 +70,6 @@ const Nav = () => {
       <NavLink to={"/findjobs"} className={({ isActive }) => isActive ? "job-nav-activepage" : "job-nav-line"} onClick={() => setmenuBar(false)}>
         <li>Find Jobs</li>
       </NavLink>
-      <NavLink to={"/favouritejobs"} className={({ isActive }) => isActive ? "job-nav-activepage" : "job-nav-line"} onClick={() => setmenuBar(false)}>
-        <li>Favourites</li>
-      </NavLink>
       <NavLink to={"/contact"} className={({ isActive }) => isActive ? "job-nav-activepage" : "job-nav-line"} onClick={() => setmenuBar(false)}>
         <li>Contact</li>
       </NavLink>

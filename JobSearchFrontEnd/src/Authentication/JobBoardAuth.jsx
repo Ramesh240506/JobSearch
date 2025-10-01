@@ -266,7 +266,7 @@ const JobBoardAuth = () => {
             {/* Form-level error (e.g., login failure) */}
             {errors.form && <div className="form-error">{errors.form}</div>}
 
-            <button type="submit" onClick={handleSubmit} className="submit-btn">
+            <button type="submit" onClick={handleSubmit} className="login-submit-btn">
               {isLoginMode ? "Sign In" : "Create Account"}
             </button>
 

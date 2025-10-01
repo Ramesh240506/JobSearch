@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
 import './Contact.css'
 import { sendFeedBack } from '@/Services/JobService';
+import Footer from '@/HOME/Footer';
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -171,7 +173,7 @@ export default function Contact() {
                     </div>
                     <div className="contact-details">
                       <p>Email</p>
-                      <p>support@jobboard.com</p>
+                      <p>jobascend@gmail.com</p>
                     </div>
                   </div>
 
@@ -200,6 +202,7 @@ export default function Contact() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

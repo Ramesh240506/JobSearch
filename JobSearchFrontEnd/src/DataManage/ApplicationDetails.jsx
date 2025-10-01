@@ -20,25 +20,7 @@ const ApplicationDetails = () => {
   const [totalPages, setTotalPages] = useState(1);
   const size = 1;
 
-  const getApplicationsByFilter = async (status) => {
-    try {
-      const response = await getApplicationsByStatus(status);
-      const applications = response.map((job) => ({
-        id: job.id,
-        jobTitle: job.jobTitle,
-        companyName: job.companyName,
-        jobLocation: job.jobLocation,
-        minsalary: job.minSalary,
-        maxsalary: job.maxSalary,
-        postedAt: formatDistanceToNow(new Date(job.postedAt), {
-          addSuffix: true,
-        }),
-      }));
-      setApplications(applications);
-    } catch (error) {
-      console.error("Failed to fetch job applications", error);
-    }
-  };
+
 
   const getApplications = async () => {
     try {

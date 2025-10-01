@@ -77,7 +77,7 @@ public class EmailService {
     public void sendFeedBack(FeedBack feedBack) {
 
         SimpleMailMessage message=new SimpleMailMessage();
-        message.setTo("rameshaathip@gmail.com");
+        message.setTo("teamjobascend@gmail.com");
         message.setSubject(feedBack.getSubject());
         message.setReplyTo(feedBack.getEmail());
 

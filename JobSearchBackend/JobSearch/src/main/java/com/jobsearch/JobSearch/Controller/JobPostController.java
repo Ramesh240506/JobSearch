@@ -52,4 +52,10 @@ public class JobPostController {
     {
         return postService.getJobsByPaginate(page,size,sortBy,mode);
     }
+
+    @GetMapping("/getjobscount")
+    public List<JobPostEntity> jobsCount()
+    {
+        return postService.jobsCount();
+    }
 }
