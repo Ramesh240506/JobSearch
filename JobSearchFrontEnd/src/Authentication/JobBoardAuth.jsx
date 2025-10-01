@@ -37,6 +37,18 @@ const JobBoardAuth = () => {
 
     if (!isLoginMode) {
       // Registration validation
+
+      if(formData.username.length<3)
+      {
+        setErrors({ username: "Username should be at least 3 characters" });
+        return;
+      }
+      if(formData.email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)===null)
+      {
+        setErrors({ email: "Invalid email format" });
+        return;
+      }
+
       if (formData.password !== formData.confirmPassword) {
         setErrors({ confirmPassword: "Passwords do not match!" });
         return;
@@ -47,11 +59,6 @@ const JobBoardAuth = () => {
         return;
       }
       
-      if(formData.email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)===null)
-      {
-        setErrors({ email: "Invalid email format" });
-        return;
-      }
 
       registerUser({
         username: formData.username,

@@ -129,8 +129,8 @@ export default function ForgotPasswordOTP() {
           <div className="iconCircle">
             <span className="lockIcon">🔒</span>
           </div>
-          <h1 className="title">Forgot Password</h1>
-          <p className="subtitle">
+          <h1 style={{color:'white'}} className="title">Forgot Password</h1>
+          <p style={{color:"white"}} className="subtitle">
             {step === 1 && "Enter your email to receive OTP"}
             {step === 2 && "Enter the 6-digit code sent to your email"}
             {step === 3 && "Create your new password"}

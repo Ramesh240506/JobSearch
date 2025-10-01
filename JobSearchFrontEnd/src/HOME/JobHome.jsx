@@ -168,13 +168,16 @@ const JobHome = () => {
             >
               Browse Jobs
             </button>
+            {
+              role === "POSTER" && 
             <button
-              disabled={role === "SEEKER"}
+              disabled={role === "POSTER"}
               onClick={() => navigate("/postjob")}
               className="cta-post"
             >
               Post a Job
             </button>
+            }
           </div>
         </section>
 

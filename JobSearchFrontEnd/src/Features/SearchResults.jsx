@@ -11,38 +11,56 @@ import "./SearchResults.css";
 import { Pagination } from "@mui/material";
 import { Stack } from "@mui/material";
 import { CgSandClock } from "react-icons/cg";
+
 const SearchResults = () => {
-  const { keyword } = useParams();
+  const {keyword} = useParams();
+  const [searchTerm, setSearchTerm] = useState("");
+
   const [searchresults, setSearchResults] = useState([]);
   const navigate = useNavigate();
   const [role, setRole] = useState("");
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
-  const size = 1;
+  const [lastSearched, setLastSearched] = useState("");
+  const size = 6;
   const handleApply = (id) => {
     console.log("Job Id:", id);
     navigate(`/jobdetails/${id}`);
   };
 
-  const fetchSearchResults = async () => {
-    const response = await getSearchResults(page, size, keyword);
+  const fetchSearchResults = async (term = searchTerm) => {
+    
+    const response = await getSearchResults(page, size, term);
     setSearchResults(response.content);
     setTotalPages(response.totalPages);
-
+    setLastSearched(term);
     console.log("Search Results:", response);
   };
 
+  
   useEffect(() => {
     const storedRole = localStorage.getItem("role");
+    setSearchTerm(keyword);
     setRole(storedRole);
-    fetchSearchResults();
-  }, [keyword, page]);
+    setLastSearched(keyword);
+    fetchSearchResults(keyword);
+  }, [keyword,page]);
   return (
     <div>
       <div className="jobsearch-results">
+        <div className="job-search-bar">
+          <input
+            type="text"
+            placeholder="Search Jobs"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+           
+          />
+          <button onClick={()=>fetchSearchResults(searchTerm)}>Search</button>
+        </div>
         {
           searchresults.length !==0 &&
-        <h2 style={{ marginTop: "10px", textAlign: "center" }}>Results for  {keyword}</h2>
+        <h2 style={{ marginTop: "10px", textAlign: "center" }}>Results for  {lastSearched}</h2>
         }
         {searchresults.length === 0 && (
           <h2 style={{marginTop:"40px",textAlign: "center" }}>No Results Found</h2>
@@ -113,7 +131,7 @@ const SearchResults = () => {
       {searchresults.length !== 0 && (
         <Stack
           style={{
-            marginTop: "-150px",
+            marginTop: "-110px",
             paddingBottom: "20px",
           }}
         >

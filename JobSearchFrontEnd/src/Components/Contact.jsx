@@ -79,17 +79,17 @@ export default function Contact() {
       
 
       <div className="contact-container">
-        <div className="max-width">
-          <div className="header">
+        <div className="contact-max-width">
+          <div className="contact-header">
             <h1>Get In Touch</h1>
             <p>
               Have questions about our job board? We're here to help employers and job seekers connect.
             </p>
           </div>
 
-          <div className="grid">
+          <div className="contact-grid">
             <div>
-              <div className="card">
+              <div className="contact-card">
                 <h2>Send us a message</h2>
                 
                 {submitted && (
@@ -99,7 +99,7 @@ export default function Contact() {
                   </div>
                 )}
 
-                <div className="form-group">
+                <div className="contact-form-group">
                   <label htmlFor="name">Full Name *</label>
                   <input
                     type="text"
@@ -113,7 +113,7 @@ export default function Contact() {
                   {errors.name && <p className="error-text">{errors.name}</p>}
                 </div>
 
-                <div className="form-group">
+                <div className="contact-form-group">
                   <label htmlFor="email">Email Address *</label>
                   <input
                     type="email"
@@ -127,7 +127,7 @@ export default function Contact() {
                   {errors.email && <p className="error-text">{errors.email}</p>}
                 </div>
 
-                <div className="form-group">
+                <div className="contact-form-group">
                   <label htmlFor="subject">Subject *</label>
                   <input
                     type="text"
@@ -141,7 +141,7 @@ export default function Contact() {
                   {errors.subject && <p className="error-text">{errors.subject}</p>}
                 </div>
 
-                <div className="form-group">
+                <div className="contact-form-group">
                   <label htmlFor="message">Message *</label>
                   <textarea
                     id="message"
@@ -163,7 +163,7 @@ export default function Contact() {
             </div>
 
             <div className="contact-info">
-              <div className="card">
+              <div className="contact-card">
                 <h3>Contact Information</h3>
                 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>

@@ -32,14 +32,14 @@
     padding-right: 120px;
     font-size: 22px;
 }
-.jobsearch-bar
-{
-    max-width: 80%;
-    margin-left: 120px;
-    border-radius: 20px;
-    padding: 60px;
-    background-color: #ffffff;
+.jobsearch-bar {
+  max-width: 80%;
+  margin: 0 auto;   /* center horizontally instead of margin-left */
+  border-radius: 20px;
+  padding: 60px;
+  background-color: #ffffff;
 }
+
 .jobsearch-bar input
 {
     width: 100%;
@@ -273,3 +273,4 @@
     padding: 0;
   }
 }
+

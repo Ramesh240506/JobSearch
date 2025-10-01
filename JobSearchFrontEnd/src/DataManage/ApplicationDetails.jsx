@@ -18,7 +18,7 @@ const ApplicationDetails = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
-  const size = 1;
+  const size = 5;
 
 
 
