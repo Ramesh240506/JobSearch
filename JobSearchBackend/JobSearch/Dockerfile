@@ -1,15 +1,16 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:17-jdk-slim
-
-# Set the working directory inside the container
+# Stage 1: Build the application using Maven
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copy the jar built by Maven/Gradle
-COPY target/*.jar app.jar
+# Stage 2: Run the application with JDK
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 
-# Expose port (Render will assign PORT dynamically)
-ENV PORT 8080
+# Expose port (Render will assign dynamically)
+ENV PORT=8080
 EXPOSE $PORT
 
-# Run the jar file
 ENTRYPOINT ["java","-jar","app.jar"]
