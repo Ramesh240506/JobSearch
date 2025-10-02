@@ -38,13 +38,15 @@ const JobBoardAuth = () => {
     if (!isLoginMode) {
       // Registration validation
 
-      if(formData.username.length<3)
-      {
+      if (formData.username.length < 3) {
         setErrors({ username: "Username should be at least 3 characters" });
         return;
       }
-      if(formData.email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)===null)
-      {
+      if (
+        formData.email.match(
+          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+        ) === null
+      ) {
         setErrors({ email: "Invalid email format" });
         return;
       }
@@ -58,7 +60,6 @@ const JobBoardAuth = () => {
         setErrors({ password: "Password should be at least 8 characters" });
         return;
       }
-      
 
       registerUser({
         username: formData.username,
@@ -67,6 +68,13 @@ const JobBoardAuth = () => {
         role: formData.role,
       })
         .then(() => {
+          // Show a message first
+          alert("Registration successful! Please login.");
+
+          // Switch to login mode
+          setIsLoginMode(true);
+
+          // Reset form
           setFormData({
             username: "",
             email: "",
@@ -74,10 +82,10 @@ const JobBoardAuth = () => {
             confirmPassword: "",
             role: "SEEKER",
           });
-          setIsLoginMode(true);
+
         })
         .catch(() => {
-          setErrors({ form: "Email already exists ! Please login" });
+          setErrors({ form: "Email already exists! Please login" });
         });
     } else {
       // Login
@@ -120,38 +128,31 @@ const JobBoardAuth = () => {
 
   useEffect(() => {
     setLoading(true);
-    const token=localStorage.getItem("accessToken");
-    
-    if(token)
-    {
-      try
-      {
-      const payload=JSON.parse(atob(token.split('.')[1]));
-      const isExpired=Date.now()/1000>=payload.exp;
-      if(!isExpired)
-      {
-        navigate("/jobhome");
-      }
-      else
-      {
+    const token = localStorage.getItem("accessToken");
+
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split(".")[1]));
+        const isExpired = Date.now() / 1000 >= payload.exp;
+        if (!isExpired) {
+          navigate("/jobhome");
+        } else {
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("role");
+        }
+      } catch (e) {
+        console.log(e);
         localStorage.removeItem("accessToken");
         localStorage.removeItem("role");
       }
-    } catch (e) {
-      console.log(e);
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("role");
     }
-  }
     setLoading(false);
-  },[]);
+  }, []);
 
-  if(loading)
-  {
+  if (loading) {
     return <div>Loading...</div>;
   }
   return (
-
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
@@ -273,7 +274,11 @@ const JobBoardAuth = () => {
             {/* Form-level error (e.g., login failure) */}
             {errors.form && <div className="form-error">{errors.form}</div>}
 
-            <button type="submit" onClick={handleSubmit} className="login-submit-btn">
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              className="login-submit-btn"
+            >
               {isLoginMode ? "Sign In" : "Create Account"}
             </button>
 

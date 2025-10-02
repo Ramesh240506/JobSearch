@@ -8,8 +8,11 @@ import com.jobsearch.JobSearch.dto.FeedBack;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,11 +32,24 @@ public class UserController {
     EmailService emailService;
 
     @PostMapping("/register")
-    public UserEntity registerUser(@RequestBody UserEntity user) throws MessagingException {
-
-
-        return userService.registerUser(user);
+    public ResponseEntity<?> registerUser(@RequestBody UserEntity user) {
+        try {
+            UserEntity savedUser = userService.registerUser(user);
+            return ResponseEntity.ok(Map.of(
+                    "message", "Registration successful!",
+                    "userId", savedUser.getId()
+            ));
+        } catch (ResponseStatusException e) {
+            return ResponseEntity.status(e.getStatusCode()).body(Map.of(
+                    "message", e.getReason()
+            ));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
+                    "message", "Something went wrong"
+            ));
+        }
     }
+
 
     @PostMapping("/login")
     public Map<String,String> loginUser(@RequestBody UserEntity user)
