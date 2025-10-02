@@ -1,6 +1,5 @@
 package com.jobsearch.JobSearch.Controller;
 
-import com.jobsearch.JobSearch.Entity.JobApplicant;
 import com.jobsearch.JobSearch.Entity.JobApplication;
 import com.jobsearch.JobSearch.Service.JobAppService;
 import org.springframework.beans.factory.annotation.Autowired;

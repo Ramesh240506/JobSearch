@@ -2,8 +2,6 @@ package com.jobsearch.JobSearch.Controller;
 
 import com.jobsearch.JobSearch.Entity.UserProfile;
 import com.jobsearch.JobSearch.Service.UserProfileService;
-import com.jobsearch.JobSearch.Service.UserService;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

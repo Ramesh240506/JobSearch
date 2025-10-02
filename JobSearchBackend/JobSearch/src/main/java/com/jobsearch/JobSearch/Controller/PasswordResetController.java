@@ -3,7 +3,6 @@ package com.jobsearch.JobSearch.Controller;
 import com.jobsearch.JobSearch.Service.PasswordResetService;
 import com.jobsearch.JobSearch.dto.ResetPwdRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

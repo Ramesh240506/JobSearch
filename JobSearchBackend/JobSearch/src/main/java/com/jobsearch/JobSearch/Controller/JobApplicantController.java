@@ -4,16 +4,10 @@ import com.jobsearch.JobSearch.Entity.JobApplicant;
 import com.jobsearch.JobSearch.Entity.JobApplication;
 import com.jobsearch.JobSearch.Entity.JobPostEntity;
 import com.jobsearch.JobSearch.Service.JobApplicantService;
-import com.jobsearch.JobSearch.Service.JobPostService;
 import jakarta.mail.MessagingException;
-import jdk.dynalink.linker.LinkerServices;
-import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authorization.method.AuthorizeReturnObject;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

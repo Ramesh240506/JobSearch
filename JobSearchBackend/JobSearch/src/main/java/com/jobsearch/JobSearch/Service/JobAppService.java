@@ -1,6 +1,5 @@
 package com.jobsearch.JobSearch.Service;
 
-import com.jobsearch.JobSearch.Entity.JobApplicant;
 import com.jobsearch.JobSearch.Entity.JobApplication;
 import com.jobsearch.JobSearch.Entity.JobPostEntity;
 import com.jobsearch.JobSearch.Entity.UserEntity;
@@ -10,7 +9,6 @@ import com.jobsearch.JobSearch.Repository.JobPostRepository;
 import com.jobsearch.JobSearch.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

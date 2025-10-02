@@ -1,6 +1,5 @@
 package com.jobsearch.JobSearch.Repository;
 
-import com.jobsearch.JobSearch.Entity.JobApplication;
 import com.jobsearch.JobSearch.Entity.JobPostEntity;
 import com.jobsearch.JobSearch.Entity.UserEntity;
 import org.springframework.data.domain.Page;

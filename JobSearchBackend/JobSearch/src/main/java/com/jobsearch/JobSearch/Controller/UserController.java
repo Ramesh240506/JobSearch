@@ -1,6 +1,5 @@
 package com.jobsearch.JobSearch.Controller;
 
-import com.jobsearch.JobSearch.Entity.JobApplication;
 import com.jobsearch.JobSearch.Entity.JobPostEntity;
 import com.jobsearch.JobSearch.Entity.UserEntity;
 import com.jobsearch.JobSearch.Service.EmailService;

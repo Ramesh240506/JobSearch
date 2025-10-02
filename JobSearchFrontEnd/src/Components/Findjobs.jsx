@@ -8,6 +8,7 @@ import { paginate } from "@/Services/JobService";
 import { useNavigate } from "react-router-dom";
 import { Pagination, Stack } from "@mui/material";
 import { CgSandClock } from "react-icons/cg";
+import CircularIndeterminate from "@/HOME/CircularIndeterminate";
 const Findjobs = () => {
   
   const navigate = useNavigate();
@@ -19,8 +20,8 @@ const Findjobs = () => {
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const size = 6;
-
   const [totalJobs, setTotalJobs] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   
 
@@ -53,9 +54,18 @@ const Findjobs = () => {
   useEffect(() => {
     const storedRole = localStorage.getItem("role");
     setRole(storedRole);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
     fetchJobs();
+    return () => clearTimeout(timer);
   }, [sortBy, page, filter]);
 
+
+  if(loading)
+  {
+    return <CircularIndeterminate/>
+  }
   return (
     <div>
       <div className="job-finderpage">

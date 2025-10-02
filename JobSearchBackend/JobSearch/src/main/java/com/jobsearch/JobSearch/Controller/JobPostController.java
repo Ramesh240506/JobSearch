@@ -1,12 +1,9 @@
 package com.jobsearch.JobSearch.Controller;
 
 import com.jobsearch.JobSearch.Entity.JobPostEntity;
-import com.jobsearch.JobSearch.Entity.UserEntity;
 import com.jobsearch.JobSearch.Service.JobPostService;
-import com.jobsearch.JobSearch.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { getUserProfile } from "@/Services/JobService";
 import JobSeeker from "@/Profile/JobSeeker";
 import JobPoster from "./JobPoster";
+import CircularIndeterminate from "@/HOME/CircularIndeterminate";
 const UserProfile = () => {
   const navigate = useNavigate();
   const [userdetails, setUserDetails] = useState({
@@ -17,21 +18,33 @@ const UserProfile = () => {
     experience: "",
     bio: "",
   });
+  const [loading, setLoading] = useState(true);
   const [role, setRole] = useState();
+  const fetchUserDetails = async () => {
+    try {
+      const response = await getUserProfile();
+      setUserDetails(response);
+      console.log("User details fetched:", response);
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
+  };
+
   useEffect(() => {
     const storedRole = localStorage.getItem("role");
     setRole(storedRole);
-    const fetchUserDetails = async () => {
-      try {
-        const response = await getUserProfile();
-        setUserDetails(response);
-        console.log("User details fetched:", response);
-      } catch (error) {
-        console.error("Error fetching user details:", error);
-      }
-    };
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 700);
     fetchUserDetails();
+    return () => clearTimeout(timer);
   }, []);
+
+  if(loading)
+  {
+    return <CircularIndeterminate/>
+  }
+
   return (
     <div className="user-profile-container">
       <div className="profile-details">

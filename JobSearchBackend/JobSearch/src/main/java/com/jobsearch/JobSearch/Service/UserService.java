@@ -1,6 +1,5 @@
 package com.jobsearch.JobSearch.Service;
 
-import com.jobsearch.JobSearch.Entity.JobApplication;
 import com.jobsearch.JobSearch.Entity.JobPostEntity;
 import com.jobsearch.JobSearch.Entity.UserEntity;
 import com.jobsearch.JobSearch.Entity.UserProfile;
@@ -20,9 +19,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
-import javax.naming.ldap.PagedResultsControl;
-import java.util.List;
 
 @Service
 public class UserService {

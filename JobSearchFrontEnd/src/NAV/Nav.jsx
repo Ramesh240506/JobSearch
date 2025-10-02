@@ -16,7 +16,7 @@ const Nav = () => {
       <div className="job-nav">
         <div className="job-navbar-menubar">
         <div className="job-title">
-          <h1>Job Flow</h1>
+          <h1>Job Ascend</h1>
         </div>
         <div className="m">
           <CiMenuFries color="orange" size={30} onClick={()=>setmenuBar(!menuBar)}/>

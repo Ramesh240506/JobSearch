@@ -17,11 +17,11 @@ public class JobApplicant {
 
     @ManyToOne
     @JoinColumn(name = "userid")
-    UserEntity user;
+    private UserEntity user;
 
     @ManyToOne
     @JoinColumn(name = "jobid")
-    JobPostEntity jobPostEntity;
+    private JobPostEntity jobPostEntity;
 
     @CreationTimestamp
     private LocalDateTime appliedAt;

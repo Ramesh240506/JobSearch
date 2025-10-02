@@ -12,7 +12,7 @@ const Footer = () => {
                 <div className="footer-content">
                   <div className="footer-logo">
                     <BsSuitcaseLg />
-                    <h2>JobFlow</h2>
+                    <h2>Job Ascend</h2>
                     
                   </div>
                   <div className="footer-links">

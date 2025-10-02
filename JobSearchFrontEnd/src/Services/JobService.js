@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const API_URL = "http://localhost:8080/api/jobs";
-// const API_URL ="https://7jktcm8r-8080.inc1.devtunnels.ms/api/jobs";
 
 const authHeaders = () => ({
   headers: {

@@ -4,23 +4,19 @@ import { formatDistanceToNow } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { CiLocationOn, CiCalendarDate } from "react-icons/ci";
 import { FiDollarSign } from "react-icons/fi";
-import {
-  getApplicationsByStatus,
-  getUserApplication,
-} from "@/Services/JobService";
+import { getUserApplication } from "@/Services/JobService";
 import { Pagination } from "@mui/material";
 import { Stack } from "@mui/material";
+import { CgSandClock } from "react-icons/cg";
 
 const ApplicationDetails = () => {
   const [applications, setApplications] = useState([]);
   const [filterStatus, setFilterStatus] = useState("");
-  const [searchTerm, setSearchTerm] = useState(""); // just for UI
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const size = 5;
-
-
 
   const getApplications = async () => {
     try {
@@ -37,6 +33,9 @@ const ApplicationDetails = () => {
         jobLocation: job.jobLocation,
         minsalary: job.minSalary,
         maxsalary: job.maxSalary,
+        currency: job.currency,
+        deadline: job.deadline,
+        status: job.status,
         postedAt: formatDistanceToNow(new Date(job.postedAt), {
           addSuffix: true,
         }),
@@ -72,8 +71,8 @@ const ApplicationDetails = () => {
             onChange={handleFilterChange}
           >
             <option value="">All</option>
-            <option value="active">Active</option>
-            <option value="expired">Expired</option>
+            <option value="Active">Active</option>
+            <option value="Expired">Expired</option>
           </select>
         </div>
 
@@ -93,89 +92,107 @@ const ApplicationDetails = () => {
       </div>
 
       {/* Applications */}
-      {
-        applications.length === 0 ? (
-          <div className="no-applications-message">
-            <p>No applications found.</p>
-          </div>
-        ) : (
+      {applications.length === 0 ? (
+        <div className="no-applications-message">
+          <p>No applications found.</p>
+        </div>
+      ) : (
+        applications.map((application) => (
+          <div className="application-details" key={application.id}>
+            <div className="application-list">
+              <div className="application-item">
+                <h3>{application.jobTitle}</h3>
+                <p style={{ fontWeight: "500" }}>{application.companyName}</p>
 
-      applications.map((application) => (
-        <div className="application-details" key={application.id}>
-          <div className="application-list">
-            <div className="application-item">
-              <h3>{application.jobTitle}</h3>
-              <p style={{ fontWeight: "500" }}>{application.companyName}</p>
-
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  marginBottom: "8px",
-                }}
-              >
-                <CiLocationOn />
-                <p style={{ margin: 0 }}>{application.jobLocation}</p>
-              </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  marginBottom: "8px",
-                }}
-              >
-                <FiDollarSign />
-                <p style={{ margin: 0 }}>
-                  ${application.minsalary}k - ${application.maxsalary}k
-                </p>
-              </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  marginBottom: "8px",
-                }}
-              >
-                <CiCalendarDate />
-                <p style={{ margin: 0 }}>{application.postedAt}</p>
-              </div>
-
-              <div className="application-action">
-                <button
-                  onClick={() => navigate(`/viewapplicants/${application.id}`)}
-                  className="view-application"
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    marginBottom: "8px",
+                  }}
                 >
-                  🔍 View Applicants
-                </button>
+                  <CiLocationOn />
+                  <p style={{ margin: 0 }}>{application.jobLocation}</p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    marginBottom: "8px",
+                  }}
+                >
+                  <FiDollarSign />
+                  <p style={{ margin: 0 }}>
+                    ${application.minsalary}k - ${application.maxsalary}k
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    marginBottom: "8px",
+                  }}
+                >
+                  <CiCalendarDate />
+                  <p style={{ margin: 0 }}>{application.postedAt}</p>
+                </div>
+                <div>
+                  <span style={{ marginRight: "5px" }}>
+                    <CgSandClock />
+                  </span>
+                  {application.deadline &&
+                    formatDistanceToNow(new Date(application.deadline), {
+                      addSuffix: true,
+                    })}
+                </div>
+                <div>
+                  <p>
+                    Status :{" "}
+                    <span
+                      style={{
+                        color:
+                          application.status === "active"
+                            ? "green"
+                            : "red",
+                      }}
+                    >
+                      {application.status}
+                    </span>
+                    
+                  </p>
+                  </div>
+                <div className="application-action">
+                  <button
+                    onClick={() =>
+                      navigate(`/viewapplicants/${application.id}`)
+                    }
+                    className="view-application"
+                  >
+                    🔍 View Applicants
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        
-      ))
-    )}
-   {
-    applications.length>0 &&
+        ))
+      )}
+      {applications.length > 0 && (
+        <Pagination
+          style={{ display: "flex", justifyContent: "center" }}
+          count={totalPages}
+          page={page + 1}
+          onChange={(e, value) => setPage(value - 1)}
+          variant="outlined"
+          shape="rounded"
+        />
+      )}
 
-    <Pagination
-      style={{ display: "flex", justifyContent: "center" }}
-      count={totalPages}
-      page={page + 1}
-      onChange={(e, value) => setPage(value - 1)}
-      variant="outlined"
-      shape="rounded"
-    />
-   }
-   
-      <div>
-
-      </div>
-
+      <div></div>
     </div>
   );
 };

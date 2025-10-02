@@ -1,6 +1,5 @@
 package com.jobsearch.JobSearch.Service;
 
-import com.jobsearch.JobSearch.Entity.JobPostEntity;
 import com.jobsearch.JobSearch.Repository.JobPostRepository;
 import com.jobsearch.JobSearch.Repository.PasswordResetRepo;
 import org.springframework.beans.factory.annotation.Autowired;
