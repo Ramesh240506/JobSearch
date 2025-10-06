@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { CiLocationOn, CiCalendarDate } from "react-icons/ci";
 import { FiDollarSign } from "react-icons/fi";
 import { getUserApplication } from "@/Services/JobService";
-import { Pagination } from "@mui/material";
+import { Box, CircularProgress, Pagination } from "@mui/material";
 import { Stack } from "@mui/material";
 import { CgSandClock } from "react-icons/cg";
+import CircularIndeterminate from "@/HOME/CircularIndeterminate";
 
 const ApplicationDetails = () => {
   const [applications, setApplications] = useState([]);
@@ -17,6 +18,7 @@ const ApplicationDetails = () => {
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const size = 5;
+  const [loading, setLoading] = useState(true);
 
   const getApplications = async () => {
     try {
@@ -40,11 +42,14 @@ const ApplicationDetails = () => {
           addSuffix: true,
         }),
       }));
-      console.log("Applications:", applications);
       setApplications(applications);
       setTotalPages(response.totalPages);
     } catch (error) {
       console.error("Failed to fetch job applications", error);
+    }
+    finally
+    {
+      setLoading(false);
     }
   };
 
@@ -56,6 +61,15 @@ const ApplicationDetails = () => {
     getApplications();
   }, [page, filterStatus, searchTerm]);
 
+  if(loading)
+  {
+    return  (
+      
+    <Box sx={{ display: 'flex' ,textAlign: 'center', justifyContent: 'center',marginTop: '20%', height: '100vh' }}>
+      <CircularProgress />
+    </Box>
+    )
+  }
   return (
     <div>
       {/* Filter + Search */}

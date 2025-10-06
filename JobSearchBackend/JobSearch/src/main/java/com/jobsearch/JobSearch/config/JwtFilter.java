@@ -28,11 +28,11 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         String path = request.getRequestURI();
-        if (path.equals("/api/jobs/register") ||
-                path.equals("/api/jobs/login") ||
-                path.equals("/api/jobs/forgot-password") ||
-                path.equals("/api/jobs/verify-otp") ||
-                path.equals("/api/jobs/reset-password")) {
+        if (path.startsWith("/api/jobs/register") ||
+                path.startsWith("/api/jobs/login") ||
+                path.startsWith("/api/jobs/forgot-password") ||
+                path.startsWith("/api/jobs/verify-otp") ||
+                path.startsWith("/api/jobs/reset-password")) {
             filterChain.doFilter(request, response);
             return;
         }

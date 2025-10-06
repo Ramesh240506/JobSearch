@@ -1,30 +1,41 @@
 import React, { useEffect } from "react";
-
-import { FaRegFileAlt } from "react-icons/fa";
-import { TiTick } from "react-icons/ti";
-import { TbUsers } from "react-icons/tb";
-import { CgInsights } from "react-icons/cg";
 import ApplicationDetails from "@/DataManage/ApplicationDetails";
 import { useState } from "react";
 import "./JobPoster.css";
-import { Stack, Pagination } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { jobsCount } from "@/Services/JobService";
+import CircularIndeterminate from "@/HOME/CircularIndeterminate";
 const JobPoster = () => {
   const [activeTab, setActiveTab] = useState("overview");
   const [jobs,setJobs] = useState([]);
   const totalJobs = jobs.length;
   const activeJobs = jobs.filter((job) => job.status === "active").length;
   const navigate = useNavigate();
+  const [loading,setLoading] = useState(true);
 
   const getJobs = async () => {
     
-    const response = await jobsCount();
-    setJobs(response);
+    try
+    {
+      const response = await jobsCount();
+      setJobs(response);
+    }
+    catch (error) {
+      console.error("Error fetching jobs:", error);
+    }
+    finally
+    {
+      setLoading(false);
+    }
   }
   useEffect(() => {
     getJobs();
   }, []);
+
+  if(loading)
+  {
+    return <CircularIndeterminate></CircularIndeterminate>;
+  }
   return (
     <div>
       <div className="job-employer-dashboard">

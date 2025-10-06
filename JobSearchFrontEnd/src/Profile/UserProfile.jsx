@@ -28,16 +28,17 @@ const UserProfile = () => {
     } catch (error) {
       console.error("Error fetching user details:", error);
     }
+    finally
+    {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     const storedRole = localStorage.getItem("role");
     setRole(storedRole);
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 700);
+   
     fetchUserDetails();
-    return () => clearTimeout(timer);
   }, []);
 
   if(loading)

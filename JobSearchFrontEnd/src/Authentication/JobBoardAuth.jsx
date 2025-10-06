@@ -61,34 +61,59 @@ const JobBoardAuth = () => {
         return;
       }
 
-      registerUser({
-        username: formData.username,
-        email: formData.email,
-        password: formData.password,
-        role: formData.role,
-      })
-        .then(() => {
-          // Show a message first
-          alert("Registration successful! Please login.");
+     
+registerUser({
+  username: formData.username,
+  email: formData.email,
+  password: formData.password,
+  role: formData.role,
+})
+  .then((response) => {
+    // Axios wraps server body in response.data
+    const body = response && response.data ? response.data : response;
+    console.log("Register response body:", body); // debug -> inspect actual shape
 
-          // Switch to login mode
-          setIsLoginMode(true);
+    // Case A: server returns { message: "Registration successful!" }
+    if (body && body.message) {
+      alert(body.message);
+    }
+    // Case B: server returns saved user object (likely contains email/id/username)
+    else if (body && (body.email || body.username || body.id)) {
+      alert("Registration successful! Please login.");
+    }
+    // Unknown but 2xx
+    else {
+      alert("Registration succeeded.");
+    }
 
-          // Reset form
-          setFormData({
-            username: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
-            role: "SEEKER",
-          });
-
-        })
-        .catch(() => {
-          setErrors({ form: "Email already exists! Please login" });
-        });
+    // On success, switch to login and clear form
+    setIsLoginMode(true);
+    setFormData({
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      role: "SEEKER",
+    });
+  })
+  .catch((err) => {
+    console.error("Register error (axios):", err, err.response?.data);
+    // Show backend message if provided
+    if (err.response && err.response.data) {
+      // if server uses { message: '...' }
+      if (err.response.data.message) {
+        setErrors({ form: err.response.data.message });
+      } else {
+        // if server returned the error string or other shape
+        setErrors({ form: String(err.response.data) });
+      }
+    } else if (err.message) {
+      setErrors({ form: err.message });
     } else {
-      // Login
+      setErrors({ form: "Registration failed. Try again." });
+    }
+  });} else {
+      
       loginUser({
         email: formData.email,
         password: formData.password,

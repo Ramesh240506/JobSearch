@@ -81,7 +81,7 @@ export default function JobApplicationForm() {
 
       if (
         (typeof value === "string" && value.trim()) ||
-        typeof value === "boolean" ||
+        typeof value === "boolean" && value ||
         (field === "resume" && value instanceof File) // check file
       ) {
         newErrors[field] = "";
@@ -177,7 +177,7 @@ export default function JobApplicationForm() {
   }
 
   return (
-    <div className="container">
+    <div className="application-container">
       {snackbar && (
         <PositionedSnackbar
           open={snackbar}
@@ -186,27 +186,27 @@ export default function JobApplicationForm() {
         />
       )}
 
-      <div className="form">
-        <div className="header">
-          <h1 className="title">Job Application Form</h1>
-          <p className="subtitle">
+      <div className="application-form">
+        <div className="application-header">
+          <h1 className="application-title">Job Application Form</h1>
+          <p className="application-subtitle">
             Please fill out all required fields marked with *
           </p>
         </div>
 
         {/* Personal Info */}
-        <div className="section">
-          <h2 className="sectionTitle">Personal Information</h2>
+        <div className="application-section">
+          <h2 className="application-sectionTitle">Personal Information</h2>
 
-          <div className="row">
-            <div className="inputGroup">
-              <label className="label">First Name *</label>
+          <div className="application-row">
+            <div className="application-inputGroup">
+              <label className="application-label">First Name *</label>
               <input
                 type="text"
                 name="firstName"
                 value={jobFormData.firstName}
                 onChange={handleInputChange}
-                className={errors.firstName ? "input inputError" : "input"}
+                className={errors.firstName ? "input inputError" : "application-input"}
                 placeholder="Enter your first name"
               />
               {errors.firstName && (
@@ -214,14 +214,14 @@ export default function JobApplicationForm() {
               )}
             </div>
 
-            <div className="inputGroup">
-              <label className="label">Last Name *</label>
+            <div className="application-inputGroup">
+              <label className="application-label">Last Name *</label>
               <input
                 type="text"
                 name="lastName"
                 value={jobFormData.lastName}
                 onChange={handleInputChange}
-                className={errors.lastName ? "input inputError" : "input"}
+                className={errors.lastName ? "input inputError" : "application-input"}
                 placeholder="Enter your last name"
               />
               {errors.lastName && (
@@ -230,15 +230,15 @@ export default function JobApplicationForm() {
             </div>
           </div>
 
-          <div className="row">
-            <div className="inputGroup">
-              <label className="label">Email Address *</label>
+          <div className="application-row">
+            <div className="application-inputGroup">
+              <label className="application-label">Email Address *</label>
               <input
                 type="email"
                 name="email"
                 value={jobFormData.email}
                 onChange={handleInputChange}
-                className={errors.email ? "input inputError" : "input"}
+                className={errors.email ? "input inputError" : "application-input"}
                 placeholder="Enter your email address"
               />
               {errors.email && (
@@ -246,14 +246,14 @@ export default function JobApplicationForm() {
               )}
             </div>
 
-            <div className="inputGroup">
-              <label className="label">Phone Number *</label>
+            <div className="application-inputGroup">
+              <label className="application-label">Phone Number *</label>
               <input
                 type="tel"
                 name="phone"
                 value={jobFormData.phone}
                 onChange={handleInputChange}
-                className={errors.phone ? "input inputError" : "input"}
+                className={errors.phone ? "input inputError" : "application-input"}
                 placeholder="Enter your phone number"
               />
               {errors.phone && (
@@ -262,51 +262,51 @@ export default function JobApplicationForm() {
             </div>
           </div>
 
-          <div className="inputGroup">
-            <label className="label">Address</label>
+          <div className="application-inputGroup">
+            <label className="application-label">Address</label>
             <input
               type="text"
               name="address"
               value={jobFormData.address}
               onChange={handleInputChange}
-              className="input"
+              className="application-input"
               placeholder="Enter your street address"
             />
           </div>
 
-          <div className="row">
-            <div className="inputGroup">
-              <label className="label">City</label>
+          <div className="application-row">
+            <div className="application-inputGroup">
+              <label className="application-label">City</label>
               <input
                 type="text"
                 name="city"
                 value={jobFormData.city}
                 onChange={handleInputChange}
-                className="input"
+                className="application-input"
                 placeholder="Enter your city"
               />
             </div>
 
-            <div className="inputGroup">
-              <label className="label">State</label>
+            <div className="application-inputGroup">
+              <label className="application-label">State</label>
               <input
                 type="text"
                 name="state"
                 value={jobFormData.state}
                 onChange={handleInputChange}
-                className="input"
+                className="application-input"
                 placeholder="Enter your state"
               />
             </div>
 
-            <div className="inputGroup">
-              <label className="label">ZIP Code</label>
+            <div className="application-inputGroup">
+              <label className="application-label">ZIP Code</label>
               <input
                 type="text"
                 name="zipCode"
                 value={jobFormData.zipCode}
                 onChange={handleInputChange}
-                className="input"
+                className="application-input"
                 placeholder="Enter your ZIP code"
               />
             </div>
@@ -314,18 +314,18 @@ export default function JobApplicationForm() {
         </div>
 
         {/* Job Information */}
-        <div className="section">
-          <h2 className="sectionTitle">Job Information</h2>
+        <div className="application-section">
+          <h2 className="application-sectionTitle">Job Information</h2>
 
-          <div className="row">
-            <div className="inputGroup">
-              <label className="label">Position Applied For *</label>
+          <div className="application-row">
+            <div className="application-inputGroup">
+              <label className="application-label">Position Applied For *</label>
               <input
                 type="text"
                 name="position"
                 value={jobFormData.position}
                 onChange={handleInputChange}
-                className={errors.position ? "input inputError" : "input"}
+                className={errors.position ? "input inputError" : "application-input"}
                 placeholder="Enter the position you're applying for"
               />
               {errors.position && (
@@ -333,8 +333,8 @@ export default function JobApplicationForm() {
               )}
             </div>
 
-            <div className="inputGroup">
-              <label className="label">Department</label>
+            <div className="application-inputGroup">
+              <label className="application-label">Department</label>
               <select
                 name="department"
                 value={jobFormData.department}
@@ -354,33 +354,33 @@ export default function JobApplicationForm() {
             </div>
           </div>
 
-          <div className="row">
-            <div className="inputGroup">
-              <label className="label">Expected Salary</label>
+          <div className="application-row">
+            <div className="application-inputGroup">
+              <label className="application-label">Expected Salary</label>
               <input
                 type="text"
                 name="salary"
                 value={jobFormData.salary}
                 onChange={handleInputChange}
-                className="input"
+                className="application-input"
                 placeholder="Enter expected salary"
               />
             </div>
 
-            <div className="inputGroup">
-              <label className="label">Available Start Date</label>
+            <div className="application-inputGroup">
+              <label className="application-label">Available Start Date</label>
               <input
                 type="date"
                 name="startDate"
                 value={jobFormData.startDate}
                 onChange={handleInputChange}
-                className="input"
+                className="application-input"
               />
             </div>
           </div>
 
-          <div className="inputGroup">
-            <label className="label">Availability</label>
+          <div className="application-inputGroup">
+            <label className="application-label">Availability</label>
             <select
               name="availability"
               value={jobFormData.availability}
@@ -397,11 +397,11 @@ export default function JobApplicationForm() {
         </div>
 
         {/* Professional Information */}
-        <div className="section">
-          <h2 className="sectionTitle">Professional Information</h2>
+        <div className="application-section">
+          <h2 className="application-sectionTitle">Professional Information</h2>
 
-          <div className="inputGroup">
-            <label className="label">Work Experience *</label>
+          <div className="application-inputGroup">
+            <label className="application-label">Work Experience *</label>
             <textarea
               name="experience"
               value={jobFormData.experience}
@@ -415,8 +415,8 @@ export default function JobApplicationForm() {
             )}
           </div>
 
-          <div className="inputGroup">
-            <label className="label">Education *</label>
+          <div className="application-inputGroup">
+            <label className="application-label">Education *</label>
             <textarea
               name="education"
               value={jobFormData.education}
@@ -430,8 +430,8 @@ export default function JobApplicationForm() {
             )}
           </div>
 
-          <div className="inputGroup">
-            <label className="label">Skills & Qualifications</label>
+          <div className="application-inputGroup">
+            <label className="application-label">Skills & Qualifications</label>
             <textarea
               name="skills"
               value={jobFormData.skills}
@@ -442,8 +442,8 @@ export default function JobApplicationForm() {
             />
           </div>
 
-          <div className="inputGroup">
-            <label className="label">Cover Letter *</label>
+          <div className="application-inputGroup">
+            <label className="application-label">Cover Letter *</label>
             <textarea
               name="coverLetter"
               value={jobFormData.coverLetter}
@@ -459,8 +459,8 @@ export default function JobApplicationForm() {
             )}
           </div>
 
-          <div className="inputGroup">
-            <label className="label">Resume Upload</label>
+          <div className="application-inputGroup">
+            <label className="application-label">Resume Upload</label>
             <input
               type="file"
               name="resume"
@@ -477,44 +477,44 @@ export default function JobApplicationForm() {
         </div>
 
         {/* References */}
-        <div className="section">
-          <h2 className="sectionTitle">References</h2>
+        <div className="application-section">
+          <h2 className="application-sectionTitle">References</h2>
 
           <div className="referenceGroup">
             <h3 className="referenceTitle">Reference </h3>
-            <div className="row">
-              <div className="inputGroup">
-                <label className="label">Name</label>
+            <div className="application-row">
+              <div className="application-inputGroup">
+                <label className="application-label">Name</label>
                 <input
                   type="text"
                   name="referenceName"
                   value={jobFormData.referenceName}
                   onChange={handleInputChange}
-                  className="input"
+                  className="application-input"
                   placeholder="Reference name"
                 />
               </div>
 
-              <div className="inputGroup">
-                <label className="label">Email</label>
+              <div className="application-inputGroup">
+                <label className="application-label">Email</label>
                 <input
                   type="email"
                   name="referenceEmail"
                   value={jobFormData.referenceEmail}
                   onChange={handleInputChange}
-                  className="input"
+                  className="application-input"
                   placeholder="Reference email"
                 />
               </div>
 
-              <div className="inputGroup">
-                <label className="label">Phone</label>
+              <div className="application-inputGroup">
+                <label className="application-label">Phone</label>
                 <input
                   type="tel"
                   name="referencePhone"
                   value={jobFormData.referencePhone}
                   onChange={handleInputChange}
-                  className="input"
+                  className="application-input"
                   placeholder="Reference phone"
                 />
               </div>
@@ -522,37 +522,37 @@ export default function JobApplicationForm() {
           </div>
         </div>
 
-        <div className="section">
-          <h2 className="sectionTitle">Additional Information</h2>
+        <div className="application-section">
+          <h2 className="application-sectionTitle">Additional Information</h2>
 
-          <div className="row">
-            <div className="inputGroup">
-              <label className="label">LinkedIn Profile</label>
+          <div className="application-row">
+            <div className="application-inputGroup">
+              <label className="application-label">LinkedIn Profile</label>
               <input
                 type="url"
                 name="linkedin"
                 value={jobFormData.linkedin}
                 onChange={handleInputChange}
-                className="input"
+                className="application-input"
                 placeholder="https://linkedin.com/in/yourprofile"
               />
             </div>
 
-            <div className="inputGroup">
-              <label className="label">Portfolio/Website</label>
+            <div className="application-inputGroup">
+              <label className="application-label">Portfolio/Website</label>
               <input
                 type="url"
                 name="portfolio"
                 value={jobFormData.portfolio}
                 onChange={handleInputChange}
-                className="input"
+                className="application-input"
                 placeholder="https://yourportfolio.com"
               />
             </div>
           </div>
 
-          <div className="inputGroup">
-            <label className="label">Work Authorization *</label>
+          <div className="application-inputGroup">
+            <label className="application-label">Work Authorization *</label>
             <select
               name="workAuthorization"
               value={jobFormData.workAuthorization}

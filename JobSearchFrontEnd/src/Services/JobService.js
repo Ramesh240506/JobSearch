@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_URL = "https://jobsearch-backend-e7av.onrender.com/api/jobs";
-
+// const API_URL="http://localhost:8080/api/jobs"
 const authHeaders = () => ({
   headers: {
     'Authorization': `Bearer ${localStorage.getItem("accessToken")}`

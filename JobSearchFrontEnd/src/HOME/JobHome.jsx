@@ -3,19 +3,10 @@ import "./JobHome.css";
 import { CiLocationOn, CiBookmark } from "react-icons/ci";
 import { PiSuitcase } from "react-icons/pi";
 import { IoMdTime } from "react-icons/io";
-import { MdArrowOutward } from "react-icons/md";
-import { FaBookmark } from "react-icons/fa6";
-import { CiFilter } from "react-icons/ci";
-import { FaInstagram } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
-import { BsSuitcaseLg } from "react-icons/bs";
 import CircularIndeterminate from "./CircularIndeterminate";
 import { getAllJobs } from "@/Services/JobService";
 import { useNavigate } from "react-router-dom";
-
 import { formatDistanceToNow } from "date-fns";
-import { NavigationOff } from "lucide-react";
 import { CgSandClock } from "react-icons/cg";
 import Footer from "./Footer";
 const JobHome = () => {
@@ -41,20 +32,28 @@ const JobHome = () => {
   };
 
   const getFeaturedJobs = async () => {
-    const response = await getAllJobs();
-    console.log(response);
-    console.log("Featured Jobs:", response);
-    setFeaturedJobs(response);
+    try
+    {
+      const response = await getAllJobs();
+      setFeaturedJobs(response);
+    }
+    catch (error) {
+      console.error("Error fetching jobs:", error);
+    }
+    finally
+    {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     const storedRole = localStorage.getItem("role");
     setRole(storedRole);
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 500);
+    // const timer = setTimeout(() => {
+    //   setLoading(false);
+    // }, 500);
     getFeaturedJobs();
-    return () => clearTimeout(timer);
+    // return () => clearTimeout(timer);
   }, []);
 
   if (loading) {

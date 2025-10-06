@@ -49,16 +49,20 @@ const Findjobs = () => {
     } catch (error) {
       console.error("Error fetching jobs:", error);
     }
+    finally
+    {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     const storedRole = localStorage.getItem("role");
     setRole(storedRole);
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 500);
+    // const timer = setTimeout(() => {
+    //   setLoading(false);
+    // }, 500);
     fetchJobs();
-    return () => clearTimeout(timer);
+    // return () => clearTimeout(timer);
   }, [sortBy, page, filter]);
 
 
